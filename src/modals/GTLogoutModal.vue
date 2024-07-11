@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { useAuth } from '@/stores/auth/auth'
+import GTButton from '@/components/GTButton.vue'
 
+const auth = useAuth()
 const open = ref(false)
 </script>
 
@@ -8,21 +11,13 @@ const open = ref(false)
   <button @click="open = true" class="hover:text-white">Logout</button>
 
   <Teleport to="body">
-    <div v-if="open" class="modal border border-black rounded-md">
-      <p>Hello from the modal!</p>
-      <button @click="open = false" class="hover:text-white">Yes, Logout</button>
-      <button @click="open = false" class="hover:text-white">No, Cancel</button>
+    <div
+      v-if="open"
+      class="fixed left-1/2 top-1/2 z-999 border w-60 h-24 border-black rounded-md bg-secondary"
+    >
+      <p>Are you sure you'd like to logout?</p>
+      <GTButton @click="auth.logout()" class="hover:text-white">Yes, Logout</GTButton>
+      <GTButton @click="open = false" class="hover:text-white">No, Cancel</GTButton>
     </div>
   </Teleport>
 </template>
-
-<style scoped>
-.modal {
-  position: fixed;
-  z-index: 999;
-  top: 20%;
-  left: 50%;
-  width: 300px;
-  margin-left: -150px;
-}
-</style>
