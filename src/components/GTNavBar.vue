@@ -3,15 +3,16 @@ import { ref } from 'vue'
 import { useAuth } from '@/stores/auth/auth'
 import GTNavLink from './GTNavLink.vue'
 import GTDropDownMenu from './GTDropDownMenu.vue'
+import GTLogoutModal from '../modals/GTLogoutModal.vue'
 
 const auth = useAuth()
+const isOpen = ref(false)
 </script>
 
 <template>
   <nav v-if="auth.isAuthed" class="flex flex-row bg-primary justify-end p-2">
     <div class="flex flex-row space-x-2">
       <GTDropDownMenu></GTDropDownMenu>
-      <GTNavLink :url="'/logout'" class="hover:text-white"> Logout </GTNavLink>
     </div>
   </nav>
   <nav v-else class="flex flex-row bg-primary justify-between p-2">
