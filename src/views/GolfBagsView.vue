@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import AddGolfBagForm from '../forms/AddGolfBagForm.vue'
+import GTGolfBagCard from '../components/cards/GTGolfBagCard.vue'
 
 axios.defaults.withCredentials = true
 axios.defaults.withXSRFToken = true
@@ -30,9 +31,9 @@ onMounted(() => {
 
 <template>
   <div class="flex justify-between">
-    <div>
+    <div class="space-y-4">
       <ul v-for="golfbag in golfbags">
-        <li>{{ golfbag.make }} {{ golfbag.model }} {{ golfbag.nickname }}</li>
+        <GTGolfBagCard :golfbag></GTGolfBagCard>
       </ul>
     </div>
     <AddGolfBagForm></AddGolfBagForm>
