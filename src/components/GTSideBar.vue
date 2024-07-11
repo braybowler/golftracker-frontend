@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { unref, ref } from 'vue'
+import { useAuth } from '@/stores/auth/auth'
 import GTNavLink from './GTNavLink.vue'
 
-const isAuthed = ref(true)
+const auth = useAuth()
 const isExpanded = ref(true)
 
 const toggleIsExpanded = () => {
@@ -15,7 +16,7 @@ const toggleIsExpanded = () => {
 </script>
 
 <template>
-  <nav v-if="isAuthed && isExpanded" class="bg-primary w-44 h-screen p-4">
+  <nav v-if="auth.isAuthed && isExpanded" class="bg-primary w-44 h-screen p-4">
     <div class="flex flex-col space-y-2">
       <div class="flex flex-row justify-end">
         <button @click="toggleIsExpanded()">
@@ -71,7 +72,7 @@ const toggleIsExpanded = () => {
       </div>
     </div>
   </nav>
-  <nav v-if="isAuthed && !isExpanded" class="bg-primary w-16 h-screen p-2 justify-center">
+  <nav v-if="auth.isAuthed && !isExpanded" class="bg-primary w-16 h-screen p-2 justify-center">
     <div class="flex flex-col space-y-2">
       <div class="flex flex-row">
         <button @click="toggleIsExpanded()">

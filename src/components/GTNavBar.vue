@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useAuth } from '@/stores/auth/auth'
 import GTNavLink from './GTNavLink.vue'
 import GTDropDownMenu from './GTDropDownMenu.vue'
 
-const isAuthed = ref(true)
+const auth = useAuth()
 </script>
 
 <template>
-  <nav v-if="isAuthed" class="flex flex-row bg-primary justify-end p-2">
+  <nav v-if="auth.isAuthed" class="flex flex-row bg-primary justify-end p-2">
     <div class="flex flex-row space-x-2">
       <GTDropDownMenu></GTDropDownMenu>
       <GTNavLink :url="'/logout'" class="hover:text-white"> Logout </GTNavLink>

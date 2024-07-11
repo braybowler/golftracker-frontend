@@ -8,6 +8,6 @@ import GTSideBar from './components/GTSideBar.vue'
   <GTNavBar></GTNavBar>
   <main class="flex flex-row">
     <GTSideBar></GTSideBar>
-    <RouterView class="w-full" />
+    <RouterView class="w-full p-4" />
   </main>
 </template>

@@ -1,34 +1,14 @@
 <script setup lang="ts">
 import { ref, unref } from 'vue'
-import axios from 'axios'
-import router from '@/router'
+import { useAuth } from '@/stores/auth/auth'
 import GTButton from '../components/GTButton.vue'
 
-axios.defaults.withCredentials = true
-axios.defaults.withXSRFToken = true
-
+const auth = useAuth()
 const email = ref('')
 const password = ref('')
 
-//TODO: Extract 'naked' axios request to a useFetch composable.
 const login = () => {
-  const authUrl = 'http://localhost/sanctum/csrf-cookie'
-  axios
-    .get(authUrl)
-    .then(function (response) {
-      const loginUrl = 'http://localhost/api/login'
-      axios
-        .post(loginUrl, { email: unref(email), password: unref(password) })
-        .then(async function (response) {
-          router.replace('/dashboard')
-        })
-        .catch(function (error) {
-          console.log('post request to api/login, error: ', error)
-        })
-    })
-    .catch(function (error) {
-      console.log('post request to sanctum/csrf-cookie, error: ', error)
-    })
+  auth.login(unref(email), unref(password))
 }
 </script>
 
