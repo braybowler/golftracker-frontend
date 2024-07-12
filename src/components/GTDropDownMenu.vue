@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, unref } from 'vue'
 import GTNavLink from './GTNavLink.vue'
+import GTLogoutModal from '@/modals/GTLogoutModal.vue'
 
-const isExpanded = ref(false)
+const isHamburgerMenuExpanded = ref(false)
 const toggleIsExpanded = () => {
-  if (unref(isExpanded) === false) {
-    isExpanded.value = true
-  } else if (unref(isExpanded.value) === true) {
-    isExpanded.value = false
+  if (unref(isHamburgerMenuExpanded) === false) {
+    isHamburgerMenuExpanded.value = true
+  } else if (unref(isHamburgerMenuExpanded.value) === true) {
+    isHamburgerMenuExpanded.value = false
   }
 }
 </script>
@@ -29,9 +30,10 @@ const toggleIsExpanded = () => {
       />
     </svg>
   </button>
-  <div v-if="isExpanded">
+  <div v-if="isHamburgerMenuExpanded">
     <div class="flex flex-col">
-      <GTNavLink :url="'/profile'" class="hover:text-white">
+      <GTNavLink :url="'/profile'" class="flex flex-row hover:text-white">
+        Profile
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -47,7 +49,8 @@ const toggleIsExpanded = () => {
           />
         </svg>
       </GTNavLink>
-      <GTNavLink :url="'/settings'" class="hover:text-white">
+      <GTNavLink :url="'/settings'" class="flex flex-row hover:text-white">
+        Settings
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -68,6 +71,7 @@ const toggleIsExpanded = () => {
           />
         </svg>
       </GTNavLink>
+      <GTLogoutModal></GTLogoutModal>
     </div>
   </div>
 </template>
