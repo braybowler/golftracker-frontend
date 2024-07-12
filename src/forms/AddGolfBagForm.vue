@@ -10,7 +10,7 @@ const make = ref('')
 const model = ref('')
 const nickname = ref('')
 
-//TODO: Extract 'naked' axios request to a useFetch composable.
+//TODO: Extract 'naked' axios request to a composable.
 const createGolfBag = () => {
   const createGolfBagUrl = 'http://localhost/api/golfbags'
   axios

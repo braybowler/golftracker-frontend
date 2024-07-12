@@ -9,7 +9,7 @@ axios.defaults.withXSRFToken = true
 const baseUrl = import.meta.env.VITE_API_BASE_URL
 const csrfUrl = import.meta.env.VITE_CSRF_URL
 
-//TODO: Extract 'naked' axios requests to a useFetch composable.
+//TODO: Extract 'naked' axios requests to a composable.
 export const useAuth = defineStore('auth', () => {
   const user = ref({})
 
