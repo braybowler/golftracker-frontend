@@ -50,7 +50,6 @@ const createGolfBag = () => {
       </div>
       <div class="flex flex-row justify-between">
         <label for="password">Nickname</label>
-        <p class="text-gray-400">(optional)</p>
         <input
           type="text"
           v-model="nickname"
