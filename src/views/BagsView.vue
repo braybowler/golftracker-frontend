@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { useAxios } from '@/composables/useAxios'
-import axios from 'axios'
 import AddGolfBagForm from '../forms/AddGolfBagForm.vue'
 import GTGolfBagCard from '../components/cards/GTGolfBagCard.vue'
-
-axios.defaults.withCredentials = true
-axios.defaults.withXSRFToken = true
 
 const { requestData: golfbags } = useAxios('GET', 'golfbags')
 </script>

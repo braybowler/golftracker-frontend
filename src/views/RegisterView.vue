@@ -14,7 +14,7 @@ const register = () => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col">
     <h1>
       Welcome to GolfTracker. We're happy to have you! <br />
       Please enter some basic information below and we'll get you started:
@@ -25,7 +25,7 @@ const register = () => {
         <input
           type="text"
           v-model="name"
-          placeholder="Please enter your name"
+          placeholder="Name"
           class="border border-black rounded-md"
         />
       </div>
@@ -34,7 +34,7 @@ const register = () => {
         <input
           type="text"
           v-model="email"
-          placeholder="Please enter an email"
+          placeholder="Email"
           class="border border-black rounded-md"
         />
       </div>
@@ -43,7 +43,7 @@ const register = () => {
         <input
           type="password"
           v-model="password"
-          placeholder="Please enter a password"
+          placeholder="Password"
           class="border border-black rounded-md"
         />
       </div>

@@ -5,7 +5,8 @@ import RegisterView from '@/views/RegisterView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
-import GolfBagsView from '@/views/GolfBagsView.vue'
+import BagsView from '@/views/BagsView.vue'
+import ClubsView from '@/views/ClubsView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import { useAuth } from '@/stores/auth/auth'
@@ -36,9 +37,14 @@ const router = createRouter({
       component: DashboardView
     },
     {
-      path: '/golfbags',
-      name: 'Golfbags',
-      component: GolfBagsView
+      path: '/bags',
+      name: 'Bags',
+      component: BagsView
+    },
+    {
+      path: '/clubs',
+      name: 'Clubs',
+      component: ClubsView
     },
     {
       path: '/login',
