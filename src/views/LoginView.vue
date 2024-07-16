@@ -13,7 +13,7 @@ const login = () => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col">
     <h1>Welcome back to GolfTracker. Please login below. <br /></h1>
     <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-1/4">
       <div class="flex flex-row justify-between">
