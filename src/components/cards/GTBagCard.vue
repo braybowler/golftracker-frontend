@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  golfbag: {}
+  bag: {}
 }>()
 </script>
 
@@ -9,11 +9,11 @@ const props = defineProps<{
     <div class="flex flex-row justify-between p-2">
       <img src="../icons/GTImageNotFound.svg" alt="Image not found" class="h-20 w-20" />
       <div>
-        <p>{{ props.golfbag.make }}</p>
-        <p>{{ props.golfbag.model }}</p>
-        <p>{{ props.golfbag.nickname }}</p>
+        <p>{{ props.bag.make }}</p>
+        <p>{{ props.bag.model }}</p>
+        <p>{{ props.bag.nickname }}</p>
       </div>
-      <p>{{ props.golfbag.id }}</p>
+      <p>{{ props.bag.id }}</p>
     </div>
   </div>
 </template>
