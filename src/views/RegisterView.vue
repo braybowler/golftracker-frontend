@@ -14,41 +14,43 @@ const register = () => {
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <h1>
-      Welcome to GolfTracker. We're happy to have you! <br />
-      Please enter some basic information below and we'll get you started:
-    </h1>
-    <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-1/4">
-      <div class="flex flex-row justify-between">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          v-model="name"
-          placeholder="Name"
-          class="border border-black rounded-md"
-        />
-      </div>
-      <div class="flex flex-row justify-between">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          v-model="email"
-          placeholder="Email"
-          class="border border-black rounded-md"
-        />
-      </div>
-      <div class="flex flex-row justify-between">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          v-model="password"
-          placeholder="Password"
-          class="border border-black rounded-md"
-        />
-      </div>
-      <div class="flex flex-col justify-center">
-        <GTButton @click="register()">Register</GTButton>
+  <div class="flex justify-center">
+    <div>
+      <h1>
+        Welcome to GolfTracker. We're happy to have you! <br />
+        Please enter some basic information below and we'll get you started:
+      </h1>
+      <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-full">
+        <div class="flex flex-row justify-between">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            v-model="name"
+            placeholder="Name"
+            class="border border-black rounded-md"
+          />
+        </div>
+        <div class="flex flex-row justify-between">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            v-model="email"
+            placeholder="Email"
+            class="border border-black rounded-md"
+          />
+        </div>
+        <div class="flex flex-row justify-between">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            v-model="password"
+            placeholder="Password"
+            class="border border-black rounded-md"
+          />
+        </div>
+        <div class="flex flex-col justify-center">
+          <GTButton @click="register()">Register</GTButton>
+        </div>
       </div>
     </div>
   </div>

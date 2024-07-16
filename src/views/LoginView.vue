@@ -13,29 +13,31 @@ const login = () => {
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <h1>Welcome back to GolfTracker. Please login below. <br /></h1>
-    <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-1/4">
-      <div class="flex flex-row justify-between">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          v-model="email"
-          placeholder="Please enter an email"
-          class="border border-black rounded-md"
-        />
-      </div>
-      <div class="flex flex-row justify-between">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          v-model="password"
-          placeholder="Please enter a password"
-          class="border border-black rounded-md"
-        />
-      </div>
-      <div class="flex flex-col justify-center">
-        <GTButton @click="login()">Login</GTButton>
+  <div class="flex justify-center">
+    <div class="">
+      <h1>Welcome back to GolfTracker. Please login below. <br /></h1>
+      <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-full">
+        <div class="flex flex-row justify-between">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            v-model="email"
+            placeholder="Please enter an email"
+            class="border border-black rounded-md"
+          />
+        </div>
+        <div class="flex flex-row justify-between">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            v-model="password"
+            placeholder="Please enter a password"
+            class="border border-black rounded-md"
+          />
+        </div>
+        <div class="flex flex-col justify-center">
+          <GTButton @click="login()">Login</GTButton>
+        </div>
       </div>
     </div>
   </div>
