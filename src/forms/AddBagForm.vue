@@ -1,28 +1,18 @@
 <script setup lang="ts">
-import { ref, unref } from 'vue'
-import axios from 'axios'
+import {ref, unref} from 'vue'
+import {useAxios} from "@/composables/useAxios";
 import GTButton from '../components/GTButton.vue'
-
-axios.defaults.withCredentials = true
-axios.defaults.withXSRFToken = true
 
 const make = ref('')
 const model = ref('')
 const nickname = ref('')
 
-//TODO: Extract 'naked' axios request to a composable.
 const createGolfBag = () => {
-  const createGolfBagUrl = 'http://localhost/api/golfbags'
-  axios
-    .post(createGolfBagUrl, {
-      make: unref(make),
-      model: unref(model),
-      nickname: unref(nickname)
-    })
-    .then(async function (response) {})
-    .catch(function (error) {
-      console.log('post request to api/golfbags, error: ', error)
-    })
+  const { requestData: bag } = useAxios(
+      'POST',
+      'golfbags',
+      { make: unref(make), model: unref(model), nickname: unref(nickname)}
+  )
 }
 </script>
 
