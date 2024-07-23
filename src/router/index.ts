@@ -69,7 +69,7 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to) => {
   const auth = useAuth()
 
   if (!auth.isAuthed && !publicRoutes.includes(to.name)) {

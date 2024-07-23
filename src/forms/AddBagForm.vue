@@ -8,7 +8,7 @@ const model = ref('')
 const nickname = ref('')
 
 const createGolfBag = () => {
-  const { requestData: bag } = useAxios(
+  useAxios(
       'POST',
       'golfbags',
       { make: unref(make), model: unref(model), nickname: unref(nickname)}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, unref } from 'vue'
+import { ref } from 'vue'
 import GTButton from '../components/GTButton.vue'
 
 const make = ref('')
@@ -7,7 +7,7 @@ const model = ref('')
 const type = ref('')
 const loft = ref('')
 
-const createClub = () => {}
+// const createClub = () => {}
 </script>
 
 <template>

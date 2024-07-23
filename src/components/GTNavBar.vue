@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useAuth } from '@/stores/auth/auth'
 import GTNavLink from './GTNavLink.vue'
 import GTDropDownMenu from './GTDropDownMenu.vue'
-import GTLogoutModal from '../modals/GTLogoutModal.vue'
 
 const auth = useAuth()
-const isOpen = ref(false)
 </script>
 
 <template>

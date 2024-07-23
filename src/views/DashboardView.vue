@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, unref } from 'vue'
+import { ref } from 'vue'
 import { useAuth } from '@/stores/auth/auth'
 
 const auth = useAuth()
