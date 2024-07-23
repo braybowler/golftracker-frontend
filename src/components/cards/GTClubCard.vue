@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type GolfClub } from "@/common";
+import { type GolfClub } from '@/common'
 
 const props = defineProps<{
   golfClub: GolfClub

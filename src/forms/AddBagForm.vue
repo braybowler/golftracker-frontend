@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {ref, unref} from 'vue'
-import {useAxios} from "@/composables/useAxios";
+import { ref, unref } from 'vue'
+import { useAxios } from '@/composables/useAxios'
 import GTButton from '../components/GTButton.vue'
 
 const make = ref('')
@@ -8,11 +8,11 @@ const model = ref('')
 const nickname = ref('')
 
 const createGolfBag = () => {
-  useAxios(
-      'POST',
-      'golfbags',
-      { make: unref(make), model: unref(model), nickname: unref(nickname)}
-  )
+  useAxios('POST', 'golfbags', {
+    make: unref(make),
+    model: unref(model),
+    nickname: unref(nickname)
+  })
 }
 </script>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { type GTResource } from "@/common";
+import { type GTResource } from '@/common'
 import GTButton from '@/components/GTButton.vue'
 
 defineProps<{
@@ -11,7 +11,9 @@ const open = ref(false)
 </script>
 
 <template>
-  <button @click="open = true" class="border border-black rounded-md hover:shadow-lg">Details</button>
+  <button @click="open = true" class="border border-black rounded-md hover:shadow-lg">
+    Details
+  </button>
 
   <Teleport to="body">
     <div
@@ -20,7 +22,7 @@ const open = ref(false)
     >
       <div v-if="resource">
         <ul v-for="(value, key) in resource">
-          <li>{{key}}: {{value}}</li>
+          <li>{{ key }}: {{ value }}</li>
         </ul>
       </div>
       <div class="flex flex-row justify-around">
