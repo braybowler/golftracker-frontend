@@ -2,8 +2,9 @@
 import { useAxios } from '@/composables/useAxios'
 import AddBagForm from '../forms/AddBagForm.vue'
 import GTBagCard from '../components/cards/GTBagCard.vue'
+import type { Ref } from 'vue'
 
-const { requestData: golfBags } = useAxios('GET', 'golfbags')
+const { requestData: golfBags }: { requestData: Ref } = useAxios('GET', 'golfbags')
 </script>
 
 <template>

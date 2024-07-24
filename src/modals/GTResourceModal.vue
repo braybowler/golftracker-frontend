@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import {type GTResource, isGolfBag, isGolfClub} from '@/common'
+import { type GTResource, isGolfBag, isGolfClub } from '@/common'
 import GTButton from '@/components/GTButton.vue'
 
 const props = defineProps<{
@@ -11,10 +11,10 @@ const open = ref(false)
 
 const openEditResourcePage = () => {
   if (isGolfBag(props.resource)) {
-      console.log("GolfBag detected");
+    console.log('GolfBag detected')
   }
   if (isGolfClub(props.resource)) {
-    console.log("GolfClub detected");
+    console.log('GolfClub detected')
   }
 }
 </script>
@@ -30,13 +30,20 @@ const openEditResourcePage = () => {
       class="fixed left-1/2 top-1/3 z-999 -ml-28 border w-70 h-60 border-black rounded-md bg-secondary p-2 space-y-4"
     >
       <div v-if="resource">
-        <ul v-for="(value, key) in resource">
+        <ul :key="index" v-for="(value, key, index) in resource">
           <li>{{ key }}: {{ value }}</li>
         </ul>
       </div>
       <div class="flex flex-row justify-between">
-      <GTButton @click="open = false; openEditResourcePage()" class="hover:text-white">Edit</GTButton>
-      <GTButton @click="open = false" class="hover:text-white">Cancel</GTButton>
+        <GTButton
+          @click="
+            open = false;
+            openEditResourcePage()
+          "
+          class="hover:text-white"
+          >Edit</GTButton
+        >
+        <GTButton @click="open = false" class="hover:text-white">Cancel</GTButton>
       </div>
     </div>
   </Teleport>

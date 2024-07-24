@@ -7,10 +7,10 @@ export interface GolfBag {
 
 export function isGolfBag(obj: any): obj is GolfBag {
   return (
-      obj.id !== undefined
-      && obj.make !== undefined
-      && obj.model !== undefined
-      && obj.nickname !== undefined
+    obj.id !== undefined &&
+    obj.make !== undefined &&
+    obj.model !== undefined &&
+    obj.nickname !== undefined
   )
 }
 
@@ -25,12 +25,12 @@ export interface GolfClub {
 
 export function isGolfClub(obj: any): obj is GolfBag {
   return (
-      obj.id !== undefined
-      && obj.make !== undefined
-      && obj.model !== undefined
-      && obj.loft !== undefined
-      && obj.carry_distance !== undefined
-      && obj.total_distance !== undefined
+    obj.id !== undefined &&
+    obj.make !== undefined &&
+    obj.model !== undefined &&
+    obj.loft !== undefined &&
+    obj.carry_distance !== undefined &&
+    obj.total_distance !== undefined
   )
 }
 
