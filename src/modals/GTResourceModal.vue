@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { type GTResource } from '@/common'
+import {type GTResource, isGolfBag, isGolfClub} from '@/common'
 import GTButton from '@/components/GTButton.vue'
 
-defineProps<{
+const props = defineProps<{
   resource: GTResource
 }>()
 
 const open = ref(false)
+
+const openEditResourcePage = () => {
+  if (isGolfBag(props.resource)) {
+      console.log("GolfBag detected");
+  }
+  if (isGolfClub(props.resource)) {
+    console.log("GolfClub detected");
+  }
+}
 </script>
 
 <template>
@@ -25,8 +34,9 @@ const open = ref(false)
           <li>{{ key }}: {{ value }}</li>
         </ul>
       </div>
-      <div class="flex flex-row justify-around">
-        <GTButton @click="open = false" class="hover:text-white">Cancel</GTButton>
+      <div class="flex flex-row justify-between">
+      <GTButton @click="open = false; openEditResourcePage()" class="hover:text-white">Edit</GTButton>
+      <GTButton @click="open = false" class="hover:text-white">Cancel</GTButton>
       </div>
     </div>
   </Teleport>
