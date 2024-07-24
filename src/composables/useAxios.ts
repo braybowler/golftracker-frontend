@@ -20,12 +20,10 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
           axios
             .get(fullUrl)
             .then(function (response) {
-              console.log('response from axios request: ', response)
-              requestData.value = response.data.data
-              console.log('assigned data: ', requestData.value)
+                //TODO : This is here to support a single resource being returned (i.e. a request to a show action). Do this better.
+                requestData.value = response.data.data ? response.data.data : response.data
             })
             .catch(function (error) {
-              console.log(method + ' request to ' + fullUrl + ', error: ', error)
               requestError.value = error
             })
         })
@@ -41,12 +39,10 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
           axios
             .post(fullUrl, body)
             .then(function (response) {
-              console.log('response from axios request: ', response)
               requestData.value = response.data.data
-              console.log('assigned data: ', requestData.value)
             })
             .catch(function (error) {
-              console.log(method + ' request to ' + fullUrl + ', error: ', error)
+                requestError.value = error
             })
         })
         .catch(function (error) {

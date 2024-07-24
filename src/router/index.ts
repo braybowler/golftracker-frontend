@@ -5,8 +5,10 @@ import RegisterView from '@/views/RegisterView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
-import BagsView from '@/views/BagsView.vue'
-import ClubsView from '@/views/ClubsView.vue'
+import IndexBagsView from "@/views/GolfBags/IndexBagsView.vue";
+import ShowBagsView from "@/views/GolfBags/ShowBagsView.vue";
+import IndexClubsView from "@/views/GolfClubs/IndexClubsView.vue";
+import ShowClubsView from "@/views/GolfClubs/ShowClubsView.vue";
 import SettingsView from '@/views/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import { useAuth } from '@/stores/auth/auth'
@@ -37,14 +39,24 @@ const router = createRouter({
       component: DashboardView
     },
     {
-      path: '/bags',
-      name: 'Bags',
-      component: BagsView
+      path: '/golfbags',
+      name: 'IndexGolfBags',
+      component: IndexBagsView
     },
     {
-      path: '/clubs',
-      name: 'Clubs',
-      component: ClubsView
+      path: '/golfbags/:id',
+      name: 'ShowGolfBags',
+      component: ShowBagsView
+    },
+    {
+      path: '/golfclubs',
+      name: 'IndexGolfClubs',
+      component: IndexClubsView
+    },
+    {
+      path: '/golfclubs/:id',
+      name: 'ShowGolfClubs',
+      component: ShowClubsView
     },
     {
       path: '/login',

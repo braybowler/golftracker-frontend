@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { type GolfBag } from '@/common'
-import GTResourceModal from '@/modals/GTResourceModal.vue'
+import GTNavLink from "@/components/GTNavLink.vue";
+import {computed} from "vue";
 
 const props = defineProps<{
   golfBag: GolfBag
 }>()
+
+const showUrl = computed(() => {
+  return '/golfbags/' + props.golfBag.id
+})
 </script>
 
 <template>
@@ -18,7 +23,7 @@ const props = defineProps<{
           <p>{{ props.golfBag.nickname }}</p>
         </div>
       </div>
-      <GTResourceModal :resource="golfBag"></GTResourceModal>
+      <GTNavLink class="border rounded-md border-black text-center" :url=showUrl>Details</GTNavLink>
     </div>
   </div>
 </template>

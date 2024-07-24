@@ -52,7 +52,7 @@ const toggleIsExpanded = () => {
         </GTNavLink>
       </div>
       <div>
-        <GTNavLink :url="'/bags'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink :url="'/golfbags'" class="hover:text-white flex flex-row justify-between">
           My Bags
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const toggleIsExpanded = () => {
         </GTNavLink>
       </div>
       <div>
-        <GTNavLink :url="'/clubs'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink :url="'/golfclubs'" class="hover:text-white flex flex-row justify-between">
           My Clubs
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ const toggleIsExpanded = () => {
           />
         </svg>
       </GTNavLink>
-      <GTNavLink :url="'/bags'" class="hover:text-white">
+      <GTNavLink :url="'/golfbags'" class="hover:text-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -139,7 +139,7 @@ const toggleIsExpanded = () => {
           />
         </svg>
       </GTNavLink>
-      <GTNavLink :url="'/clubs'" class="hover:text-white">
+      <GTNavLink :url="'/golfclubs'" class="hover:text-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
