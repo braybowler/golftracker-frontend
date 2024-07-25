@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { useAxios } from '@/composables/useAxios'
-import AddBagForm from '../../forms/AddBagForm.vue'
 import GTBagCard from '../../components/cards/GTBagCard.vue'
 import type { Ref } from 'vue'
+import GTNavButton from "@/components/GTNavButton.vue";
 
+const createUrl = 'golfbags/create'
 const { requestData: golfBags }: { requestData: Ref } = useAxios('GET', 'golfbags/')
 </script>
 
 <template>
-  <div class="flex justify-between">
-    <div v-if="golfBags" class="space-y-4">
+  <div class="flex flex-col">
+    <GTNavButton :url=createUrl class="border rounded-md border-black text-center w-1/5">Add A New Bag</GTNavButton>
+    <div v-if="golfBags" class="mt-2 space-y-2 w-1/5">
       <ul :key="golfBag.id" v-for="golfBag in golfBags">
         <GTBagCard :golfBag></GTBagCard>
       </ul>
     </div>
-    <AddBagForm></AddBagForm>
   </div>
 </template>

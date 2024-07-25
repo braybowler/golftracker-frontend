@@ -7,6 +7,7 @@ import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
 import IndexBagsView from "@/views/GolfBags/IndexBagsView.vue";
 import ShowBagsView from "@/views/GolfBags/ShowBagsView.vue";
+import CreateBagsView from "@/views/GolfBags/CreateBagsView.vue";
 import IndexClubsView from "@/views/GolfClubs/IndexClubsView.vue";
 import ShowClubsView from "@/views/GolfClubs/ShowClubsView.vue";
 import SettingsView from '@/views/SettingsView.vue'
@@ -47,6 +48,11 @@ const router = createRouter({
       path: '/golfbags/:id',
       name: 'ShowGolfBags',
       component: ShowBagsView
+    },
+    {
+      path: '/golfbags/create',
+      name: 'CreateGolfBags',
+      component: CreateBagsView
     },
     {
       path: '/golfclubs',

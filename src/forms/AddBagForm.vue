@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, unref } from 'vue'
 import { useAxios } from '@/composables/useAxios'
-import GTButton from '../components/GTButton.vue'
+import GTNavButton from "@/components/GTNavButton.vue";
 
 const make = ref('')
 const model = ref('')
@@ -48,7 +48,7 @@ const createGolfBag = () => {
         />
       </div>
       <div class="flex flex-col justify-center">
-        <GTButton @click="createGolfBag()">Create Golf Bag</GTButton>
+        <GTNavButton @click="createGolfBag()" url='/golfbags' class="border border-black rounded-md text-center">Create Golf Bag</GTNavButton>
       </div>
     </div>
   </div>

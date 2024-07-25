@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type GolfClub } from '@/common'
-import GTNavLink from "@/components/GTNavLink.vue";
+import GTNavButton from "@/components/GTNavButton.vue";
 import {computed} from "vue";
 
 const props = defineProps<{
@@ -22,7 +22,7 @@ const showUrl = computed(() => {
           <p>{{ props.golfClub.model }}</p>
         </div>
       </div>
-      <GTNavLink class="border rounded-md border-black text-center" :url=showUrl>Details</GTNavLink>
+      <GTNavButton class="border rounded-md border-black text-center" :url=showUrl>Details</GTNavButton>
     </div>
   </div>
 </template>
