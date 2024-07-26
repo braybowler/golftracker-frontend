@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AddBagForm from "@/forms/AddBagForm.vue";
-import GTNavButton from "@/components/GTNavButton.vue";
+import AddBagForm from '@/forms/AddBagForm.vue'
+import GTNavButton from '@/components/GTNavButton.vue'
 </script>
 
 <template>

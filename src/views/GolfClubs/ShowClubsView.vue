@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useAxios } from '@/composables/useAxios'
-import {computed, Ref, unref} from 'vue'
-import {useRoute} from "vue-router";
-import GTNavButton from "@/components/GTNavButton.vue";
+import { computed, unref } from 'vue'
+import { type Ref } from 'vue'
+import { useRoute } from 'vue-router'
+import GTNavButton from '@/components/GTNavButton.vue'
 
 const route = useRoute()
 const showUrl = computed(() => {
@@ -18,7 +19,7 @@ const { requestData: golfClub }: { requestData: Ref } = useAxios('GET', unref(sh
     <div v-if="golfClub" class="mt-2">
       <p>Make: {{ golfClub.make }}</p>
       <p>Model: {{ golfClub.model }}</p>
-      <p>Loft: {{ golfClub.loft }}&#176</p>
+      <p>Loft: {{ golfClub.loft }}&#176;</p>
       <p>Carry Distance: {{ golfClub.carry_distance }}</p>
       <p>Total Distance: {{ golfClub.total_distance }}</p>
     </div>

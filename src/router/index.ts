@@ -5,11 +5,12 @@ import RegisterView from '@/views/RegisterView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
-import IndexBagsView from "@/views/GolfBags/IndexBagsView.vue";
-import ShowBagsView from "@/views/GolfBags/ShowBagsView.vue";
-import CreateBagsView from "@/views/GolfBags/CreateBagsView.vue";
-import IndexClubsView from "@/views/GolfClubs/IndexClubsView.vue";
-import ShowClubsView from "@/views/GolfClubs/ShowClubsView.vue";
+import IndexBagsView from '@/views/GolfBags/IndexBagsView.vue'
+import ShowBagsView from '@/views/GolfBags/ShowBagsView.vue'
+import CreateBagsView from '@/views/GolfBags/CreateBagsView.vue'
+import IndexClubsView from '@/views/GolfClubs/IndexClubsView.vue'
+import ShowClubsView from '@/views/GolfClubs/ShowClubsView.vue'
+import CreateClubsView from '@/views/GolfClubs/CreateClubsView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import { useAuth } from '@/stores/auth/auth'
@@ -63,6 +64,11 @@ const router = createRouter({
       path: '/golfclubs/:id',
       name: 'ShowGolfClubs',
       component: ShowClubsView
+    },
+    {
+      path: '/golfclubs/create',
+      name: 'CreateGolfClubs',
+      component: CreateClubsView
     },
     {
       path: '/login',

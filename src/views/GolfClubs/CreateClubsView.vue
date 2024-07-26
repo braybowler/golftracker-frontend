@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AddClubForm from "@/forms/AddClubForm.vue";
-import GTNavButton from "@/components/GTNavButton.vue";
+import AddClubForm from '@/forms/AddClubForm.vue'
+import GTNavButton from '@/components/GTNavButton.vue'
 </script>
 
 <template>

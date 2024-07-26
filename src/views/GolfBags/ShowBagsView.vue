@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useAxios } from '@/composables/useAxios'
-import {computed, Ref, unref} from 'vue'
-import {useRoute} from "vue-router";
-import GTNavButton from "@/components/GTNavButton.vue";
+import { computed, unref } from 'vue'
+import { type Ref } from 'vue'
+import { useRoute } from 'vue-router'
+import GTNavButton from '@/components/GTNavButton.vue'
 
 const route = useRoute()
 const showUrl = computed(() => {

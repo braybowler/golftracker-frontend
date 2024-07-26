@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref, unref} from 'vue'
 import GTButton from '../components/GTButton.vue'
+import {useAxios} from "@/composables/useAxios";
+import GTNavButton from "@/components/GTNavButton.vue";
 
 const make = ref('')
 const model = ref('')
@@ -9,7 +11,16 @@ const loft = ref(0)
 const carryDistance = ref(0)
 const totalDistance = ref(0)
 
-// const createClub = () => {}
+const createGolfClub = () => {
+  useAxios('POST', 'golfclubs', {
+    make: unref(make),
+    model: unref(model),
+    type: unref(type),
+    loft: unref(loft),
+    carry_distance: unref(carryDistance),
+    total_distance: unref(totalDistance)
+  })
+}
 </script>
 
 <template>
@@ -34,44 +45,50 @@ const totalDistance = ref(0)
           class="border border-black rounded-md"
         />
       </div>
-      <div class="flex flex-row justify-between">
-        <label for="model">Club Type</label>
-        <input
-          type="text"
-          v-model="type"
-          placeholder="Please enter the type of your club"
-          class="border border-black rounded-md"
-        />
-      </div>
+<!--      <div class="flex flex-row justify-between">-->
+<!--        <label for="clubType">Club Type</label>-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          v-model="clubType"-->
+<!--          placeholder="Please enter the type of your club"-->
+<!--          class="border border-black rounded-md"-->
+<!--        />-->
+<!--      </div>-->
       <div class="flex flex-row justify-between">
         <label for="loft">Loft</label>
         <input
-          type="text"
+          type="number"
           v-model="loft"
           placeholder="Please enter the loft of your club"
           class="border border-black rounded-md"
         />
       </div>
       <div class="flex flex-row justify-between">
-        <label for="carry">Carry distance</label>
+        <label for="carryDistance">Carry distance</label>
         <input
-          type="text"
+          type="number"
           v-model="carryDistance"
           placeholder="Please enter your carry distance"
           class="border border-black rounded-md"
         />
       </div>
       <div class="flex flex-row justify-between">
-        <label for="total">Total distance</label>
+        <label for="totalDistance">Total distance</label>
         <input
-          type="text"
+          type="number"
           v-model="totalDistance"
           placeholder="Please enter a nickname for your bag"
           class="border border-black rounded-md"
         />
       </div>
       <div class="flex flex-col justify-center">
-        <GTButton @click="createClub()">Create Golf Bag</GTButton>
+        <GTNavButton
+            @click="createGolfClub()"
+            url="/golfclubs"
+            class="border border-black rounded-md text-center"
+        >
+          Create Golf Club
+        </GTNavButton>
       </div>
     </div>
   </div>

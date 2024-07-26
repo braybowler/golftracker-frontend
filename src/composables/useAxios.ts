@@ -20,8 +20,8 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
           axios
             .get(fullUrl)
             .then(function (response) {
-                //TODO : This is here to support a single resource being returned (i.e. a request to a show action). Do this better.
-                requestData.value = response.data.data ? response.data.data : response.data
+              //TODO : This is here to support a single resource being returned (i.e. a request to a show action). Do this better.
+              requestData.value = response.data.data ? response.data.data : response.data
             })
             .catch(function (error) {
               requestError.value = error
@@ -42,7 +42,7 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
               requestData.value = response.data.data
             })
             .catch(function (error) {
-                requestError.value = error
+              requestError.value = error
             })
         })
         .catch(function (error) {

@@ -5,9 +5,9 @@ import GTLogoutModal from '@/modals/GTLogoutModal.vue'
 
 const isHamburgerMenuExpanded = ref(false)
 const toggleIsExpanded = () => {
-  if (unref(isHamburgerMenuExpanded) === false) {
+  if (!unref(isHamburgerMenuExpanded)) {
     isHamburgerMenuExpanded.value = true
-  } else if (unref(isHamburgerMenuExpanded.value) === true) {
+  } else if (unref(isHamburgerMenuExpanded.value)) {
     isHamburgerMenuExpanded.value = false
   }
 }
