@@ -2,14 +2,19 @@
 import { type GolfClub } from '@/common'
 import GTNavButton from '@/components/GTNavButton.vue'
 import { computed } from 'vue'
+import {useAxios} from "@/composables/useAxios";
 
 const props = defineProps<{
   golfClub: GolfClub
 }>()
 
-const showUrl = computed(() => {
-  return '/golfclubs/' + props.golfClub.id
+const resourceUrl = computed(() => {
+  return 'golfclubs/' + props.golfClub.id
 })
+
+const deleteGolfClub = () => {
+  useAxios('DELETE', resourceUrl.value)
+}
 </script>
 
 <template>
@@ -23,10 +28,10 @@ const showUrl = computed(() => {
         </div>
       </div>
       <div class="flex flex-row justify-between space-x-1">
-        <GTNavButton class="grow border rounded-md border-black text-center" :url="showUrl"
+        <GTNavButton class="grow border rounded-md border-black text-center" :url="resourceUrl"
           >Details</GTNavButton
         >
-        <button>
+        <button @click="deleteGolfClub()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

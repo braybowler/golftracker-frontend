@@ -10,13 +10,23 @@ const csrfUrl = import.meta.env.VITE_CSRF_URL
 export function useAxios(method: string, requestUrl: string, body?: {}) {
   const requestData = ref(null)
   const requestError = ref(null)
+  const fullUrl = baseUrl + requestUrl
 
   switch (method) {
+    case 'DELETE':
+      axios
+        .delete(fullUrl)
+        .then(function (response) {
+          requestData.value = response.data.data ? response.data.data : response.data
+        })
+        .catch(function (error) {
+          requestError.value = error
+        })
+      break
     case 'GET':
       axios
         .get(csrfUrl)
         .then(function () {
-          const fullUrl = baseUrl + requestUrl
           axios
             .get(fullUrl)
             .then(function (response) {
@@ -35,7 +45,6 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
       axios
         .get(csrfUrl)
         .then(function () {
-          const fullUrl = baseUrl + requestUrl
           axios
             .post(fullUrl, body)
             .then(function (response) {

@@ -8,12 +8,12 @@ const props = defineProps<{
   golfBag: GolfBag
 }>()
 
-const showUrl = computed(() => {
-  return '/golfbags/' + props.golfBag.id
+const resourceUrl = computed(() => {
+  return 'golfbags/' + props.golfBag.id
 })
 
 const deleteGolfBag = () => {
-  useAxios('DELETE', 'golfbags')
+  useAxios('DELETE', resourceUrl.value)
 }
 </script>
 
@@ -29,9 +29,9 @@ const deleteGolfBag = () => {
         </div>
       </div>
       <div class="flex flex-row justify-between space-x-1">
-        <GTNavButton class="grow border rounded-md border-black text-center" :url="showUrl"
-          >Details</GTNavButton
-        >
+        <GTNavButton class="grow border rounded-md border-black text-center" :url="resourceUrl">
+          Details
+        </GTNavButton>
         <button @click="deleteGolfBag()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
