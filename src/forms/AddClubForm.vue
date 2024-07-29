@@ -8,6 +8,8 @@ const make = ref('')
 const model = ref('')
 const type = ref('')
 const loft = ref(0)
+const clubCategory = ref(null)
+const clubType = ref(null)
 const carryDistance = ref(0)
 const totalDistance = ref(0)
 
@@ -45,15 +47,24 @@ const createGolfClub = () => {
           class="border border-black rounded-md"
         />
       </div>
-<!--      <div class="flex flex-row justify-between">-->
-<!--        <label for="clubType">Club Type</label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          v-model="clubType"-->
-<!--          placeholder="Please enter the type of your club"-->
-<!--          class="border border-black rounded-md"-->
-<!--        />-->
-<!--      </div>-->
+      <div class="flex flex-row justify-between">
+        <label for="clubType">Club Category</label>
+        <input
+            type="text"
+            v-model="clubCategory"
+            placeholder="Please enter the category"
+            class="border border-black rounded-md"
+        />
+      </div>
+      <div class="flex flex-row justify-between">
+        <label for="clubType">Club Type</label>
+        <input
+          type="text"
+          v-model="clubType"
+          placeholder="Please enter the type"
+          class="border border-black rounded-md"
+        />
+      </div>
       <div class="flex flex-row justify-between">
         <label for="loft">Loft</label>
         <input
