@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import {ref, unref} from 'vue'
-import GTButton from '../components/GTButton.vue'
+import {computed, ref, unref} from 'vue'
 import {useAxios} from "@/composables/useAxios";
 import GTNavButton from "@/components/GTNavButton.vue";
+import {CLUB_TYPES, ClubCategory} from "@/common/enums";
 
 const make = ref('')
 const model = ref('')
 const type = ref('')
 const loft = ref(0)
 const clubCategory = ref(null)
-const clubType = ref(null)
 const carryDistance = ref(0)
 const totalDistance = ref(0)
 
@@ -26,7 +25,7 @@ const createGolfClub = () => {
 </script>
 
 <template>
-  <div class="flex flex-col">
+    <div class="flex flex-col">
     <p>Want to add another club? Enter the details here:</p>
     <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-full">
       <div class="flex flex-row justify-between">
@@ -34,8 +33,8 @@ const createGolfClub = () => {
         <input
           type="text"
           v-model="make"
-          placeholder="Please enter the make of your club"
-          class="border border-black rounded-md"
+          placeholder="Make"
+          class="w-1/2 border border-black rounded-md"
         />
       </div>
       <div class="flex flex-row justify-between">
@@ -43,35 +42,28 @@ const createGolfClub = () => {
         <input
           type="text"
           v-model="model"
-          placeholder="Please enter the model of your club"
-          class="border border-black rounded-md"
+          placeholder="Model"
+          class="w-1/2 border border-black rounded-md"
         />
       </div>
       <div class="flex flex-row justify-between">
-        <label for="clubType">Club Category</label>
-        <input
-            type="text"
-            v-model="clubCategory"
-            placeholder="Please enter the category"
-            class="border border-black rounded-md"
-        />
+        <label for="clubCategory">Club Category</label>
+        <select class="w-1/2 border border-black rounded-md" v-model="clubCategory">
+          <option v-for="(value, key) in ClubCategory" :value="key"> {{value}}</option>
+        </select>
       </div>
-      <div class="flex flex-row justify-between">
-        <label for="clubType">Club Type</label>
-        <input
-          type="text"
-          v-model="clubType"
-          placeholder="Please enter the type"
-          class="border border-black rounded-md"
-        />
-      </div>
+<!--      <div v-if="clubCategory" class="flex flex-row justify-between">-->
+<!--        <label for="clubType">Club Type</label>-->
+<!--        <select class="w-1/2 border border-black rounded-md" v-model="clubType">-->
+<!--          <option v-for="type in ClubType" :value="type">{{type}}</option>-->
+<!--        </select>-->
+<!--      </div>-->
       <div class="flex flex-row justify-between">
         <label for="loft">Loft</label>
         <input
           type="number"
           v-model="loft"
-          placeholder="Please enter the loft of your club"
-          class="border border-black rounded-md"
+          class="w-1/2 border border-black rounded-md"
         />
       </div>
       <div class="flex flex-row justify-between">
@@ -79,8 +71,7 @@ const createGolfClub = () => {
         <input
           type="number"
           v-model="carryDistance"
-          placeholder="Please enter your carry distance"
-          class="border border-black rounded-md"
+          class="w-1/2 border border-black rounded-md"
         />
       </div>
       <div class="flex flex-row justify-between">
@@ -88,15 +79,14 @@ const createGolfClub = () => {
         <input
           type="number"
           v-model="totalDistance"
-          placeholder="Please enter a nickname for your bag"
-          class="border border-black rounded-md"
+          class="w-1/2 border border-black rounded-md"
         />
       </div>
       <div class="flex flex-col justify-center">
         <GTNavButton
             @click="createGolfClub()"
             url="/golfclubs"
-            class="border border-black rounded-md text-center"
+            class="w-1/2 border border-black rounded-md text-center"
         >
           Create Golf Club
         </GTNavButton>

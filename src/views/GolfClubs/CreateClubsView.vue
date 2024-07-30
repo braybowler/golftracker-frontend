@@ -5,7 +5,7 @@ import GTNavButton from '@/components/GTNavButton.vue'
 
 <template>
   <div>
-    <GTNavButton url="/golfbags" class="border border-black rounded-md">Back to Clubs</GTNavButton>
+    <GTNavButton url="/golfclubs" class="border border-black rounded-md">Back to Clubs</GTNavButton>
     <div class="flex justify-center">
       <AddClubForm class="w-1/3"></AddClubForm>
     </div>

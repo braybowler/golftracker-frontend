@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type GolfBag } from '@/common'
+import { type GolfBag } from '@/common/resources'
 import GTNavButton from '@/components/GTNavButton.vue'
 import { computed } from 'vue'
 import { useAxios } from '@/composables/useAxios'
