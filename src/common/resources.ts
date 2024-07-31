@@ -1,3 +1,5 @@
+import type { ClubCategory } from '@/common/enums'
+
 export interface GolfBag {
   id: string
   make: string
@@ -19,6 +21,7 @@ export interface GolfClub {
   make: string
   model: string
   loft: number
+  club_category: ClubCategory
   carry_distance: number
   total_distance: number
 }

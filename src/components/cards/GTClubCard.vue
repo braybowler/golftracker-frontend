@@ -2,7 +2,7 @@
 import { type GolfClub } from '@/common/resources'
 import GTNavButton from '@/components/GTNavButton.vue'
 import { computed } from 'vue'
-import {useAxios} from "@/composables/useAxios";
+import { useAxios } from '@/composables/useAxios'
 
 const props = defineProps<{
   golfClub: GolfClub
