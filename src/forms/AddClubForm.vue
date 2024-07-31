@@ -24,6 +24,7 @@ const createGolfClub = () => {
     type: unref(type),
     loft: unref(loft),
     club_category: unref(category),
+    club_type: unref(type),
     carry_distance: unref(carryDistance),
     total_distance: unref(totalDistance)
   })
@@ -84,7 +85,7 @@ const createGolfClub = () => {
         <GTNavButton
           @click="createGolfClub()"
           url="/golfclubs"
-          class="w-1/2 border border-black rounded-md text-center"
+          class="border border-black rounded-md text-center"
         >
           Create Golf Club
         </GTNavButton>

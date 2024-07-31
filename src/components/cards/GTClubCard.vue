@@ -25,6 +25,7 @@ const deleteGolfClub = () => {
         <div>
           <p>{{ props.golfClub.make }}</p>
           <p>{{ props.golfClub.model }}</p>
+          <p>{{ props.golfClub.club_type }}</p>
         </div>
       </div>
       <div class="flex flex-row justify-between space-x-1">

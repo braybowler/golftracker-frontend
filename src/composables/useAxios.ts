@@ -20,6 +20,7 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
           requestData.value = response.data.data ? response.data.data : response.data
         })
         .catch(function (error) {
+          console.log('DELETE error: ', error)
           requestError.value = error
         })
       break
@@ -34,6 +35,7 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
               requestData.value = response.data.data ? response.data.data : response.data
             })
             .catch(function (error) {
+              console.log('GET error: ', error)
               requestError.value = error
             })
         })
@@ -51,6 +53,7 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
               requestData.value = response.data.data
             })
             .catch(function (error) {
+              console.log('POST error: ', error)
               requestError.value = error
             })
         })
