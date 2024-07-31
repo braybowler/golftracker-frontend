@@ -23,5 +23,8 @@ const { requestData: golfBag }: { requestData: Ref } = useAxios('GET', unref(sho
       <p>Created: {{ golfBag.created_at }}</p>
       <p>Last Updated: {{ golfBag.updated_at }}</p>
     </div>
+    <div v-if="golfBag" class="mt-2">
+      <p> SOME LINK TO ADD CLUB </p>
+    </div>
   </div>
 </template>

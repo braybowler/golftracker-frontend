@@ -17,6 +17,7 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
       axios
         .delete(fullUrl)
         .then(function (response) {
+          console.log(response)
           requestData.value = response.data.data ? response.data.data : response.data
         })
         .catch(function (error) {
@@ -31,7 +32,9 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
           axios
             .get(fullUrl)
             .then(function (response) {
-              //TODO : This is here to support a single resource being returned (i.e. a request to a show action). Do this better.
+              console.log(response)
+              //This is here to support a single resource being returned (i.e. a request to a show action),
+              //since Laravel paginate() forces an additional 'data' wrapping.
               requestData.value = response.data.data ? response.data.data : response.data
             })
             .catch(function (error) {
@@ -50,6 +53,7 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
           axios
             .post(fullUrl, body)
             .then(function (response) {
+              console.log(response)
               requestData.value = response.data.data
             })
             .catch(function (error) {
