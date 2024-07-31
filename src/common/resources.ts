@@ -22,6 +22,7 @@ export interface GolfClub {
   model: string
   loft: number
   club_category: ClubCategory
+  club_type: string
   carry_distance: number
   total_distance: number
 }
@@ -32,6 +33,8 @@ export function isGolfClub(obj: any): obj is GolfBag {
     obj.make !== undefined &&
     obj.model !== undefined &&
     obj.loft !== undefined &&
+    obj.club_category !== undefined &&
+    obj.club_type !== undefined &&
     obj.carry_distance !== undefined &&
     obj.total_distance !== undefined
   )

@@ -2,15 +2,7 @@
 import { computed, ref, unref } from 'vue'
 import { useAxios } from '@/composables/useAxios'
 import GTNavButton from '@/components/GTNavButton.vue'
-import {
-  CLUB_TYPES,
-  ClubCategory,
-  HYBRID_TYPES,
-  IRON_TYPES,
-  PUTTER_TYPES,
-  WEDGE_TYPES,
-  WOOD_TYPES
-} from '@/common/enums'
+import { CLUB_TYPES, ClubCategory } from '@/common/enums'
 
 const make = ref('')
 const model = ref('')
@@ -20,11 +12,10 @@ const type = ref('')
 const carryDistance = ref(0)
 const totalDistance = ref(0)
 
-const clubCategories = Object.values(ClubCategory);
+const clubCategories = Object.values(ClubCategory)
 const clubTypes = computed(() => {
-  return category.value ? CLUB_TYPES[category.value as ClubCategory] : [];
+  return category.value ? CLUB_TYPES[category.value as ClubCategory] : []
 })
-
 
 const createGolfClub = () => {
   useAxios('POST', 'golfclubs', {
@@ -65,7 +56,9 @@ const createGolfClub = () => {
         <label for="category">Club Category</label>
         <select class="w-1/2 border border-black rounded-md" v-model="category">
           <option value="" disabled>Select a category</option>
-          <option :key="category" v-for="category in clubCategories" :value="category">{{ category }}</option>
+          <option :key="category" v-for="category in clubCategories" :value="category">
+            {{ category }}
+          </option>
         </select>
       </div>
       <div v-if="category" class="flex flex-row justify-between">
