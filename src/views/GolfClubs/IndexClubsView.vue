@@ -10,9 +10,9 @@ const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfcl
 
 <template>
   <div class="flex flex-col">
-    <GTNavButton :url="createUrl" class="border rounded-md border-black text-center w-1/5"
-      >Add A New Club</GTNavButton
-    >
+    <GTNavButton :url="createUrl" class="border rounded-md border-black text-center w-1/5">
+      Add A New Club
+    </GTNavButton>
     <div v-if="golfClubs" class="mt-2 space-y-2 w-1/5">
       <ul :key="golfClub.id" v-for="golfClub in golfClubs">
         <GTClubCard :golfClub></GTClubCard>
