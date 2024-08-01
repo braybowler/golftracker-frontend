@@ -11,7 +11,7 @@ const { requestData: golfBalls }: { requestData: Ref } = useAxios('GET', 'golfba
 <template>
   <div class="flex flex-col">
     <GTNavButton :url="createUrl" class="border rounded-md border-black text-center w-1/5"
-      >Add A New Club</GTNavButton
+      >Add A New Golf Ball</GTNavButton
     >
     <div v-if="golfBalls" class="mt-2 space-y-2 w-1/5">
       <ul :key="golfBall.id" v-for="golfBall in golfBalls">
