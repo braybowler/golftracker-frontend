@@ -19,8 +19,8 @@ const auth = useAuth()
       <GTNavLink :url="'/contact'" class="hover:text-white"> Contact Us </GTNavLink>
     </div>
     <div class="space-x-2">
-      <GTNavLink :url="'/register'" class="hover:text-white"> Register with GolfTracker </GTNavLink>
-      <GTNavLink :url="'/login'" class="hover:text-white"> Login to GolfTracker </GTNavLink>
+      <GTNavLink :url="'/register'" class="hover:text-white">Register</GTNavLink>
+      <GTNavLink :url="'/login'" class="hover:text-white">Login</GTNavLink>
     </div>
   </nav>
 </template>

@@ -24,7 +24,7 @@ const { requestData: golfBag }: { requestData: Ref } = useAxios('GET', unref(sho
       <p>Last Updated: {{ golfBag.updated_at }}</p>
     </div>
     <div v-if="golfBag" class="mt-2">
-      <p> SOME LINK TO ADD CLUB </p>
+      <p>SOME LINK TO ADD CLUB</p>
     </div>
   </div>
 </template>

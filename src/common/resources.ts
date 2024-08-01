@@ -47,11 +47,7 @@ export interface GolfBall {
 }
 
 export function isGolfBall(obj: any): obj is GolfBag {
-  return (
-    obj.id !== undefined &&
-    obj.make !== undefined &&
-    obj.model !== undefined
-  )
+  return obj.id !== undefined && obj.make !== undefined && obj.model !== undefined
 }
 
 export type GTResource = GolfBag | GolfClub | GolfBall

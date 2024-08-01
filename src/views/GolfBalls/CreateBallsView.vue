@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import AddClubForm from '@/forms/AddClubForm.vue'
+import AddBallForm from '@/forms/AddBallForm.vue'
 import GTNavButton from '@/components/GTNavButton.vue'
 </script>
 
 <template>
   <div>
-    <GTNavButton url="/golfclubs" class="border border-black rounded-md">Back to Clubs</GTNavButton>
+    <GTNavButton url="/golfballs" class="border border-black rounded-md"
+      >Back to Golf Balls</GTNavButton
+    >
     <div class="flex justify-center">
-      <AddClubForm class="w-1/3"></AddClubForm>
+      <AddBallForm class="w-1/3"></AddBallForm>
     </div>
   </div>
 </template>
