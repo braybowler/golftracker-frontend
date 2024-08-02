@@ -34,7 +34,9 @@ const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfcl
         <label for="type">Golf Ball</label>
         <select class="w-1/2 border border-black rounded-md" v-model="selectedBall">
           <option value="" disabled>Select a golf ball</option>
-          <option :key="golfBall.id" v-for="golfBall in golfBalls" :value="golfBall">{{ golfBall.make }}: {{ golfBall.model }}</option>
+          <option :key="golfBall.id" v-for="golfBall in golfBalls" :value="golfBall">
+            {{ golfBall.make }}: {{ golfBall.model }}
+          </option>
         </select>
       </div>
       <div class="flex flex-row justify-between">

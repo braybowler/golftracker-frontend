@@ -3,6 +3,7 @@ import { useAxios } from '@/composables/useAxios'
 import GTClubCard from '../../components/cards/GTClubCard.vue'
 import type { Ref } from 'vue'
 import GTNavButton from '@/components/GTNavButton.vue'
+import type { GolfClub } from '@/common/resources'
 
 const createUrl = 'golfclubs/create'
 const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfclubs/')
@@ -10,9 +11,7 @@ const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfcl
 function handleDelete(golfClubId: number) {
   const deleteUrl = 'golfclubs/' + golfClubId
   useAxios('DELETE', deleteUrl)
-  golfClubs.value = golfClubs.value.filter(
-    (golfClub) => golfClub.id !== golfClubId
-  )
+  golfClubs.value = golfClubs.value.filter((golfClub: GolfClub) => golfClub.id !== golfClubId)
 }
 </script>
 
@@ -22,7 +21,12 @@ function handleDelete(golfClubId: number) {
       Add A New Club
     </GTNavButton>
     <div v-if="golfClubs" class="mt-2 space-y-2 w-1/5">
-      <GTClubCard :key="golfClub.id" v-for="golfClub in golfClubs" :golfClub @delete-golf-club="handleDelete"></GTClubCard>
+      <GTClubCard
+        :key="golfClub.id"
+        v-for="golfClub in golfClubs"
+        :golfClub
+        @delete-golf-club="handleDelete"
+      ></GTClubCard>
     </div>
   </div>
 </template>

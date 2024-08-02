@@ -1,7 +1,7 @@
 import type { ClubCategory } from '@/common/enums'
 
 export interface GolfBag {
-  id: string
+  id: string | number
   make: string
   model: string
   nickname: string
@@ -17,7 +17,7 @@ export function isGolfBag(obj: any): obj is GolfBag {
 }
 
 export interface GolfClub {
-  id: string
+  id: string | number
   make: string
   model: string
   loft: number
@@ -41,7 +41,7 @@ export function isGolfClub(obj: any): obj is GolfBag {
 }
 
 export interface GolfBall {
-  id: string
+  id: string | number
   make: string
   model: string
 }

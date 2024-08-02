@@ -3,6 +3,7 @@ import { useAxios } from '@/composables/useAxios'
 import GTBagCard from '../../components/cards/GTBagCard.vue'
 import type { Ref } from 'vue'
 import GTNavButton from '@/components/GTNavButton.vue'
+import type { GolfBag } from '@/common/resources'
 
 const createUrl = 'golfbags/create'
 const { requestData: golfBags }: { requestData: Ref } = useAxios('GET', 'golfbags/')
@@ -10,9 +11,7 @@ const { requestData: golfBags }: { requestData: Ref } = useAxios('GET', 'golfbag
 function handleDelete(golfBagId: number) {
   const deleteUrl = 'golfbags/' + golfBagId
   useAxios('DELETE', deleteUrl)
-  golfBags.value = golfBags.value.filter(
-    (golfBag) => golfBag.id !== golfBagId
-  )
+  golfBags.value = golfBags.value.filter((golfBag: GolfBag) => golfBag.id !== golfBagId)
 }
 </script>
 
@@ -22,7 +21,12 @@ function handleDelete(golfBagId: number) {
       >Add A New Bag</GTNavButton
     >
     <div v-if="golfBags" class="mt-2 space-y-2 w-1/5">
-      <GTBagCard :key="golfBag.id" v-for="golfBag in golfBags" :golfBag @delete-golf-bag="handleDelete"></GTBagCard>
+      <GTBagCard
+        :key="golfBag.id"
+        v-for="golfBag in golfBags"
+        :golfBag
+        @delete-golf-bag="handleDelete"
+      ></GTBagCard>
     </div>
   </div>
 </template>

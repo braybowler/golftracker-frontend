@@ -15,7 +15,9 @@ const { requestData: golfBall }: { requestData: Ref } = useAxios('GET', unref(sh
 
 <template>
   <div>
-    <GTNavButton url="/golfballs" class="border border-black rounded-md">Back to Golf Balls</GTNavButton>
+    <GTNavButton url="/golfballs" class="border border-black rounded-md"
+      >Back to Golf Balls</GTNavButton
+    >
     <div v-if="golfBall" class="mt-2">
       <p>Make: {{ golfBall.make }}</p>
       <p>Model: {{ golfBall.model }}</p>
