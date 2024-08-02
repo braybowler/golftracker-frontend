@@ -28,9 +28,9 @@ const deleteGolfBall = () => {
         </div>
       </div>
       <div class="flex flex-row justify-between space-x-1">
-        <GTNavButton class="grow border rounded-md border-black text-center" :url="resourceUrl"
-          >Details</GTNavButton
-        >
+        <GTNavButton class="grow border rounded-md border-black text-center" :url="resourceUrl">
+          Details
+        </GTNavButton>
         <button @click="deleteGolfBall()">
           <svg
             xmlns="http://www.w3.org/2000/svg"

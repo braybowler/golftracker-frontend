@@ -7,23 +7,20 @@ import GTNavButton from '@/components/GTNavButton.vue'
 
 const route = useRoute()
 const showUrl = computed(() => {
-  return 'golfclubs/' + route.params.id
+  return 'golfballs/' + route.params.id
 })
 
-const { requestData: golfClub }: { requestData: Ref } = useAxios('GET', unref(showUrl))
+const { requestData: golfBall }: { requestData: Ref } = useAxios('GET', unref(showUrl))
 </script>
 
 <template>
   <div>
     <GTNavButton url="/golfballs" class="border border-black rounded-md">Back to Golf Balls</GTNavButton>
-    <div v-if="golfClub" class="mt-2">
-      <p>Make: {{ golfClub.make }}</p>
-      <p>Model: {{ golfClub.model }}</p>
-      <p>Loft: {{ golfClub.loft }}&#176;</p>
-      <p>Carry Distance: {{ golfClub.carry_distance }}</p>
-      <p>Total Distance: {{ golfClub.total_distance }}</p>
-      <p>Created: {{ golfClub.created_at }}</p>
-      <p>Last Updated: {{ golfClub.updated_at }}</p>
+    <div v-if="golfBall" class="mt-2">
+      <p>Make: {{ golfBall.make }}</p>
+      <p>Model: {{ golfBall.model }}</p>
+      <p>Created: {{ golfBall.created_at }}</p>
+      <p>Last Updated: {{ golfBall.updated_at }}</p>
     </div>
   </div>
 </template>
