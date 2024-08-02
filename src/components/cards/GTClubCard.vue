@@ -11,10 +11,6 @@ const props = defineProps<{
 const resourceUrl = computed(() => {
   return 'golfclubs/' + props.golfClub.id
 })
-
-const deleteGolfClub = () => {
-  useAxios('DELETE', resourceUrl.value)
-}
 </script>
 
 <template>
@@ -32,7 +28,7 @@ const deleteGolfClub = () => {
         <GTNavButton class="grow border rounded-md border-black text-center" :url="resourceUrl"
           >Details</GTNavButton
         >
-        <button @click="deleteGolfClub()">
+        <button @click="$emit('deleteGolfClub', props.golfClub.id)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

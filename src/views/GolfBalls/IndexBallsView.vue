@@ -6,6 +6,14 @@ import GTNavButton from '@/components/GTNavButton.vue'
 
 const createUrl = 'golfballs/create'
 const { requestData: golfBalls }: { requestData: Ref } = useAxios('GET', 'golfballs/')
+
+function handleDelete(golfBallId: number) {
+  const deleteUrl = 'golfballs/' + golfBallId
+  useAxios('DELETE', deleteUrl)
+  golfBalls.value = golfBalls.value.filter(
+    (golfBall) => golfBall.id !== golfBallId
+  )
+}
 </script>
 
 <template>
@@ -14,9 +22,7 @@ const { requestData: golfBalls }: { requestData: Ref } = useAxios('GET', 'golfba
       >Add A New Golf Ball</GTNavButton
     >
     <div v-if="golfBalls" class="mt-2 space-y-2 w-1/5">
-      <ul :key="golfBall.id" v-for="golfBall in golfBalls">
-        <GTBallCard :golfBall></GTBallCard>
-      </ul>
+      <GTBallCard v-for="golfBall in golfBalls" :key="golfBall.id" :golfBall @delete-golf-ball="handleDelete"></GTBallCard>
     </div>
   </div>
 </template>

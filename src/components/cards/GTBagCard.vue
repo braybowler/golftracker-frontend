@@ -2,7 +2,6 @@
 import { type GolfBag } from '@/common/resources'
 import GTNavButton from '@/components/GTNavButton.vue'
 import { computed } from 'vue'
-import { useAxios } from '@/composables/useAxios'
 
 const props = defineProps<{
   golfBag: GolfBag
@@ -11,10 +10,6 @@ const props = defineProps<{
 const resourceUrl = computed(() => {
   return 'golfbags/' + props.golfBag.id
 })
-
-const deleteGolfBag = () => {
-  useAxios('DELETE', resourceUrl.value)
-}
 </script>
 
 <template>
@@ -32,7 +27,7 @@ const deleteGolfBag = () => {
         <GTNavButton class="grow border rounded-md border-black text-center" :url="resourceUrl">
           Details
         </GTNavButton>
-        <button @click="deleteGolfBag()">
+        <button @click="$emit('deleteGolfBag', props.golfBag.id)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
