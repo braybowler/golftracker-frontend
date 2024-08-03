@@ -18,7 +18,7 @@ const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfcl
   <Teleport to="body">
     <div
       v-if="open"
-      class="fixed left-1/2 top-1/2 z-999 -ml-28 border w-70 h-30 border-black rounded-md bg-secondary p-2 space-y-4"
+      class="fixed left-1/2 top-1/2 z-999 -ml-28 border w-96 h-30 border-black rounded-md bg-secondary p-2 space-y-4"
     >
       <p>Select equipment to add to this bag.</p>
       <div class="flex flex-row justify-between">
