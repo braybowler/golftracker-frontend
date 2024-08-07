@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, unref } from 'vue'
 import GTButton from '@/components/GTButton.vue'
 import type { Ref } from 'vue'
 import { useAxios } from '@/composables/useAxios.js'
+import type { GolfBag } from '@/common/resources'
+
+const props = defineProps<{
+  golfBag: GolfBag
+}>()
 
 const open = ref(false)
 const selectedClub = ref(null)
@@ -10,6 +15,21 @@ const selectedBall = ref(null)
 
 const { requestData: golfBalls }: { requestData: Ref } = useAxios('GET', 'golfballs/')
 const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfclubs/')
+
+const addGearToBag = () => {
+  if (selectedClub.value) {
+    useAxios('POST', 'baggables', {
+      bag: props.golfBag,
+      baggable: unref(selectedClub),
+    })
+  }
+  if (selectedBall.value) {
+    useAxios('POST', 'baggables', {
+      bag: props.golfBag,
+      baggable: unref(selectedBall),
+    })
+  }
+}
 </script>
 
 <template>
@@ -41,10 +61,10 @@ const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfcl
       </div>
       <div class="flex flex-row justify-between">
         <div>
-          <GTButton @click="open = false" class="disabled">Add Equipment</GTButton>
+          <GTButton @click="addGearToBag()">Add Equipment</GTButton>
         </div>
         <div>
-          <GTButton @click="open = false" class="hover:text-white">Cancel</GTButton>
+          <GTButton @click="open = false">Cancel</GTButton>
         </div>
       </div>
     </div>
