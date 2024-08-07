@@ -11,6 +11,9 @@ import CreateBagsView from '@/views/GolfBags/CreateBagsView.vue'
 import IndexClubsView from '@/views/GolfClubs/IndexClubsView.vue'
 import ShowClubsView from '@/views/GolfClubs/ShowClubsView.vue'
 import CreateClubsView from '@/views/GolfClubs/CreateClubsView.vue'
+import IndexBallsView from '@/views/GolfBalls/IndexBallsView.vue'
+import ShowBallsView from '@/views/GolfBalls/ShowBallsView.vue'
+import CreateBallsView from '@/views/GolfBalls/CreateBallsView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import { useAuth } from '@/stores/auth/auth'
@@ -69,6 +72,21 @@ const router = createRouter({
       path: '/golfclubs/create',
       name: 'CreateGolfClubs',
       component: CreateClubsView
+    },
+    {
+      path: '/golfballs',
+      name: 'IndexGolfBalls',
+      component: IndexBallsView
+    },
+    {
+      path: '/golfballs/:id',
+      name: 'ShowGolfBalls',
+      component: ShowBallsView
+    },
+    {
+      path: '/golfballs/create',
+      name: 'CreateGolfBalls',
+      component: CreateBallsView
     },
     {
       path: '/login',

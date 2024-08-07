@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { type GolfBag } from '@/common/resources'
+import { type GolfBall } from '@/common/resources'
 import GTNavButton from '@/components/GTNavButton.vue'
 import { computed } from 'vue'
 
 const props = defineProps<{
-  golfBag: GolfBag
+  golfBall: GolfBall
 }>()
 
 const resourceUrl = computed(() => {
-  return 'golfbags/' + props.golfBag.id
+  return 'golfballs/' + props.golfBall.id
 })
 </script>
 
@@ -18,16 +18,15 @@ const resourceUrl = computed(() => {
       <div class="flex flex-row justify-between p-2">
         <img src="../icons/GTImageNotFound.svg" alt="Image not found" class="h-20 w-20" />
         <div>
-          <p>{{ props.golfBag.make }}</p>
-          <p>{{ props.golfBag.model }}</p>
-          <p>{{ props.golfBag.nickname }}</p>
+          <p>{{ props.golfBall.make }}</p>
+          <p>{{ props.golfBall.model }}</p>
         </div>
       </div>
       <div class="flex flex-row justify-between space-x-1">
         <GTNavButton class="grow border rounded-md border-black text-center" :url="resourceUrl">
           Details
         </GTNavButton>
-        <button @click="$emit('deleteGolfBag', props.golfBag.id)">
+        <button @click="$emit('deleteGolfBall', props.golfBall.id)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

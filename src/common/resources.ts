@@ -1,7 +1,7 @@
 import type { ClubCategory } from '@/common/enums'
 
 export interface GolfBag {
-  id: string
+  id: number
   make: string
   model: string
   nickname: string
@@ -17,7 +17,8 @@ export function isGolfBag(obj: any): obj is GolfBag {
 }
 
 export interface GolfClub {
-  id: string
+  id: number
+  type: string
   make: string
   model: string
   loft: number
@@ -40,4 +41,18 @@ export function isGolfClub(obj: any): obj is GolfBag {
   )
 }
 
-export type GTResource = GolfBag | GolfClub
+export interface GolfBall {
+  id: number
+  type: string
+  user_id: number
+  make: string
+  model: string
+  created_at: string
+  updated_at: string
+}
+
+export function isGolfBall(obj: any): obj is GolfBag {
+  return obj.id !== undefined && obj.make !== undefined && obj.model !== undefined
+}
+
+export type GTResource = GolfBag | GolfClub | GolfBall

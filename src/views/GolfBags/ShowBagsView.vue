@@ -3,6 +3,7 @@ import { useAxios } from '@/composables/useAxios'
 import { computed, unref } from 'vue'
 import { type Ref } from 'vue'
 import { useRoute } from 'vue-router'
+import GTEquipmentModal from '@/modals/GTEquipmentModal.vue'
 import GTNavButton from '@/components/GTNavButton.vue'
 
 const route = useRoute()
@@ -22,6 +23,9 @@ const { requestData: golfBag }: { requestData: Ref } = useAxios('GET', unref(sho
       <p>Nickname: {{ golfBag.nickname }}</p>
       <p>Created: {{ golfBag.created_at }}</p>
       <p>Last Updated: {{ golfBag.updated_at }}</p>
+    </div>
+    <div v-if="golfBag" class="mt-2">
+      <GTEquipmentModal :golfBagId="+golfBag.id as number"></GTEquipmentModal>
     </div>
   </div>
 </template>
