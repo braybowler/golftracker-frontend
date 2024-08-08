@@ -6,40 +6,51 @@ import { useAxios } from '@/composables/useAxios'
 export const useAuth = defineStore('auth', () => {
   const user = ref({})
 
-  const register = async (name: string, email: string, password: string) => {
-    const {requestData: requestUser} = await useAxios('REGISTER', 'register', {
-      name: name,
-      email: email,
-      password: password,
-    })
-
-    console.log(requestUser.value, 'requestUser')
-    user.value = requestUser.value
-
-    router.replace('/dashboard')
+  if (sessionStorage.getItem('gt_user')) {
+    user.value = JSON.parse(sessionStorage.gt_user)
   }
 
-  const login = (email: string, password: string) => {
-    useAxios('LOGIN', 'login', {
+  const register = async (name: string, email: string, password: string) => {
+    const { requestData: requestUser } = await useAxios('REGISTER', 'register', {
+      name: name,
       email: email,
-      password: password,
+      password: password
     })
 
-    router.replace('/dashboard')
+    user.value = requestUser.value
+    sessionStorage.setItem('gt_user', JSON.stringify(user.value))
+
+
+    router.replace({ name: 'Dashboard' })
+  }
+
+  const login = async (email: string, password: string) => {
+    const { requestData: requestUser } = await useAxios('LOGIN', 'login', {
+      email: email,
+      password: password
+    })
+
+    user.value = requestUser.value
+    sessionStorage.setItem('gt_user', JSON.stringify(user.value))
+
+    router.replace({ name: 'Dashboard' })
   }
 
   const logout = () => {
     useAxios('LOGOUT', 'logout', {})
 
-    router.replace('/')
+    user.value = {}
+    sessionStorage.removeItem('gt_user')
+
+    router.replace({name: 'Home'})
   }
 
   const isAuthed = computed(() => {
-    if (Object.keys(unref(user)).length != 0) {
-      return true
-    }
+    return Object.keys(unref(user)).length != 0;
+  })
 
-    return false
+  const getUser = computed(() => {
+    return user.value
   })
 
   return {
@@ -47,6 +58,6 @@ export const useAuth = defineStore('auth', () => {
     login,
     logout,
     isAuthed,
-    user
+    getUser
   }
 })
