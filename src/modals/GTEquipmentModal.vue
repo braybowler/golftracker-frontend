@@ -19,24 +19,24 @@ const addGearToBag = () => {
   if (selectedClub.value) {
     useAxios('POST', 'baggables', {
       bag: {
-        id: props.golfBagId,
+        id: props.golfBagId
       },
-      baggable: unref(selectedClub),
+      baggable: unref(selectedClub)
     })
   }
   if (selectedBall.value) {
     useAxios('POST', 'baggables', {
       bag: {
-        id: props.golfBagId,
+        id: props.golfBagId
       },
-      baggable: unref(selectedBall),
+      baggable: unref(selectedBall)
     })
   }
 }
 
 const clearSelections = () => {
-  selectedBall.value = null;
-  selectedClub.value = null;
+  selectedBall.value = null
+  selectedClub.value = null
 }
 </script>
 
@@ -69,10 +69,23 @@ const clearSelections = () => {
       </div>
       <div class="flex flex-row justify-between">
         <div>
-          <GTButton @click="addGearToBag(); clearSelections(); open = false">Add Equipment</GTButton>
+          <GTButton
+            @click="
+              addGearToBag();
+              clearSelections();
+              open = false
+            "
+            >Add Equipment</GTButton
+          >
         </div>
         <div>
-          <GTButton @click="clearSelections(); open = false">Cancel</GTButton>
+          <GTButton
+            @click="
+              clearSelections();
+              open = false
+            "
+            >Cancel</GTButton
+          >
         </div>
       </div>
     </div>

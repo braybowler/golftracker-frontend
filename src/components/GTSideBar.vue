@@ -7,9 +7,9 @@ const auth = useAuth()
 const isExpanded = ref(true)
 
 const toggleIsExpanded = () => {
-  if (unref(isExpanded) === false) {
+  if (!unref(isExpanded)) {
     isExpanded.value = true
-  } else if (unref(isExpanded.value) === true) {
+  } else if (unref(isExpanded.value)) {
     isExpanded.value = false
   }
 }
