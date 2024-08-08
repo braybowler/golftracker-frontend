@@ -7,7 +7,7 @@ axios.defaults.withXSRFToken = true
 const baseUrl = import.meta.env.VITE_API_BASE_URL
 const csrfUrl = import.meta.env.VITE_CSRF_URL
 
-export function useAxios(method: string, requestUrl: string, body?: {}) {
+export async function useAxios(method: string, requestUrl: string, body?: {}) {
   const requestData = ref(null)
   const requestError = ref(null)
   const fullUrl = baseUrl + requestUrl
@@ -63,6 +63,67 @@ export function useAxios(method: string, requestUrl: string, body?: {}) {
         })
         .catch(function (error) {
           console.log(method + ' request to sanctum/csrf-cookie, error: ', error)
+        })
+      break
+    //Special switch cases to handle registration, log-in, and log-out requests.
+    case 'REGISTER':
+      await axios
+        .get(csrfUrl)
+        .then(async function () {
+          await axios
+            .post(fullUrl, body)
+            .then(function (response) {
+              console.log(response, 'response')
+              requestData.value = response.data.data ? response.data.data : response.data
+              console.log(requestData.value, 'requestData assignment')
+            })
+            .catch(function (error) {
+              console.log('REGISTER error: ', error)
+              requestError.value = error
+            })
+        })
+        .catch(function (error) {
+          console.log('post request to sanctum/csrf-cookie, error: ', error)
+        })
+      break
+    case 'LOGIN':
+      axios
+        .get(csrfUrl)
+        .then(function () {
+          axios
+            .post(fullUrl, body)
+            .then(async function (response) {
+              console.log(response)
+              requestData.value = response.data.data ? response.data.data : response.data
+            })
+            .catch(function (error) {
+              console.log('LOGIN error: ', error)
+              requestError.value = error
+            })
+        })
+        .catch(function (error) {
+          console.log('post request to sanctum/csrf-cookie, error: ', error)
+        })
+      break
+    case 'LOGOUT':
+      axios
+        .get(csrfUrl)
+        .then(function () {
+          axios
+            .post(fullUrl, body)
+            .then(async function (response) {
+              if (response.status === 204) {
+                console.log(response)
+                requestData.value = response.data.data ? response.data.data : response.data
+              }
+            })
+            .catch(function (error) {
+              console.log('LOGOUT error: ', error)
+              requestError.value = error
+            })
+        })
+        .catch(function (error) {
+          console.log('post request to sanctum/csrf-cookie, error: ', error)
         })
       break
   }
