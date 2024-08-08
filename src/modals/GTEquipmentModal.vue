@@ -69,7 +69,7 @@ const clearSelections = () => {
       </div>
       <div class="flex flex-row justify-between">
         <div>
-          <GTButton @click="addGearToBag()">Add Equipment</GTButton>
+          <GTButton @click="addGearToBag(); clearSelections(); open = false">Add Equipment</GTButton>
         </div>
         <div>
           <GTButton @click="clearSelections(); open = false">Cancel</GTButton>
