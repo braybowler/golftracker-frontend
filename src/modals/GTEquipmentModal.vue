@@ -73,7 +73,7 @@ const clearSelections = () => {
             @click="
               addGearToBag();
               clearSelections();
-              open = false
+              open = false;
             "
             >Add Equipment</GTButton
           >
@@ -82,7 +82,7 @@ const clearSelections = () => {
           <GTButton
             @click="
               clearSelections();
-              open = false
+              open = false;
             "
             >Cancel</GTButton
           >
