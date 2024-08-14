@@ -114,6 +114,10 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const auth = useAuth()
 
+  if (!auth.isAuthed) {
+    await auth.tryAuthOnce()
+  }
+
   if (!auth.isAuthed && !publicRoutes.includes(to.name as string)) {
     return { name: 'Login' }
   }
