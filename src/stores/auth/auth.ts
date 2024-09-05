@@ -11,7 +11,7 @@ export const useAuth = defineStore('auth', () => {
 
   const register = async (name: string, email: string, password: string) => {
     axios
-    .get(csrfUrl)
+      .get(csrfUrl)
       .then(async function () {
         await axios
           .post(baseUrl + 'register', {
@@ -19,11 +19,11 @@ export const useAuth = defineStore('auth', () => {
             email: email,
             password: password
           })
-          .then(function(response) {
+          .then(function (response) {
             user.value = response.data.data ? response.data.data : response.data
             router.replace({ name: 'Dashboard' })
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log('REGISTER error: ', error)
           })
       })
@@ -34,24 +34,24 @@ export const useAuth = defineStore('auth', () => {
 
   const login = async (email: string, password: string) => {
     axios
-    .get(csrfUrl)
+      .get(csrfUrl)
       .then(async function () {
         await axios
-        .post(baseUrl + 'login', {
-        email: email,
-        password: password
-        })
-        .then(function(response) {
-          user.value = response.data.data ? response.data.data : response.data
-          router.replace({ name: 'Dashboard' })
-        })
-        .catch(function(error) {
-          console.log('LOGIN error: ', error)
-        })
+          .post(baseUrl + 'login', {
+            email: email,
+            password: password
+          })
+          .then(function (response) {
+            user.value = response.data.data ? response.data.data : response.data
+            router.replace({ name: 'Dashboard' })
+          })
+          .catch(function (error) {
+            console.log('LOGIN error: ', error)
+          })
       })
-    .catch(function (error) {
-      console.log('post request to sanctum/csrf-cookie, error: ', error)
-    })
+      .catch(function (error) {
+        console.log('post request to sanctum/csrf-cookie, error: ', error)
+      })
   }
 
   const logout = () => {
@@ -70,14 +70,14 @@ export const useAuth = defineStore('auth', () => {
     return user.value
   })
 
-  const tryAuthOnce = async ()=> {
+  const tryAuthOnce = async () => {
     await axios
-    .get(baseUrl + 'me')
-      .then(async function(response) {
+      .get(baseUrl + 'me')
+      .then(async function (response) {
         user.value = response.data.data ? response.data.data : response.data
         console.log('tryAuthOnce', user.value)
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error('request to /me failed', error)
       })
   }

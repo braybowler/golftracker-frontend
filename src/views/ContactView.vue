@@ -6,13 +6,13 @@ const form = ref({
   name: '',
   email: '',
   subject: '',
-  message: '',
+  message: ''
 })
 
 const submitForm = () => {
   if (!form.value.name || !form.value.email || !form.value.subject || !form.value.message) {
     alert('Please fill out all of the fields before submitting your message.')
-    return;
+    return
   }
 
   form.value.name = ''
@@ -20,9 +20,10 @@ const submitForm = () => {
   form.value.subject = ''
   form.value.message = ''
 
-  alert('Thank you for contacting the GolfTracker team. You will hear back from us as soon as possible')
+  alert(
+    'Thank you for contacting the GolfTracker team. You will hear back from us as soon as possible'
+  )
 }
-
 </script>
 
 <template>
