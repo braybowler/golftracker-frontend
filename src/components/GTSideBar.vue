@@ -33,6 +33,9 @@ const toggleIsExpanded = () => {
         </button>
       </div>
       <div>
+        <hr class="rounded">
+      </div>
+      <div>
         <GTNavLink :url="'/dashboard'" class="hover:text-white flex flex-row justify-between">
           Dashboard
           <svg
@@ -50,6 +53,9 @@ const toggleIsExpanded = () => {
             />
           </svg>
         </GTNavLink>
+      </div>
+      <div>
+        <hr class="rounded">
       </div>
       <div>
         <GTNavLink :url="'/golfbags'" class="hover:text-white flex flex-row justify-between">
@@ -108,11 +114,14 @@ const toggleIsExpanded = () => {
           </svg>
         </GTNavLink>
       </div>
+      <div>
+        <hr class="rounded">
+      </div>
     </div>
   </nav>
   <nav v-if="auth.isAuthed && !isExpanded" class="bg-primary w-16 h-screen p-2 justify-center">
     <div class="flex flex-col space-y-2">
-      <div class="flex flex-row">
+      <div class="flex flex-row justify-end">
         <button @click="toggleIsExpanded()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -120,11 +129,14 @@ const toggleIsExpanded = () => {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="hover:text-white size-6"
+            class="hover:text-white size-8"
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
           </svg>
         </button>
+      </div>
+      <div>
+        <hr class="rounded">
       </div>
       <GTNavLink :url="'/dashboard'" class="hover:text-white">
         <svg
@@ -142,6 +154,9 @@ const toggleIsExpanded = () => {
           />
         </svg>
       </GTNavLink>
+      <div>
+        <hr class="rounded">
+      </div>
       <GTNavLink :url="'/golfbags'" class="hover:text-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -190,6 +205,9 @@ const toggleIsExpanded = () => {
           />
         </svg>
       </GTNavLink>
+      <div>
+        <hr class="rounded">
+      </div>
     </div>
   </nav>
 </template>
