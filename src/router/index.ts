@@ -17,6 +17,9 @@ import CreateBallsView from '@/views/GolfBalls/CreateBallsView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import { useAuth } from '@/stores/auth/auth'
+import CreatePracticeSessionsView from '@/views/PracticeSessions/CreatePracticeSessionsView.vue'
+import ShowPracticeSessionsView from '@/views/PracticeSessions/ShowPracticeSessionsView.vue'
+import IndexPracticeSessionsView from '@/views/PracticeSessions/IndexPracticeSessionsView.vue'
 
 const publicRoutes = ['Home', 'About', 'Contact', 'Register', 'Login']
 
@@ -87,6 +90,21 @@ const router = createRouter({
       path: '/golfballs/create',
       name: 'CreateGolfBalls',
       component: CreateBallsView
+    },
+    {
+      path: '/practicesessions',
+      name: 'IndexPracticeSessions',
+      component: IndexPracticeSessionsView
+    },
+    {
+      path: '/practicesessions/:id',
+      name: 'ShowPracticeSessions',
+      component: ShowPracticeSessionsView
+    },
+    {
+      path: '/practicesessions/create',
+      name: 'CreatePracticeSessions',
+      component: CreatePracticeSessionsView
     },
     {
       path: '/login',
