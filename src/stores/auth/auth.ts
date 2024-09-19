@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { computed, ref, unref } from 'vue'
-import { useAxios } from '@/composables/useAxios'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 
@@ -22,7 +21,10 @@ export const useAuth = defineStore('auth', () => {
         })
 
       user.value = response.data.data ? response.data.data : response.data
-      await router.replace({ name: 'Dashboard' })
+
+      if (user.value) {
+        await router.replace({ name: 'Dashboard' })
+      }
     } catch (e) {
       console.error('Error when trying to register: ',  e)
     }
@@ -41,17 +43,25 @@ export const useAuth = defineStore('auth', () => {
       user.value = response.data.data ? response.data.data : response.data
       await router.replace({ name: 'Dashboard' })
 
+      if (user.value) {
+        await router.replace({ name: 'Dashboard' })
+      }
     } catch (e) {
       console.error('Error when trying to login: ',  e)
     }
   }
 
-  const logout = () => {
-    useAxios('LOGOUT', 'logout', {})
+  const logout = async () => {
+    try {
+      const response = await axios.post(baseUrl + 'logout')
 
-    user.value = {}
-
-    router.replace({ name: 'Home' })
+      if (response.status === 204) {
+        user.value = {}
+        await router.replace({ name: 'Home' })
+      }
+    } catch (e) {
+      console.error('Error when trying to logout: ', e)
+    }
   }
 
   const isAuthed = computed(() => {
@@ -63,15 +73,13 @@ export const useAuth = defineStore('auth', () => {
   })
 
   const tryAuthOnce = async () => {
-    await axios
-      .get(baseUrl + 'me')
-      .then(async function (response) {
-        user.value = response.data.data ? response.data.data : response.data
-        console.log('tryAuthOnce', user.value)
-      })
-      .catch(function (error) {
-        console.error('request to /me failed', error)
-      })
+    try {
+      const response = await axios.get(baseUrl + 'me')
+
+      user.value = response.data.data ? response.data.data : response.data
+    } catch (e) {
+      console.error('Error when trying to fetch from /me endpoint: ', e)
+    }
   }
 
   return {
