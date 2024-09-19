@@ -1,65 +1,67 @@
 import { defineStore } from 'pinia'
 import { computed, ref, unref } from 'vue'
-import router from '@/router'
-import { useAxios } from '@/composables/useAxios'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 export const useAuth = defineStore('auth', () => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL
   const csrfUrl = import.meta.env.VITE_CSRF_URL
+  const router = useRouter();
   const user = ref({})
 
   const register = async (name: string, email: string, password: string) => {
-    axios
-      .get(csrfUrl)
-      .then(async function () {
-        await axios
-          .post(baseUrl + 'register', {
-            name: name,
-            email: email,
-            password: password
-          })
-          .then(function (response) {
-            user.value = response.data.data ? response.data.data : response.data
-            router.replace({ name: 'Dashboard' })
-          })
-          .catch(function (error) {
-            console.log('REGISTER error: ', error)
-          })
-      })
-      .catch(function (error) {
-        console.log('post request to sanctum/csrf-cookie, error: ', error)
-      })
+    try {
+      await axios.get(csrfUrl)
+
+      const response = await axios
+        .post(baseUrl + 'register', {
+          name: name,
+          email: email,
+          password: password
+        })
+
+      user.value = response.data.data ? response.data.data : response.data
+
+      if (user.value) {
+        await router.replace({ name: 'Dashboard' })
+      }
+    } catch (e) {
+      console.error('Error when trying to register: ',  e)
+    }
   }
 
   const login = async (email: string, password: string) => {
-    axios
-      .get(csrfUrl)
-      .then(async function () {
-        await axios
-          .post(baseUrl + 'login', {
-            email: email,
-            password: password
-          })
-          .then(function (response) {
-            user.value = response.data.data ? response.data.data : response.data
-            router.replace({ name: 'Dashboard' })
-          })
-          .catch(function (error) {
-            console.log('LOGIN error: ', error)
-          })
-      })
-      .catch(function (error) {
-        console.log('post request to sanctum/csrf-cookie, error: ', error)
-      })
+    try {
+      await axios.get(csrfUrl)
+
+      const response = await axios
+        .post(baseUrl + 'login', {
+          email: email,
+          password: password
+        })
+
+      user.value = response.data.data ? response.data.data : response.data
+      await router.replace({ name: 'Dashboard' })
+
+      if (user.value) {
+        await router.replace({ name: 'Dashboard' })
+      }
+    } catch (e) {
+      console.error('Error when trying to login: ',  e)
+    }
   }
 
-  const logout = () => {
-    useAxios('LOGOUT', 'logout', {})
+  const logout = async () => {
+    try {
+      const response = await axios.post(baseUrl + 'logout')
 
-    user.value = {}
-
-    router.replace({ name: 'Home' })
+      if (response.status === 204) {
+        user.value = {}
+        await router.replace({ name: 'Home' })
+      }
+    } catch (e) {
+      console.error('Error when trying to logout: ', e)
+    }
   }
 
   const isAuthed = computed(() => {
@@ -71,15 +73,13 @@ export const useAuth = defineStore('auth', () => {
   })
 
   const tryAuthOnce = async () => {
-    await axios
-      .get(baseUrl + 'me')
-      .then(async function (response) {
-        user.value = response.data.data ? response.data.data : response.data
-        console.log('tryAuthOnce', user.value)
-      })
-      .catch(function (error) {
-        console.error('request to /me failed', error)
-      })
+    try {
+      const response = await axios.get(baseUrl + 'me')
+
+      user.value = response.data.data ? response.data.data : response.data
+    } catch (e) {
+      console.error('Error when trying to fetch from /me endpoint: ', e)
+    }
   }
 
   return {
