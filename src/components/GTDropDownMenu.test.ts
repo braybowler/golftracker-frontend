@@ -3,7 +3,7 @@ import { createPinia, setActivePinia } from 'pinia'
 import { shallowMount } from '@vue/test-utils'
 import GTDropDownMenu from '@/components/GTDropDownMenu.vue'
 
-describe('GTBottomBar', () => {
+describe('GTDropDownMenu', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
