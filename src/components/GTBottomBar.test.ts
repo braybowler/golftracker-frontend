@@ -5,7 +5,9 @@ import { createPinia, setActivePinia } from 'pinia'
 
 vi.mock('@/stores/auth/auth', async () => {
   const actual = await vi.importActual('@/stores/auth/auth')
-  const mockIsAuthed = vi.fn(() => { return true })
+  const mockIsAuthed = vi.fn()
+    .mockImplementationOnce(() => { return true })
+    .mockImplementationOnce(() => { return false })
 
   return {
     ...actual,
@@ -32,7 +34,7 @@ describe('GTBottomBar', () => {
     expect(wrapper.html()).toContain('<nav class="bg-primary w-screen">')
   })
 
-  test.todo('Component does not render when there is not an authorized user', () => {
+  test('Component does not render when there is not an authorized user', () => {
     const wrapper = shallowMount(GTBottomBar)
 
     expect(wrapper.html()).toContain('')
