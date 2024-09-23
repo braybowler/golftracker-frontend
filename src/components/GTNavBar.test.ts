@@ -1,13 +1,11 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
-import { mount, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import GTNavBar from '@/components/GTNavBar.vue'
 
 vi.mock('@/stores/auth/auth', async () => {
   const actual = await vi.importActual('@/stores/auth/auth')
   const mockIsAuthed = vi.fn()
-    .mockImplementationOnce(() => false )
-    .mockImplementationOnce(() => true )
 
   return {
     ...actual,

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, type Mock, test, vi } from 'vitest'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import GTBottomBar from '@/components/GTBottomBar.vue'
 import { createPinia, setActivePinia } from 'pinia'
