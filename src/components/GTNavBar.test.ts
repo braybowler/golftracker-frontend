@@ -28,14 +28,12 @@ describe('GTNavBar', () => {
 
   test('Component renders the guest view if the user is not authenticated', () => {
     const wrapper = shallowMount(GTNavBar)
-    expect(wrapper.vm.auth.isAuthed).toBeFalsy
 
     expect(wrapper.html()).toContain('<g-t-nav-link-stub url="/" class="hover:text-white"></g-t-nav-link-stub>')
   })
 
   test('Component renders the user view if the user is authenticated', async () => {
     const wrapper = shallowMount(GTNavBar)
-    expect(wrapper.vm.auth.isAuthed).toBeTruthy
 
     expect(wrapper.html()).toContain('<g-t-drop-down-menu-stub></g-t-drop-down-menu-stub>')
   })
