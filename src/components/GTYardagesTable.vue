@@ -1,9 +1,26 @@
 <script setup lang="ts">
-import { ref, type Ref, unref } from 'vue'
+import { ref, type Ref, unref, watch } from 'vue'
 import { useAxios } from '@/composables/useAxios'
 import GTButton from '@/components/GTButton.vue'
 
 const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfclubs/')
+
+const sortedGolfClubs = ref<any>()
+const trySortGolfClubs = () => {
+  sortedGolfClubs.value = [...golfClubs.value].sort((a, b) => {
+    if (a.sort_index === b.sort_index) {
+      return a.carry_distance - b.carry_distance;
+    }
+    return a.sort_index - b.sort_index
+  })
+}
+
+watch(
+  golfClubs,
+  () => {
+    trySortGolfClubs()
+  }
+)
 
 const isInEditMode = ref(false)
 
@@ -46,7 +63,7 @@ const updateYardages = () => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(club, index) in golfClubs" :key="index" class="h-10">
+          <tr v-for="(club, index) in sortedGolfClubs" :key="index" class="h-10">
             <td>
               {{club.make}} {{club.model}}: {{club.club_type}}
             </td>

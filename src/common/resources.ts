@@ -19,6 +19,7 @@ export function isGolfBag(obj: any): obj is GolfBag {
 export interface GolfClub {
   id: number
   type: string
+  sort_index: number
   make: string
   model: string
   loft: number
@@ -31,6 +32,8 @@ export interface GolfClub {
 export function isGolfClub(obj: any): obj is GolfBag {
   return (
     obj.id !== undefined &&
+    obj.type !== undefined &&
+    obj.sort_index !== undefined &&
     obj.make !== undefined &&
     obj.model !== undefined &&
     obj.loft !== undefined &&
