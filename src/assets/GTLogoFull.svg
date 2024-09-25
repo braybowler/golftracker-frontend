@@ -1,0 +1,19 @@
+<svg width="280" height="80" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="white" />
+    <!-- Golf ball -->
+    <circle cx="132" cy="22" r="15" fill="white" stroke="black" stroke-width="2" />
+    <!-- Dimple effects on the golf ball -->
+    <circle cx="132" cy="15" r="2" fill="lightgray" />
+    <circle cx="140" cy="25" r="2" fill="lightgray" />
+    <circle cx="125" cy="20" r="2" fill="lightgray" />
+    <circle cx="128" cy="30" r="2" fill="lightgray" />
+    <!-- "Golf" Text -->
+    <text x="30" y="65" font-family="Arial" font-size="40" fill="green">Golf</text>
+    <!-- Stylized T -->
+    <text x="120" y="65" font-family="Arial" font-size="40" fill="white" stroke="black" stroke-width="1">T</text>
+    <line x1="130" y1="55" x2="134" y2="55" stroke="red" stroke-width="1"></line>
+    <line x1="130" y1="60" x2="134" y2="60" stroke="red" stroke-width="1"></line>
+
+    <text x="140" y="65" font-family="Arial" font-size="40" fill="green">racker</text>
+</svg>
