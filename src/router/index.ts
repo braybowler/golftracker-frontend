@@ -20,6 +20,7 @@ import { useAuth } from '@/stores/auth/auth'
 import CreatePracticeSessionsView from '@/views/PracticeSessions/CreatePracticeSessionsView.vue'
 import ShowPracticeSessionsView from '@/views/PracticeSessions/ShowPracticeSessionsView.vue'
 import IndexPracticeSessionsView from '@/views/PracticeSessions/IndexPracticeSessionsView.vue'
+import ShowYardagesTableView from '@/views/ShowYardagesTableView.vue'
 
 const publicRoutes = ['Home', 'About', 'Contact', 'Register', 'Login']
 
@@ -105,6 +106,11 @@ const router = createRouter({
       path: '/practicesessions/create',
       name: 'CreatePracticeSessions',
       component: CreatePracticeSessionsView
+    },
+    {
+      path: '/yardages',
+      name: 'ShowYardagesTable',
+      component: ShowYardagesTableView
     },
     {
       path: '/login',
