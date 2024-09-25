@@ -2,7 +2,6 @@
 import { useAuth } from '@/stores/auth/auth'
 import GTNavLink from './GTNavLink.vue'
 import GTDropDownMenu from './GTDropDownMenu.vue'
-import GTLogo from '@/assets/GTLogoFull.svg'
 
 const auth = useAuth()
 </script>

@@ -1,91 +1,139 @@
 <script setup lang="ts">
-import { type Ref } from 'vue'
+import { ref, type Ref, unref } from 'vue'
 import { useAxios } from '@/composables/useAxios'
+import GTButton from '@/components/GTButton.vue'
 
 const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfclubs/')
+
+const isInEditMode = ref(false)
+
+const toggleIsInEditMode = () => {
+  if (!unref(isInEditMode)) {
+    isInEditMode.value = true
+  } else if (unref(isInEditMode.value)) {
+    updateYardages()
+    isInEditMode.value = false
+  }
+}
+
+const updateYardages = () => {
+  console.log('...updating yardages.')
+}
 
 </script>
 
 <template>
-  <div class="yardages-table">
-    <table>
-      <thead>
-        <tr>
-          <th rowspan="3">Club</th>
-          <th colspan="6">Swing Type</th>
-          <th rowspan="3">Tools</th>
-        </tr>
-        <tr>
-          <th colspan="2">50%</th>
-          <th colspan="2">75%</th>
-          <th colspan="2">Full</th>
-        </tr>
-        <tr>
-          <th>Carry</th>
-          <th>Total</th>
-          <th>Carry</th>
-          <th>Total</th>
-          <th>Carry</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(club, index) in golfClubs" :key="index">
-          <td>
-            {{club.make}} {{club.model}}: {{club.club_type}}
-          </td>
+  <div class="flex flex-col justify-center align-items-center">
+    <div class="yardages-table">
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="3">Club</th>
+            <th colspan="6">Swing Type</th>
+          </tr>
+          <tr>
+            <th colspan="2">50%</th>
+            <th colspan="2">75%</th>
+            <th colspan="2">Full</th>
+          </tr>
+          <tr>
+            <th>Carry</th>
+            <th>Total</th>
+            <th>Carry</th>
+            <th>Total</th>
+            <th>Carry</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(club, index) in golfClubs" :key="index" class="h-10">
+            <td>
+              {{club.make}} {{club.model}}: {{club.club_type}}
+            </td>
 
-          <!-- 50% Swing -->
-          <td>
-            <input
-              type="number"
-              placeholder="Enter carry"
-            />
-          </td>
-          <td>
-            <input
-              type="number"
-              placeholder="Enter total"
-            />
-          </td>
+            <!-- 50% Swing -->
+            <td>
+              <template v-if="isInEditMode">
+                <input
+                  type="number"
+                  placeholder="Enter carry"
+                  class="w-full"
+                />
+              </template>
+              <template v-else>
+              </template>
+            </td>
+            <td>
+              <template v-if="isInEditMode">
+                <input
+                  type="number"
+                  placeholder="Enter total"
+                  class="w-full"
+                />
+              </template>
+              <template v-else>
+              </template>
+            </td>
 
-          <!-- 75% Swing -->
-          <td>
-            <input
-              type="number"
-              placeholder="Enter carry"
-            />
-          </td>
-          <td>
-            <input
-              type="number"
-              placeholder="Enter total"
-            />
-          </td>
+            <!-- 75% Swing -->
+            <td>
+              <template v-if="isInEditMode">
+                <input
+                  type="number"
+                  placeholder="Enter carry"
+                  class="w-full"
+                />
+              </template>
+              <template v-else>
+              </template>
+            </td>
+            <td>
+              <template v-if="isInEditMode">
+                <input
+                  type="number"
+                  placeholder="Enter total"
+                  class="w-full"
+                />
+              </template>
+              <template v-else>
+              </template>
+            </td>
 
-          <!-- Full Swing -->
-          <td>
-            <input
-              type="number"
-              v-model.number="club.carry_distance"
-              placeholder="Enter carry"
-            />
-          </td>
-          <td>
-            <input
-              type="number"
-              v-model.number="club.total_distance"
-              placeholder="Enter total"
-            />
-          </td>
+            <!-- Full Swing -->
+            <td>
+              <template v-if="isInEditMode">
+                <input
+                  type="number"
+                  v-model.number="club.carry_distance"
+                  placeholder="Enter carry"
+                  class="w-full"
+                />
+              </template>
+              <template v-else>
+                {{club.carry_distance}}
+              </template>
+            </td>
+            <td>
+              <template v-if="isInEditMode">
+                <input
+                  type="number"
+                  v-model.number="club.total_distance"
+                  placeholder="Enter total"
+                  class="w-full"
+                />
+              </template>
+              <template v-else>
+                {{club.total_distance}}
+              </template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-          <!-- Tools -->
-          <td>
-            Edit
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="flex justify-center items-center w-full mt-2">
+      <GTButton @click="toggleIsInEditMode()"> {{ isInEditMode ? 'Save Edits' : 'Edit' }}</GTButton>
+    </div>
   </div>
 </template>
 
