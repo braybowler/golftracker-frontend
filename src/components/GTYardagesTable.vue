@@ -6,7 +6,7 @@ import GTButton from '@/components/GTButton.vue'
 const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfclubs/')
 
 const sortedGolfClubs = ref<any>()
-const trySortGolfClubs = () => {
+const sortGolfClubs = () => {
   sortedGolfClubs.value = [...golfClubs.value].sort((a, b) => {
     if (a.sort_index === b.sort_index) {
       return a.carry_distance - b.carry_distance;
@@ -18,7 +18,7 @@ const trySortGolfClubs = () => {
 watch(
   golfClubs,
   () => {
-    trySortGolfClubs()
+    sortGolfClubs()
   }
 )
 
