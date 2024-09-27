@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref, unref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { getCSRFToken, getMe, loginUser, logoutUser } from '@/stores/auth/api'
 
 export const useAuth = defineStore('auth', () => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL
@@ -31,12 +32,9 @@ export const useAuth = defineStore('auth', () => {
 
   const login = async (email: string, password: string) => {
     try {
-      await axios.get(csrfUrl)
+      await getCSRFToken()
 
-      const response = await axios.post(baseUrl + 'login', {
-        email: email,
-        password: password
-      })
+      const response = await loginUser(email, password)
 
       user.value = response.data.data ? response.data.data : response.data
       await router.replace({ name: 'Dashboard' })
@@ -51,7 +49,7 @@ export const useAuth = defineStore('auth', () => {
 
   const logout = async () => {
     try {
-      const response = await axios.post(baseUrl + 'logout')
+      const response = await logoutUser()
 
       if (response.status === 204) {
         user.value = {}
@@ -72,7 +70,7 @@ export const useAuth = defineStore('auth', () => {
 
   const tryAuthOnce = async () => {
     try {
-      const response = await axios.get(baseUrl + 'me')
+      const response = await getMe()
 
       user.value = response.data.data ? response.data.data : response.data
     } catch (e) {
