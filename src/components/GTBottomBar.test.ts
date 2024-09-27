@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import GTBottomBar from '@/components/GTBottomBar.vue'
 import { createTestingPinia } from '@pinia/testing'
@@ -6,12 +6,13 @@ import GTNavLink from '@/components/GTNavLink.vue'
 import { useAuth } from '@/stores/auth/auth'
 
 describe('GTBottomBar', () => {
-
   const defaultMountOptions = {
     global: {
-      plugins: [createTestingPinia({
-        createSpy: vi.fn,
-      })]
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn
+        })
+      ]
     }
   }
 

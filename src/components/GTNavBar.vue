@@ -4,7 +4,6 @@ import GTNavLink from './GTNavLink.vue'
 import GTDropDownMenu from './GTDropDownMenu.vue'
 
 const auth = useAuth()
-
 </script>
 
 <template>

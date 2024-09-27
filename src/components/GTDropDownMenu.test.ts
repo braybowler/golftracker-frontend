@@ -4,12 +4,13 @@ import GTDropDownMenu from '@/components/GTDropDownMenu.vue'
 import { createTestingPinia } from '@pinia/testing'
 
 describe('GTDropDownMenu', () => {
-
   const defaultMountOptions = {
     global: {
-      plugins: [createTestingPinia({
-        createSpy: vi.fn,
-      })]
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn
+        })
+      ]
     }
   }
 

@@ -11,7 +11,9 @@ const { requestData: practiceSessions }: { requestData: Ref } = useAxios('GET', 
 function handleDelete(practiceSessionId: number) {
   const deleteUrl = 'practiceSessions/' + practiceSessionId
   useAxios('DELETE', deleteUrl)
-  practiceSessions.value = practiceSessions.value.filter((practiceSession: PracticeSession) => practiceSession.id !== practiceSessionId)
+  practiceSessions.value = practiceSessions.value.filter(
+    (practiceSession: PracticeSession) => practiceSession.id !== practiceSessionId
+  )
 }
 </script>
 

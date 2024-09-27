@@ -9,18 +9,15 @@ const sortedGolfClubs = ref<any>()
 const sortGolfClubs = () => {
   sortedGolfClubs.value = [...golfClubs.value].sort((a, b) => {
     if (a.sort_index === b.sort_index) {
-      return a.carry_distance - b.carry_distance;
+      return a.carry_distance - b.carry_distance
     }
     return a.sort_index - b.sort_index
   })
 }
 
-watch(
-  golfClubs,
-  () => {
-    sortGolfClubs()
-  }
-)
+watch(golfClubs, () => {
+  sortGolfClubs()
+})
 
 const isInEditMode = ref(false)
 
@@ -36,7 +33,6 @@ const toggleIsInEditMode = () => {
 const updateYardages = () => {
   console.log('...updating yardages.')
 }
-
 </script>
 
 <template>
@@ -64,56 +60,34 @@ const updateYardages = () => {
         </thead>
         <tbody>
           <tr v-for="(club, index) in sortedGolfClubs" :key="index" class="h-10">
-            <td>
-              {{club.make}} {{club.model}}: {{club.club_type}}
-            </td>
+            <td>{{ club.make }} {{ club.model }}: {{ club.club_type }}</td>
 
             <!-- 50% Swing -->
             <td>
               <template v-if="isInEditMode">
-                <input
-                  type="number"
-                  placeholder="Enter carry"
-                  class="w-full"
-                />
+                <input type="number" placeholder="Enter carry" class="w-full" />
               </template>
-              <template v-else>
-              </template>
+              <template v-else> </template>
             </td>
             <td>
               <template v-if="isInEditMode">
-                <input
-                  type="number"
-                  placeholder="Enter total"
-                  class="w-full"
-                />
+                <input type="number" placeholder="Enter total" class="w-full" />
               </template>
-              <template v-else>
-              </template>
+              <template v-else> </template>
             </td>
 
             <!-- 75% Swing -->
             <td>
               <template v-if="isInEditMode">
-                <input
-                  type="number"
-                  placeholder="Enter carry"
-                  class="w-full"
-                />
+                <input type="number" placeholder="Enter carry" class="w-full" />
               </template>
-              <template v-else>
-              </template>
+              <template v-else> </template>
             </td>
             <td>
               <template v-if="isInEditMode">
-                <input
-                  type="number"
-                  placeholder="Enter total"
-                  class="w-full"
-                />
+                <input type="number" placeholder="Enter total" class="w-full" />
               </template>
-              <template v-else>
-              </template>
+              <template v-else> </template>
             </td>
 
             <!-- Full Swing -->
@@ -127,7 +101,7 @@ const updateYardages = () => {
                 />
               </template>
               <template v-else>
-                {{club.carry_distance}}
+                {{ club.carry_distance }}
               </template>
             </td>
             <td>
@@ -140,7 +114,7 @@ const updateYardages = () => {
                 />
               </template>
               <template v-else>
-                {{club.total_distance}}
+                {{ club.total_distance }}
               </template>
             </td>
           </tr>
@@ -155,13 +129,13 @@ const updateYardages = () => {
 </template>
 
 <style scoped>
-
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid black;
 }
 

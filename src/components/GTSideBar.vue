@@ -33,7 +33,7 @@ const toggleIsExpanded = () => {
         </button>
       </div>
       <div>
-        <hr class="rounded">
+        <hr class="rounded" />
       </div>
       <div>
         <GTNavLink :url="'/dashboard'" class="hover:text-white flex flex-row justify-between">
@@ -55,7 +55,7 @@ const toggleIsExpanded = () => {
         </GTNavLink>
       </div>
       <div>
-        <hr class="rounded">
+        <hr class="rounded" />
       </div>
       <div>
         <GTNavLink :url="'/golfbags'" class="hover:text-white flex flex-row justify-between">
@@ -115,7 +115,7 @@ const toggleIsExpanded = () => {
         </GTNavLink>
       </div>
       <div>
-        <hr class="rounded">
+        <hr class="rounded" />
       </div>
       <div>
         <GTNavLink :url="'/yardages'" class="hover:text-white flex flex-row justify-between">
@@ -137,7 +137,10 @@ const toggleIsExpanded = () => {
         </GTNavLink>
       </div>
       <div>
-        <GTNavLink :url="'/practicesessions'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink
+          :url="'/practicesessions'"
+          class="hover:text-white flex flex-row justify-between"
+        >
           Practice
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +177,7 @@ const toggleIsExpanded = () => {
         </button>
       </div>
       <div>
-        <hr class="rounded">
+        <hr class="rounded" />
       </div>
       <GTNavLink :url="'/dashboard'" class="hover:text-white">
         <svg
@@ -193,7 +196,7 @@ const toggleIsExpanded = () => {
         </svg>
       </GTNavLink>
       <div>
-        <hr class="rounded">
+        <hr class="rounded" />
       </div>
       <GTNavLink :url="'/golfbags'" class="hover:text-white">
         <svg
@@ -244,7 +247,7 @@ const toggleIsExpanded = () => {
         </svg>
       </GTNavLink>
       <div>
-        <hr class="rounded">
+        <hr class="rounded" />
       </div>
       <GTNavLink :url="'/yardages'" class="hover:text-white">
         <svg

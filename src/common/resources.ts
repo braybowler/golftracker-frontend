@@ -70,7 +70,8 @@ export interface PracticeSession {
 }
 
 export function isPracticeSession(obj: any): obj is GolfBag {
-  return obj.id !== undefined &&
+  return (
+    obj.id !== undefined &&
     obj.date !== undefined &&
     obj.note !== undefined &&
     obj.start_time !== undefined &&
@@ -78,6 +79,7 @@ export function isPracticeSession(obj: any): obj is GolfBag {
     obj.temperature !== undefined &&
     obj.wind_speed !== undefined &&
     obj.is_complete !== undefined
+  )
 }
 
 export type GTResource = GolfBag | GolfClub | GolfBall | PracticeSession

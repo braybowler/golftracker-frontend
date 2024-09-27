@@ -19,7 +19,7 @@ const createPracticeSession = () => {
     end_time: unref(end_time),
     temperature: unref(temperature),
     wind_speed: unref(wind_speed),
-    is_complete: unref(is_complete),
+    is_complete: unref(is_complete)
   })
 }
 </script>
@@ -28,8 +28,14 @@ const createPracticeSession = () => {
   <div class="flex flex-col">
     <div class="space-y-2">
       <p>GolfTracker was created to help you practice golf better.</p>
-      <p>You're encouraged to select one of our pre-defined practice sessions to ensure you get the most out of your practice time.</p>
-      <p>However, if none of the pre-defined options appeal to you, select 'Custom' to begin your own practice session.</p>
+      <p>
+        You're encouraged to select one of our pre-defined practice sessions to ensure you get the
+        most out of your practice time.
+      </p>
+      <p>
+        However, if none of the pre-defined options appeal to you, select 'Custom' to begin your own
+        practice session.
+      </p>
     </div>
     <div class="bg-secondary border border-black rounded-md flex flex-col mt-2 p-4 gap-2 w-full">
       <div class="flex flex-col justify-center">

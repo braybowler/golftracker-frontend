@@ -6,19 +6,18 @@ import { useRouter } from 'vue-router'
 export const useAuth = defineStore('auth', () => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL
   const csrfUrl = import.meta.env.VITE_CSRF_URL
-  const router = useRouter();
+  const router = useRouter()
   const user = ref({})
 
   const register = async (name: string, email: string, password: string) => {
     try {
       await axios.get(csrfUrl)
 
-      const response = await axios
-        .post(baseUrl + 'register', {
-          name: name,
-          email: email,
-          password: password
-        })
+      const response = await axios.post(baseUrl + 'register', {
+        name: name,
+        email: email,
+        password: password
+      })
 
       user.value = response.data.data ? response.data.data : response.data
 
@@ -26,7 +25,7 @@ export const useAuth = defineStore('auth', () => {
         await router.replace({ name: 'Dashboard' })
       }
     } catch (e) {
-      console.error('Error when trying to register: ',  e)
+      console.error('Error when trying to register: ', e)
     }
   }
 
@@ -34,11 +33,10 @@ export const useAuth = defineStore('auth', () => {
     try {
       await axios.get(csrfUrl)
 
-      const response = await axios
-        .post(baseUrl + 'login', {
-          email: email,
-          password: password
-        })
+      const response = await axios.post(baseUrl + 'login', {
+        email: email,
+        password: password
+      })
 
       user.value = response.data.data ? response.data.data : response.data
       await router.replace({ name: 'Dashboard' })
@@ -47,7 +45,7 @@ export const useAuth = defineStore('auth', () => {
         await router.replace({ name: 'Dashboard' })
       }
     } catch (e) {
-      console.error('Error when trying to login: ',  e)
+      console.error('Error when trying to login: ', e)
     }
   }
 

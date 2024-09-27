@@ -7,19 +7,20 @@ import GTDropDownMenu from '@/components/GTDropDownMenu.vue'
 import { useAuth } from '@/stores/auth/auth'
 
 describe('GTNavBar', () => {
-
-   const defaultMountOptions = {
-     global: {
-       plugins: [createTestingPinia({
-         createSpy: vi.fn,
-       })]
-     }
-   }
+  const defaultMountOptions = {
+    global: {
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn
+        })
+      ]
+    }
+  }
 
   test('Component can render', () => {
-  const wrapper = shallowMount(GTNavBar, defaultMountOptions)
+    const wrapper = shallowMount(GTNavBar, defaultMountOptions)
 
-  expect(wrapper.exists()).toBe(true)
+    expect(wrapper.exists()).toBe(true)
   })
 
   test('Component renders the guest view if the user is not authenticated', () => {
