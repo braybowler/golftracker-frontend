@@ -1,42 +1,39 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import GTBottomBar from '@/components/GTBottomBar.vue'
-import { createPinia, setActivePinia } from 'pinia'
-
-vi.mock('@/stores/auth/auth', async () => {
-  const actual = await vi.importActual('@/stores/auth/auth')
-  const mockIsAuthed = vi.fn()
-    .mockImplementationOnce(() => { return true })
-    .mockImplementationOnce(() => { return false })
-
-  return {
-    ...actual,
-    useAuth: ()=> {
-      return {isAuthed: mockIsAuthed}
-    }
-  }
-})
+import { createTestingPinia } from '@pinia/testing'
+import GTNavLink from '@/components/GTNavLink.vue'
+import { useAuth } from '@/stores/auth/auth'
 
 describe('GTBottomBar', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+
+  const defaultMountOptions = {
+    global: {
+      plugins: [createTestingPinia({
+        createSpy: vi.fn,
+      })]
+    }
+  }
 
   test('Component can render', () => {
-    const wrapper = shallowMount(GTBottomBar)
+    const wrapper = shallowMount(GTBottomBar, defaultMountOptions)
 
     expect(wrapper.exists()).toBe(true)
   })
 
   test('Component does render when there is an authorized user', () => {
-    const wrapper = shallowMount(GTBottomBar)
+    const auth = useAuth()
+    auth.isAuthed = true
+    const wrapper = shallowMount(GTBottomBar, defaultMountOptions)
 
-    expect(wrapper.html()).toContain('<nav class="bg-primary w-screen">')
+    expect(wrapper.findComponent(GTNavLink).exists()).toBe(true)
   })
 
   test('Component does not render when there is not an authorized user', () => {
-    const wrapper = shallowMount(GTBottomBar)
+    const auth = useAuth()
+    auth.isAuthed = false
+    const wrapper = shallowMount(GTBottomBar, defaultMountOptions)
 
-    expect(wrapper.html()).toContain('')
+    expect(wrapper.findComponent(GTNavLink).exists()).toBe(false)
   })
 })
