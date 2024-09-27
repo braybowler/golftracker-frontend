@@ -1,27 +1,32 @@
-import { beforeEach, describe, expect, test } from 'vitest'
-import { createPinia, setActivePinia } from 'pinia'
+import { describe, expect, test, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import GTDropDownMenu from '@/components/GTDropDownMenu.vue'
+import { createTestingPinia } from '@pinia/testing'
 
-describe('GTBottomBar', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+describe('GTDropDownMenu', () => {
+
+  const defaultMountOptions = {
+    global: {
+      plugins: [createTestingPinia({
+        createSpy: vi.fn,
+      })]
+    }
+  }
 
   test('Component can render', () => {
-    const wrapper = shallowMount(GTDropDownMenu)
+    const wrapper = shallowMount(GTDropDownMenu, defaultMountOptions)
 
     expect(wrapper.exists()).toBe(true)
   })
 
   test('Component initializes unexpanded', () => {
-    const wrapper = shallowMount(GTDropDownMenu)
+    const wrapper = shallowMount(GTDropDownMenu, defaultMountOptions)
 
     expect(wrapper.vm.isHamburgerMenuExpanded).toBe(false)
   })
 
   test('Component can be toggled to expand', async () => {
-    const wrapper = shallowMount(GTDropDownMenu)
+    const wrapper = shallowMount(GTDropDownMenu, defaultMountOptions)
 
     expect(wrapper.vm.isHamburgerMenuExpanded).toBe(false)
 
@@ -32,7 +37,7 @@ describe('GTBottomBar', () => {
   })
 
   test('Component can be toggled back to unexpanded', async () => {
-    const wrapper = shallowMount(GTDropDownMenu)
+    const wrapper = shallowMount(GTDropDownMenu, defaultMountOptions)
 
     expect(wrapper.vm.isHamburgerMenuExpanded).toBe(false)
 
