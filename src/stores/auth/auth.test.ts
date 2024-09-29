@@ -1,8 +1,8 @@
 import { describe, test, vi, expect, beforeEach, type Mock, afterEach } from 'vitest'
 import { useAuth } from '@/stores/auth/auth'
-import axios from 'axios'
 import { createPinia, setActivePinia } from 'pinia'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 
 const csrfUrl = import.meta.env.VITE_CSRF_URL
 const baseUrl = import.meta.env.VITE_API_BASE_URL

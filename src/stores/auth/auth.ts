@@ -63,12 +63,10 @@ export const useAuth = defineStore('auth', () => {
   }
 
   const isAuthed = computed(() => {
-    return Object.keys(unref(user)).length != 0
+    return Object.keys(unref(getUser)).length != 0
   })
 
-  const getUser = computed(() => {
-    return user.value
-  })
+  const getUser = computed(() => unref(user))
 
   const tryAuthOnce = async () => {
     try {
@@ -86,6 +84,7 @@ export const useAuth = defineStore('auth', () => {
     logout,
     tryAuthOnce,
     isAuthed,
-    getUser
+    getUser,
+    user
   }
 })

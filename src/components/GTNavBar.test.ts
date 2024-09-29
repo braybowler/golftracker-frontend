@@ -4,13 +4,17 @@ import GTNavBar from '@/components/GTNavBar.vue'
 import { createTestingPinia } from '@pinia/testing'
 import GTNavLink from '@/components/GTNavLink.vue'
 import GTDropDownMenu from '@/components/GTDropDownMenu.vue'
-import { useAuth } from '@/stores/auth/auth'
 
 describe('GTNavBar', () => {
   const defaultMountOptions = {
     global: {
       plugins: [
         createTestingPinia({
+          initialState: {
+            auth: {
+              user: {}
+            }
+          },
           createSpy: vi.fn
         })
       ]
@@ -24,9 +28,6 @@ describe('GTNavBar', () => {
   })
 
   test('Component renders the guest view if the user is not authenticated', () => {
-    const auth = useAuth()
-    auth.isAuthed = false
-
     const wrapper = shallowMount(GTNavBar, defaultMountOptions)
 
     expect(wrapper.findComponent(GTNavLink).exists()).toBe(true)
@@ -34,10 +35,24 @@ describe('GTNavBar', () => {
   })
 
   test('Component renders the user view if the user is authenticated', async () => {
-    const auth = useAuth()
-    auth.isAuthed = true
+    const authenticatedMountOptions = {
+      global: {
+        plugins: [
+          createTestingPinia({
+            initialState: {
+              auth: {
+                user: {
+                  name: 'Test User'
+                }
+              }
+            },
+            createSpy: vi.fn
+          })
+        ]
+      }
+    }
 
-    const wrapper = shallowMount(GTNavBar, defaultMountOptions)
+    const wrapper = shallowMount(GTNavBar, authenticatedMountOptions)
 
     expect(wrapper.findComponent(GTNavLink).exists()).toBe(false)
     expect(wrapper.findComponent(GTDropDownMenu).exists()).toBe(true)
