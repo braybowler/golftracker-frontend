@@ -1,19 +1,16 @@
 import { defineStore } from 'pinia'
 import { computed, ref, unref } from 'vue'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { useAxios } from '@/composables/useAxios'
 
 export const useAuth = defineStore('auth', () => {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL
-  const csrfUrl = import.meta.env.VITE_CSRF_URL
   const router = useRouter()
   const user = ref({})
 
   const register = async (name: string, email: string, password: string) => {
     try {
-      await axios.get(csrfUrl)
-
-      const response = await axios.post(baseUrl + 'register', {
+      const { requestMethodSelector } = useAxios()
+      const response = requestMethodSelector('POST', 'register', {
         name: name,
         email: email,
         password: password
@@ -31,9 +28,8 @@ export const useAuth = defineStore('auth', () => {
 
   const login = async (email: string, password: string) => {
     try {
-      await axios.get(csrfUrl)
-
-      const response = await axios.post(baseUrl + 'login', {
+      const { requestMethodSelector } = useAxios()
+      const response = requestMethodSelector('GET', 'login', {
         email: email,
         password: password
       })
@@ -51,7 +47,8 @@ export const useAuth = defineStore('auth', () => {
 
   const logout = async () => {
     try {
-      const response = await axios.post(baseUrl + 'logout')
+      const { requestMethodSelector } = useAxios()
+      const response = requestMethodSelector('POST', 'logout')
 
       if (response.status === 204) {
         user.value = {}
@@ -70,7 +67,8 @@ export const useAuth = defineStore('auth', () => {
 
   const tryAuthOnce = async () => {
     try {
-      const response = await axios.get(baseUrl + 'me')
+      const { requestMethodSelector } = useAxios()
+      const response = requestMethodSelector('GET', 'me')
 
       user.value = response.data.data ? response.data.data : response.data
     } catch (e) {

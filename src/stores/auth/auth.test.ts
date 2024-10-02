@@ -1,8 +1,9 @@
-import { describe, test, vi, expect, beforeEach, type Mock, afterEach } from 'vitest'
+import { describe, test, vi, expect, afterEach, beforeEach, type Mock } from 'vitest'
 import { useAuth } from '@/stores/auth/auth'
-import { createPinia, setActivePinia } from 'pinia'
+import { setActivePinia } from 'pinia'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { createTestingPinia } from '@pinia/testing'
 
 const csrfUrl = import.meta.env.VITE_CSRF_URL
 const baseUrl = import.meta.env.VITE_API_BASE_URL
@@ -29,7 +30,12 @@ const guest = {
 
 describe('useAuth.ts', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    setActivePinia(
+      createTestingPinia({
+        createSpy: vi.fn,
+        stubActions: false
+      }),
+    )
   })
 
   afterEach(() => {
@@ -40,8 +46,6 @@ describe('useAuth.ts', () => {
     const registrationEndpoint = baseUrl + 'register'
 
     test('Registration requests make an initial request to the csrf endpoint', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
-
       const { register } = useAuth()
       await register(guest.name, guest.email, guest.password)
 
@@ -49,22 +53,6 @@ describe('useAuth.ts', () => {
     })
 
     test('Registration requests are submitted to the registration endpoint', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
-      const mockResponse = {
-        data: {
-          user: {
-            id: 1,
-            name: 'test user',
-            email: 'test@example.com',
-            email_verified_at: null,
-            last_active_at: null,
-            created_at: '2024-09-08T17:28:16.000000Z',
-            updated_at: '2024-09-08T17:28:16.000000Z'
-          }
-        }
-      }
-      ;(axios.post as Mock).mockResolvedValueOnce(mockResponse)
-
       const { register } = useAuth()
       await register(guest.name, guest.email, guest.password)
 
@@ -76,7 +64,6 @@ describe('useAuth.ts', () => {
     })
 
     test('A successful registration request routes a user to the dashboard', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
       const mockResponse = {
         data: {
           user: {
@@ -100,9 +87,6 @@ describe('useAuth.ts', () => {
     })
 
     test('An unsuccessful registration request keeps the user at the register page', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
-      ;(axios.post as Mock).mockResolvedValueOnce({})
-
       const { register } = useAuth()
 
       await register(guest.name, guest.email, guest.password)

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, unref } from 'vue'
 import GTNavLink from './GTNavLink.vue'
-import GTLogoutModal from '@/modals/GTLogoutModal.vue'
+import GTLogoutModal from '../modals/GTLogoutModal.vue'
 
 const isHamburgerMenuExpanded = ref(false)
 const toggleIsExpanded = () => {

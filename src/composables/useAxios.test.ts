@@ -3,7 +3,6 @@ import { useAxios } from '@/composables/useAxios'
 import axios from 'axios'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
-import { throws } from 'assert'
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -22,47 +21,41 @@ describe('useAxios.ts', () => {
     vi.restoreAllMocks()
   })
 
-  const testEndpoint = baseUrl + 'test'
-
   describe('requestMethodSelector', () => {
+    const testEndpoint = baseUrl + 'test'
+    const csrfUrl = import.meta.env.VITE_CSRF_URL
 
-    test('method routes calls with GET parameter to correct HTTP request type', async () => {
+    test('routes calls with GET parameter to correct HTTP request type', async () => {
+      const spy = vi.spyOn(axios, 'get')
       const {requestMethodSelector} = useAxios()
-// todo: fix this test with proper setup
       await requestMethodSelector("GET", 'test', {})
 
-      expect(axios.get).toHaveBeenCalledWith(testEndpoint)
+      expect(spy).toHaveBeenCalledWith(testEndpoint)
       expect(axios.post).not.toHaveBeenCalled()
       expect(axios.delete).not.toHaveBeenCalled()
+      spy.mockReset()
     })
 
-    test('method routes calls with POST parameter to correct HTTP request type', async () => {
-      ;(axios.post as Mock).mockReturnValue({
-        data: {
-          data: {
-            name: 'test'
-            }
-          }
-        }
-      )
-
+    test('routes calls with POST parameter to correct HTTP request type', async () => {
+      const spy = vi.spyOn(axios, 'post')
       const {requestMethodSelector} = useAxios()
-
       await requestMethodSelector("POST", 'test', {})
 
-      expect(axios.post).toHaveBeenCalledWith(testEndpoint, {})
-      expect(axios.get).not.toHaveBeenCalled()
+      expect(spy).toHaveBeenCalledWith(testEndpoint, {})
+      expect(axios.get).toHaveBeenCalledWith(csrfUrl)
       expect(axios.delete).not.toHaveBeenCalled()
+      spy.mockReset()
     })
 
-    test('method routes calls with DELETE parameter to correct HTTP request type', async () => {
+    test('routes calls with DELETE parameter to correct HTTP request type', async () => {
+      const spy = vi.spyOn(axios, 'delete')
       const {requestMethodSelector} = useAxios()
-// todo: fix this test with proper setup
       await requestMethodSelector("DELETE", 'test')
 
-      expect(axios.delete).toHaveBeenCalledWith(testEndpoint)
+      expect(spy).toHaveBeenCalledWith(testEndpoint)
       expect(axios.post).not.toHaveBeenCalled()
-      expect(axios.get).not.toHaveBeenCalled()
+      expect(axios.get).toHaveBeenCalledWith(csrfUrl)
+      spy.mockReset()
     })
 
     test.each([
@@ -70,30 +63,49 @@ describe('useAxios.ts', () => {
       { method: 'POST', functionCall: axios.post as Mock, expectedParams: [testEndpoint, {}]},
       { method: 'DELETE', functionCall: axios.delete as Mock, expectedParams: [testEndpoint]}
     ])
-    ('it will catch and re-throw error from request $method', async ({ method, functionCall, expectedParams }) => {
-      const spy = vi.spyOn(console, 'error').mockImplementation(() => ({}))
-      let thrownError = undefined
+    ('catches and re-throws error from request $method', async ({ method, functionCall, expectedParams }) => {
+      const spy = vi.spyOn(console, 'error')
+      if (method === 'GET') {
+        functionCall.mockReturnValueOnce({}).mockRejectedValueOnce({
+          status: 404
+        })
+      }
+
       functionCall.mockRejectedValue({
         status: 404
       })
 
       const {requestMethodSelector} = useAxios()
-
-      try {
-        await requestMethodSelector(method, 'test', {})
-      } catch (e) {
-        thrownError = e
-      }
-
+      await requestMethodSelector(method, 'test', {})
 
       expect(spy).toHaveBeenCalled()
       expect(functionCall).toHaveBeenCalledWith(...expectedParams)
-      expect(thrownError).not.toBeUndefined()
 
       spy.mockReset()
     })
 
-    test.todo('it makes a CSRF request if the XSRF_TOKEN is not present')
-    test.todo('it does not make a CSRF request if the XSRF_TOKEN is present')
+    describe('CSRF checks', () => {
+
+      test('it makes a CSRF request if the XSRF_TOKEN is not present', async () => {
+        const spy = vi.spyOn(axios, 'get')
+
+        const {requestMethodSelector} = useAxios()
+        await requestMethodSelector('GET', 'test', {})
+
+        expect(spy).toHaveBeenCalledWith(csrfUrl)
+        spy.mockReset()
+      })
+
+      test('it does not make a CSRF request if the XSRF_TOKEN is present', async () => {
+        const spy = vi.spyOn(axios, 'get')
+        document.cookie = 'XSRF_TOKEN=Foobar'
+
+        const {requestMethodSelector} = useAxios()
+        await requestMethodSelector('GET', 'test', {})
+
+        expect(spy).not.toHaveBeenCalledWith(csrfUrl)
+        spy.mockReset()
+      })
+    })
   })
 })
