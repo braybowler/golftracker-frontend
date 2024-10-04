@@ -98,6 +98,8 @@ describe('useAxios.ts', () => {
 
       test('it does not make a CSRF request if the XSRF_TOKEN is present', async () => {
         const spy = vi.spyOn(axios, 'get')
+        //TODO: Setting document.cookie is not ideal.
+        // This pollutes the test file for any subsequent tests.
         document.cookie = 'XSRF_TOKEN=Foobar'
 
         const {requestMethodSelector} = useAxios()

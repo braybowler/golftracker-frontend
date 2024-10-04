@@ -9,14 +9,14 @@ export const useAuth = defineStore('auth', () => {
 
   const register = async (name: string, email: string, password: string) => {
     try {
-      const { requestMethodSelector } = useAxios()
-      const response = requestMethodSelector('POST', 'register', {
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('POST', 'register', {
         name: name,
         email: email,
         password: password
       })
 
-      user.value = response.data.data ? response.data.data : response.data
+      user.value = response.value?.data?.data ? response.value.data.data : response.value?.data
 
       if (user.value) {
         await router.replace({ name: 'Dashboard' })
@@ -28,14 +28,13 @@ export const useAuth = defineStore('auth', () => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { requestMethodSelector } = useAxios()
-      const response = requestMethodSelector('GET', 'login', {
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('POST', 'login', {
         email: email,
         password: password
       })
 
-      user.value = response.data.data ? response.data.data : response.data
-      await router.replace({ name: 'Dashboard' })
+      user.value = response.value?.data?.data ? response.value.data.data : response.value?.data
 
       if (user.value) {
         await router.replace({ name: 'Dashboard' })
@@ -47,10 +46,10 @@ export const useAuth = defineStore('auth', () => {
 
   const logout = async () => {
     try {
-      const { requestMethodSelector } = useAxios()
-      const response = requestMethodSelector('POST', 'logout')
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('POST', 'logout')
 
-      if (response.status === 204) {
+      if (response.value?.status === 204) {
         user.value = {}
         await router.replace({ name: 'Home' })
       }
@@ -67,10 +66,11 @@ export const useAuth = defineStore('auth', () => {
 
   const tryAuthOnce = async () => {
     try {
-      const { requestMethodSelector } = useAxios()
-      const response = requestMethodSelector('GET', 'me')
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('GET', 'me')
 
-      user.value = response.data.data ? response.data.data : response.data
+      user.value = response.value?.data?.data ? response.value.data.data : response.value?.data
+      console.log(user.value)
     } catch (e) {
       console.error('Error when trying to fetch from /me endpoint: ', e)
     }

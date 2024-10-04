@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { createTestingPinia } from '@pinia/testing'
 
-const csrfUrl = import.meta.env.VITE_CSRF_URL
 const baseUrl = import.meta.env.VITE_API_BASE_URL
 
 vi.mock('axios')
@@ -45,13 +44,6 @@ describe('useAuth.ts', () => {
   describe('Register', () => {
     const registrationEndpoint = baseUrl + 'register'
 
-    test('Registration requests make an initial request to the csrf endpoint', async () => {
-      const { register } = useAuth()
-      await register(guest.name, guest.email, guest.password)
-
-      expect(axios.get).toHaveBeenCalledWith(csrfUrl)
-    })
-
     test('Registration requests are submitted to the registration endpoint', async () => {
       const { register } = useAuth()
       await register(guest.name, guest.email, guest.password)
@@ -77,16 +69,24 @@ describe('useAuth.ts', () => {
           }
         }
       }
-      ;(axios.post as Mock).mockResolvedValueOnce(mockResponse)
+      ;(axios.post as Mock).mockResolvedValue(mockResponse)
 
       const { register } = useAuth()
-
       await register(guest.name, guest.email, guest.password)
 
+      expect(axios.post).toHaveBeenCalledWith(registrationEndpoint, {
+        name: guest.name,
+        email: guest.email,
+        password: guest.password
+      })
       expect(useRouter().replace).toHaveBeenCalledWith({ name: 'Dashboard' })
     })
 
     test('An unsuccessful registration request keeps the user at the register page', async () => {
+      const mockResponse = {
+        status: 500
+      }
+      ;(axios.post as Mock).mockResolvedValue(mockResponse)
       const { register } = useAuth()
 
       await register(guest.name, guest.email, guest.password)
@@ -98,17 +98,7 @@ describe('useAuth.ts', () => {
   describe('Login', () => {
     const loginEndpoint = baseUrl + 'login'
 
-    test('Login requests make an initial request to the csrf endpoint', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
-
-      const { login } = useAuth()
-      await login(guest.email, guest.password)
-
-      expect(axios.get).toHaveBeenCalledWith(csrfUrl)
-    })
-
     test('Login requests are submitted to the login endpoint', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
       const mockResponse = {
         data: {
           user: {
@@ -134,7 +124,6 @@ describe('useAuth.ts', () => {
     })
 
     test('A successful login request routes a user to the dashboard', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
       const mockResponse = {
         data: {
           user: {
@@ -151,18 +140,17 @@ describe('useAuth.ts', () => {
       ;(axios.post as Mock).mockResolvedValueOnce(mockResponse)
 
       const { login } = useAuth()
-
       await login(guest.email, guest.password)
 
       expect(useRouter().replace).toHaveBeenCalledWith({ name: 'Dashboard' })
     })
 
     test('An unsuccessful login request keeps the user at the register page', async () => {
-      ;(axios.get as Mock).mockResolvedValueOnce({})
-      ;(axios.post as Mock).mockResolvedValueOnce({})
+      ;(axios.post as Mock).mockResolvedValueOnce({
+        status: 500
+      })
 
       const { login } = useAuth()
-
       await login(guest.name, guest.email)
 
       expect(useRouter().replace).not.toHaveBeenCalled()
@@ -173,13 +161,15 @@ describe('useAuth.ts', () => {
     const logoutEndpoint = baseUrl + 'logout'
 
     test('Logout requests are submitted to the logout endpoint', async () => {
-      const mockResponse = {}
+      const mockResponse = {
+        status: 204
+      }
       ;(axios.post as Mock).mockResolvedValueOnce(mockResponse)
 
       const { logout } = useAuth()
       await logout()
 
-      expect(axios.post).toHaveBeenCalledWith(logoutEndpoint)
+      expect(axios.post).toHaveBeenCalledWith(logoutEndpoint, undefined)
     })
 
     test('A successful logout request routes a user to the home page', async () => {
@@ -189,7 +179,6 @@ describe('useAuth.ts', () => {
       ;(axios.post as Mock).mockResolvedValueOnce(mockResponse)
 
       const { logout } = useAuth()
-
       await logout()
 
       expect(useRouter().replace).toHaveBeenCalledWith({ name: 'Home' })
