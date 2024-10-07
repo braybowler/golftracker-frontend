@@ -3,13 +3,15 @@ import { ref, unref } from 'vue'
 import { useAxios } from '@/composables/useAxios'
 import GTNavButton from '@/components/GTNavButton.vue'
 
+const { requestMethodSelector } = useAxios()
+
 const make = ref('')
 const model = ref('')
 
-const createGolfBall = () => {
-  useAxios('POST', 'golfballs', {
+const createGolfBall = async () => {
+  await requestMethodSelector('POST', 'golfballs', {
     make: unref(make),
-    model: unref(model)
+    model: unref(model),
   })
 }
 </script>

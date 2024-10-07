@@ -5,6 +5,8 @@ export interface GolfBag {
   make: string
   model: string
   nickname: string
+  created_at: string
+  updated_at: string
 }
 
 export function isGolfBag(obj: any): obj is GolfBag {
@@ -27,6 +29,8 @@ export interface GolfClub {
   club_type: string
   carry_distance: number
   total_distance: number
+  created_at: string
+  updated_at: string
 }
 
 export function isGolfClub(obj: any): obj is GolfBag {

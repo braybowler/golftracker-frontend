@@ -5,9 +5,9 @@ import GTNavButton from '@/components/GTNavButton.vue'
 import type { GolfBag } from '@/common/resources'
 import { onMounted, ref } from 'vue'
 
+const createUrl = 'golfbags/create'
 const golfBags = ref<Array<GolfBag>>([])
 
-const createUrl = 'golfbags/create'
 const { requestMethodSelector } = useAxios()
 
 onMounted(async () => {

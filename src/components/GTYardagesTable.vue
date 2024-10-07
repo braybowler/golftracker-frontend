@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { ref, type Ref, unref, watch } from 'vue'
+import { onMounted, ref, unref, watch } from 'vue'
 import { useAxios } from '@/composables/useAxios'
 import GTButton from '@/components/GTButton.vue'
+import type { GolfClub } from '@/common/resources'
 
-const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfclubs/')
+const golfClubs = ref<Array<GolfClub>>([])
 
-const sortedGolfClubs = ref<any>()
+const { requestMethodSelector } = useAxios()
+
+onMounted(async () => {
+  golfClubs.value = await requestMethodSelector('GET', 'golfclubs/')
+})
+
+const sortedGolfClubs = ref<Array<GolfClub>>()
 const sortGolfClubs = () => {
   sortedGolfClubs.value = [...golfClubs.value].sort((a, b) => {
     if (a.sort_index === b.sort_index) {
