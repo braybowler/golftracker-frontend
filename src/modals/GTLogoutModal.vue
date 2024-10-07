@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useAuth } from '@/stores/auth/auth'
 import GTButton from '@/components/GTButton.vue'

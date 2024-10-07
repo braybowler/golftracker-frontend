@@ -1,25 +1,22 @@
 import { defineStore } from 'pinia'
 import { computed, ref, unref } from 'vue'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { useAxios } from '@/composables/useAxios'
 
 export const useAuth = defineStore('auth', () => {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL
-  const csrfUrl = import.meta.env.VITE_CSRF_URL
   const router = useRouter()
   const user = ref({})
 
   const register = async (name: string, email: string, password: string) => {
     try {
-      await axios.get(csrfUrl)
-
-      const response = await axios.post(baseUrl + 'register', {
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('POST', 'register', {
         name: name,
         email: email,
         password: password
       })
 
-      user.value = response.data.data ? response.data.data : response.data
+      user.value = response.value?.data?.data ? response.value.data.data : response.value?.data
 
       if (user.value) {
         await router.replace({ name: 'Dashboard' })
@@ -31,15 +28,13 @@ export const useAuth = defineStore('auth', () => {
 
   const login = async (email: string, password: string) => {
     try {
-      await axios.get(csrfUrl)
-
-      const response = await axios.post(baseUrl + 'login', {
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('POST', 'login', {
         email: email,
         password: password
       })
 
-      user.value = response.data.data ? response.data.data : response.data
-      await router.replace({ name: 'Dashboard' })
+      user.value = response.value?.data?.data ? response.value.data.data : response.value?.data
 
       if (user.value) {
         await router.replace({ name: 'Dashboard' })
@@ -51,9 +46,10 @@ export const useAuth = defineStore('auth', () => {
 
   const logout = async () => {
     try {
-      const response = await axios.post(baseUrl + 'logout')
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('POST', 'logout')
 
-      if (response.status === 204) {
+      if (response.value?.status === 204) {
         user.value = {}
         await router.replace({ name: 'Home' })
       }
@@ -70,9 +66,11 @@ export const useAuth = defineStore('auth', () => {
 
   const tryAuthOnce = async () => {
     try {
-      const response = await axios.get(baseUrl + 'me')
+      const { response, requestMethodSelector } = useAxios()
+      await requestMethodSelector('GET', 'me')
 
-      user.value = response.data.data ? response.data.data : response.data
+      user.value = response.value?.data?.data ? response.value.data.data : response.value?.data
+      console.log(user.value)
     } catch (e) {
       console.error('Error when trying to fetch from /me endpoint: ', e)
     }

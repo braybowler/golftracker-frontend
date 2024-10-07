@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import { useAxios } from '@/composables/useAxios'
 import GTBallCard from '../../components/cards/GTBallCard.vue'
-import type { Ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import GTNavButton from '@/components/GTNavButton.vue'
 import type { GolfBall } from '@/common/resources'
 
 const createUrl = 'golfballs/create'
-const { requestData: golfBalls }: { requestData: Ref } = useAxios('GET', 'golfballs/')
+const golfBalls = ref<Array<GolfBall>>([])
+
+const { requestMethodSelector } = useAxios()
+
+onMounted(async () => {
+  golfBalls.value = await requestMethodSelector('GET', 'golfballs/')
+})
 
 function handleDelete(golfBallId: number) {
   const deleteUrl = 'golfballs/' + golfBallId
-  useAxios('DELETE', deleteUrl)
+  requestMethodSelector('DELETE', deleteUrl)
   golfBalls.value = golfBalls.value.filter((golfBall: GolfBall) => golfBall.id !== golfBallId)
 }
 </script>

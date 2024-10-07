@@ -4,6 +4,8 @@ import { useAxios } from '@/composables/useAxios'
 import GTNavButton from '@/components/GTNavButton.vue'
 import { CLUB_TYPES, ClubCategory } from '@/common/enums'
 
+const { requestMethodSelector } = useAxios()
+
 const make = ref('')
 const model = ref('')
 const loft = ref(0)
@@ -17,11 +19,10 @@ const clubTypes = computed(() => {
   return category.value ? CLUB_TYPES[category.value as ClubCategory] : []
 })
 
-const createGolfClub = () => {
-  useAxios('POST', 'golfclubs', {
+const createGolfClub = async () => {
+  await requestMethodSelector('POST', 'golfclubs', {
     make: unref(make),
     model: unref(model),
-    type: unref(type),
     loft: unref(loft),
     club_category: unref(category),
     club_type: unref(type),

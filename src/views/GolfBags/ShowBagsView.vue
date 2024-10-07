@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import { useAxios } from '@/composables/useAxios'
-import { computed, unref } from 'vue'
-import { type Ref } from 'vue'
+import { computed, onMounted, ref, unref } from 'vue'
 import { useRoute } from 'vue-router'
 import GTEquipmentModal from '@/modals/GTEquipmentModal.vue'
 import GTNavButton from '@/components/GTNavButton.vue'
+import type { GolfBag } from '@/common/resources'
 
 const route = useRoute()
 const showUrl = computed(() => {
   return 'golfbags/' + route.params.id
 })
 
-const { requestData: golfBag }: { requestData: Ref } = useAxios('GET', unref(showUrl))
+const golfBag = ref<GolfBag>()
+
+const { requestMethodSelector } = useAxios()
+
+onMounted(async () => {
+  golfBag.value = await requestMethodSelector('GET', unref(showUrl))
+})
 </script>
 
 <template>
