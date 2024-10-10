@@ -11,6 +11,10 @@ const toggleIsExpanded = () => {
     isHamburgerMenuExpanded.value = false
   }
 }
+
+defineExpose({
+  isHamburgerMenuExpanded
+})
 </script>
 
 <template>

@@ -12,7 +12,7 @@ onMounted(async () => {
   golfClubs.value = await requestMethodSelector('GET', 'golfclubs/')
 })
 
-const sortedGolfClubs = ref<Array<GolfClub>>()
+const sortedGolfClubs = ref<Array<GolfClub>>([])
 const sortGolfClubs = () => {
   sortedGolfClubs.value = [...golfClubs.value].sort((a, b) => {
     if (a.sort_index === b.sort_index) {
@@ -40,6 +40,12 @@ const toggleIsInEditMode = () => {
 const updateYardages = () => {
   console.log('...updating yardages.')
 }
+
+defineExpose({
+  golfClubs,
+  sortedGolfClubs,
+  isInEditMode
+})
 </script>
 
 <template>

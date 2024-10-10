@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import { useAxios } from '@/composables/useAxios'
-import type { Ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import GTNavButton from '@/components/GTNavButton.vue'
 import type { PracticeSession } from '@/common/resources'
 import GTPracticeSessionCard from '@/components/cards/GTPracticeSessionCard.vue'
 
 const createUrl = 'practicesessions/create'
-const { requestData: practiceSessions }: { requestData: Ref } = useAxios('GET', 'practicesessions/')
+const practiceSessions = ref<Array<PracticeSession>>([])
+
+const { requestMethodSelector } = useAxios()
+
+onMounted(async () => {
+  practiceSessions.value = await requestMethodSelector('GET', 'practicesessions/')
+})
 
 function handleDelete(practiceSessionId: number) {
   const deleteUrl = 'practiceSessions/' + practiceSessionId
-  useAxios('DELETE', deleteUrl)
+  requestMethodSelector('DELETE', deleteUrl)
   practiceSessions.value = practiceSessions.value.filter(
     (practiceSession: PracticeSession) => practiceSession.id !== practiceSessionId
   )

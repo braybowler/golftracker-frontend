@@ -33,7 +33,7 @@ describe('useAuth.ts', () => {
       createTestingPinia({
         createSpy: vi.fn,
         stubActions: false
-      }),
+      })
     )
   })
 

@@ -11,7 +11,7 @@ const model = ref('')
 const createGolfBall = async () => {
   await requestMethodSelector('POST', 'golfballs', {
     make: unref(make),
-    model: unref(model),
+    model: unref(model)
   })
 }
 </script>

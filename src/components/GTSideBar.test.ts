@@ -33,8 +33,7 @@ describe('GTSideBar', () => {
         plugins: [
           createTestingPinia({
             initialState: {
-              auth: {
-              }
+              auth: {}
             },
             createSpy: vi.fn
           })

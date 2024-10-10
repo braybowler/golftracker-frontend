@@ -11,7 +11,7 @@ export function useAxios() {
   const response = ref<AxiosResponse>()
 
   async function requestMethodSelector(method: string, requestUrl: string, body?: {}) {
-    const fullUrl = baseUrl + requestUrl;
+    const fullUrl = baseUrl + requestUrl
 
     if (!isCsrfCookieSet()) {
       await axios.get(csrfUrl)
@@ -31,7 +31,6 @@ export function useAxios() {
       }
 
       return response.value?.data.data ? response.value?.data.data : response.value?.data
-
     } catch (e) {
       console.error(`Error with ${method} request: `, e)
     }
@@ -39,11 +38,11 @@ export function useAxios() {
 
   function isCsrfCookieSet() {
     const csrfCookieIndex = document.cookie.indexOf('XSRF_TOKEN')
-    return csrfCookieIndex != -1;
+    return csrfCookieIndex != -1
   }
 
   return {
     requestMethodSelector,
-    response,
+    response
   }
 }

@@ -13,6 +13,10 @@ const toggleIsExpanded = () => {
     isExpanded.value = false
   }
 }
+
+defineExpose({
+  isExpanded
+})
 </script>
 
 <template>

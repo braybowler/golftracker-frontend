@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, unref } from 'vue'
+import { onMounted, ref, unref } from 'vue'
 import GTButton from '@/components/GTButton.vue'
-import type { Ref } from 'vue'
 import { useAxios } from '@/composables/useAxios.js'
+import type { GolfBall, GolfClub } from '@/common/resources'
 
 const props = defineProps<{
   golfBagId: number
@@ -11,13 +11,19 @@ const props = defineProps<{
 const open = ref(false)
 const selectedClub = ref(null)
 const selectedBall = ref(null)
+const golfBalls = ref<Array<GolfBall>>([])
+const golfClubs = ref<Array<GolfClub>>([])
 
-const { requestData: golfBalls }: { requestData: Ref } = useAxios('GET', 'golfballs/')
-const { requestData: golfClubs }: { requestData: Ref } = useAxios('GET', 'golfclubs/')
+const { requestMethodSelector } = useAxios()
 
-const addGearToBag = () => {
+onMounted(async () => {
+  golfBalls.value = await requestMethodSelector('GET', 'golfballs/')
+  golfClubs.value = await requestMethodSelector('GET', 'golfclubs/')
+})
+
+const addGearToBag = async () => {
   if (selectedClub.value) {
-    useAxios('POST', 'baggables', {
+    await requestMethodSelector('POST', 'baggables', {
       bag: {
         id: props.golfBagId
       },
@@ -25,7 +31,7 @@ const addGearToBag = () => {
     })
   }
   if (selectedBall.value) {
-    useAxios('POST', 'baggables', {
+    await requestMethodSelector('POST', 'baggables', {
       bag: {
         id: props.golfBagId
       },

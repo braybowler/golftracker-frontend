@@ -11,8 +11,9 @@ const temperature = ref(0)
 const wind_speed = ref(0)
 const is_complete = ref(false)
 
-const createPracticeSession = () => {
-  useAxios('POST', 'practicesessions', {
+const { requestMethodSelector } = useAxios()
+const createPracticeSession = async () => {
+  await requestMethodSelector('POST', 'golfballs', {
     date: unref(date),
     note: unref(note),
     start_time: unref(start_time),
