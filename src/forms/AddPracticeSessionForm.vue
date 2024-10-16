@@ -38,7 +38,7 @@ const createPracticeSession = async () => {
         practice session.
       </p>
     </div>
-    <div class="bg-secondary border border-black rounded-md flex flex-col mt-2 p-4 gap-2 w-full">
+    <div class="bg-white border border-black rounded-md flex flex-col mt-2 p-4 gap-2 w-full">
       <div class="flex flex-col justify-center">
         <GTNavButton
           @click="createPracticeSession()"

@@ -7,20 +7,20 @@ const auth = useAuth()
 </script>
 
 <template>
-  <nav v-if="auth.isAuthed" class="flex flex-row bg-primary justify-end p-2">
+  <nav v-if="auth.isAuthed" class="flex flex-row bg-white justify-end p-2">
     <div class="flex flex-row space-x-2">
       <GTDropDownMenu></GTDropDownMenu>
     </div>
   </nav>
-  <nav v-else class="flex flex-row bg-primary justify-between p-2">
+  <nav v-else class="flex flex-row bg-white justify-between p-2">
     <div class="space-x-2">
-      <GTNavLink :url="'/'" class="hover:text-white"> Home </GTNavLink>
-      <GTNavLink :url="'/about'" class="hover:text-white"> About </GTNavLink>
-      <GTNavLink :url="'/contact'" class="hover:text-white"> Contact Us </GTNavLink>
+      <GTNavLink :url="'/'">Home</GTNavLink>
+      <GTNavLink :url="'/about'">About</GTNavLink>
+      <GTNavLink :url="'/contact'">Contact Us</GTNavLink>
     </div>
     <div class="space-x-2">
-      <GTNavLink :url="'/register'" class="hover:text-white">Register</GTNavLink>
-      <GTNavLink :url="'/login'" class="hover:text-white">Login</GTNavLink>
+      <GTNavLink :url="'/register'">Register</GTNavLink>
+      <GTNavLink :url="'/login'">Login</GTNavLink>
     </div>
   </nav>
 </template>

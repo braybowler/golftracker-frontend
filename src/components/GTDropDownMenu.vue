@@ -2,6 +2,7 @@
 import { ref, unref } from 'vue'
 import GTNavLink from './GTNavLink.vue'
 import GTLogoutModal from '../modals/GTLogoutModal.vue'
+import GTButton from '@/components/GTButton.vue'
 
 const isHamburgerMenuExpanded = ref(false)
 const toggleIsExpanded = () => {
@@ -18,14 +19,14 @@ defineExpose({
 </script>
 
 <template>
-  <button @click="toggleIsExpanded()">
+  <GTButton class="border-none" @click="toggleIsExpanded()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="hover:text-white size-6"
+      class="transition duration-400 hover:scale-105 size-6"
     >
       <path
         stroke-linecap="round"
@@ -33,12 +34,12 @@ defineExpose({
         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
       />
     </svg>
-  </button>
+  </GTButton>
   <div
-    class="flex flex-col bg-primary w-36 fixed top-10 right-0 p-2 space-y-1"
+    class="flex flex-col bg-white w-36 fixed top-10 right-0 p-2 space-y-2"
     v-if="isHamburgerMenuExpanded"
   >
-    <GTNavLink :url="'/profile'" class="flex flex-row justify-end gap-2 hover:text-white">
+    <GTNavLink :url="'/profile'" class="flex flex-row justify-end gap-2">
       <div>Profile</div>
       <div>
         <svg
@@ -57,7 +58,7 @@ defineExpose({
         </svg>
       </div>
     </GTNavLink>
-    <GTNavLink :url="'/settings'" class="flex flex-row justify-end gap-2 hover:text-white">
+    <GTNavLink :url="'/settings'" class="flex flex-row justify-end gap-2">
       Settings
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -79,22 +80,6 @@ defineExpose({
         />
       </svg>
     </GTNavLink>
-    <div class="flex flex-row justify-end gap-2 hover:text-white">
-      <GTLogoutModal></GTLogoutModal>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="size-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
-        />
-      </svg>
-    </div>
+    <GTLogoutModal></GTLogoutModal>
   </div>
 </template>

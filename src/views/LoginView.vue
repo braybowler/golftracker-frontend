@@ -16,7 +16,7 @@ const login = () => {
   <div class="flex justify-center">
     <div class="">
       <h1>Welcome back to GolfTracker. Please login below. <br /></h1>
-      <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-full">
+      <div class="bg-white border border-black rounded-md flex flex-col p-4 gap-2 w-full">
         <div class="flex flex-row justify-between">
           <label for="email">Email</label>
           <input

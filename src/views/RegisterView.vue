@@ -20,7 +20,7 @@ const register = () => {
         Welcome to GolfTracker. We're happy to have you! <br />
         Please enter some basic information below and we'll get you started:
       </h1>
-      <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-full">
+      <div class="bg-white border border-black rounded-md flex flex-col p-4 gap-2 w-full">
         <div class="flex flex-row justify-between">
           <label for="name">Name</label>
           <input

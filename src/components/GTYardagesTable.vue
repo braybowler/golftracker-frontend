@@ -147,12 +147,11 @@ table {
   border-collapse: collapse;
 }
 
-th,
-td {
+th, td {
   border: 1px solid black;
 }
 
 th {
-  background-color: #f1f5f9;
+  background-color: #F4F4F4;
 }
 </style>

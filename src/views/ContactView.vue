@@ -33,7 +33,7 @@ const submitForm = () => {
       <p>Feel free to reach out with any questions, feedback, or suggestions.</p>
 
       <form @submit.prevent="submitForm">
-        <div class="border border-black rounded-md bg-secondary w-full p-2 mt-2 space-y-2">
+        <div class="border border-black rounded-md bg-white w-full p-2 mt-2 space-y-2">
           <div class="flex flex-row justify-between">
             <label for="name">Name: </label>
             <input

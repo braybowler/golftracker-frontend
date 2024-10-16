@@ -3,9 +3,7 @@ export default {
   content: ['./src/**/*.{html,js,ts,vue}'],
   theme: {
     colors: {
-      primary: '#657996',
-      secondary: '#f1f5f9',
-      white: '#ffffff',
+      white: '#F4F4F4',
       black: '#000000'
     },
     extend: {}

@@ -47,12 +47,12 @@ const clearSelections = () => {
 </script>
 
 <template>
-  <GTButton @click="open = true" class="hover:text-white">Add Gear</GTButton>
+  <GTButton @click="open = true" class="p-1">Add Gear</GTButton>
 
   <Teleport to="body">
     <div
       v-if="open"
-      class="fixed left-1/2 top-1/3 z-999 -ml-28 border w-96 h-30 border-black rounded-md bg-secondary p-2 space-y-4"
+      class="fixed left-1/2 top-1/3 z-999 -ml-28 border w-96 h-30 border-black rounded-md bg-white p-2 space-y-4"
     >
       <p>Select equipment to add to this bag.</p>
       <div class="flex flex-row justify-between">

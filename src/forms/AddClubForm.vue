@@ -35,7 +35,7 @@ const createGolfClub = async () => {
 <template>
   <div class="flex flex-col">
     <p>Want to add another club? Enter the details here:</p>
-    <div class="bg-secondary border border-black rounded-md flex flex-col p-4 gap-2 w-full">
+    <div class="bg-white border border-black rounded-md flex flex-col p-4 gap-2 w-full">
       <div class="flex flex-row justify-between">
         <label for="make">Make</label>
         <input

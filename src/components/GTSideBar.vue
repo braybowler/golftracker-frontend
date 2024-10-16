@@ -2,6 +2,7 @@
 import { unref, ref } from 'vue'
 import { useAuth } from '@/stores/auth/auth'
 import GTNavLink from './GTNavLink.vue'
+import GTButton from '@/components/GTButton.vue'
 
 const auth = useAuth()
 const isExpanded = ref(true)
@@ -20,27 +21,27 @@ defineExpose({
 </script>
 
 <template>
-  <nav v-if="auth.isAuthed && isExpanded" class="bg-primary w-44 h-dvh p-4">
+  <nav v-if="auth.isAuthed && isExpanded" class="bg-white w-44 h-dvh p-4">
     <div class="flex flex-col space-y-2">
       <div class="flex flex-row justify-end">
-        <button @click="toggleIsExpanded()">
+        <GTButton class="border-none" @click="toggleIsExpanded()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="hover:text-white size-6"
+            class="size-6 transition duration-400 hover:scale-110"
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
           </svg>
-        </button>
+        </GTButton>
       </div>
       <div>
         <hr class="rounded" />
       </div>
       <div>
-        <GTNavLink :url="'/dashboard'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink :url="'/dashboard'" class="flex flex-row justify-between">
           Dashboard
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +63,7 @@ defineExpose({
         <hr class="rounded" />
       </div>
       <div>
-        <GTNavLink :url="'/golfbags'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink :url="'/golfbags'" class="flex flex-row justify-between">
           Golf Bags
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +71,7 @@ defineExpose({
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="size-6"
+            class="size-6 transition duration-400 hover:scale-110"
           >
             <path
               stroke-linecap="round"
@@ -81,7 +82,7 @@ defineExpose({
         </GTNavLink>
       </div>
       <div>
-        <GTNavLink :url="'/golfclubs'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink :url="'/golfclubs'" class="flex flex-row justify-between">
           Golf Clubs
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +101,7 @@ defineExpose({
         </GTNavLink>
       </div>
       <div>
-        <GTNavLink :url="'/golfballs'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink :url="'/golfballs'" class="flex flex-row justify-between">
           Golf Balls
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +123,7 @@ defineExpose({
         <hr class="rounded" />
       </div>
       <div>
-        <GTNavLink :url="'/yardages'" class="hover:text-white flex flex-row justify-between">
+        <GTNavLink :url="'/yardages'" class="flex flex-row justify-between">
           Yardages
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +144,7 @@ defineExpose({
       <div>
         <GTNavLink
           :url="'/practicesessions'"
-          class="hover:text-white flex flex-row justify-between"
+          class="flex flex-row justify-between"
         >
           Practice
           <svg
@@ -164,26 +165,26 @@ defineExpose({
       </div>
     </div>
   </nav>
-  <nav v-if="auth.isAuthed && !isExpanded" class="bg-primary w-16 h-screen p-2 justify-center">
+  <nav v-if="auth.isAuthed && !isExpanded" class="bg-white w-16 h-screen p-2 justify-center">
     <div class="flex flex-col space-y-2">
       <div class="flex flex-row justify-end">
-        <button @click="toggleIsExpanded()">
+        <GTButton class="border-none" @click="toggleIsExpanded()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="hover:text-white size-8"
+            class=" size-8"
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
           </svg>
-        </button>
+        </GTButton>
       </div>
       <div>
         <hr class="rounded" />
       </div>
-      <GTNavLink :url="'/dashboard'" class="hover:text-white">
+      <GTNavLink :url="'/dashboard'" class="">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -202,7 +203,7 @@ defineExpose({
       <div>
         <hr class="rounded" />
       </div>
-      <GTNavLink :url="'/golfbags'" class="hover:text-white">
+      <GTNavLink :url="'/golfbags'" class="">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -218,7 +219,7 @@ defineExpose({
           />
         </svg>
       </GTNavLink>
-      <GTNavLink :url="'/golfclubs'" class="hover:text-white">
+      <GTNavLink :url="'/golfclubs'" class="">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -234,7 +235,7 @@ defineExpose({
           />
         </svg>
       </GTNavLink>
-      <GTNavLink :url="'/golfballs'" class="hover:text-white">
+      <GTNavLink :url="'/golfballs'" class="">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -253,7 +254,7 @@ defineExpose({
       <div>
         <hr class="rounded" />
       </div>
-      <GTNavLink :url="'/yardages'" class="hover:text-white">
+      <GTNavLink :url="'/yardages'" class="">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -269,7 +270,7 @@ defineExpose({
           />
         </svg>
       </GTNavLink>
-      <GTNavLink :url="'/practicesessions'" class="hover:text-white">
+      <GTNavLink :url="'/practicesessions'" class="">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

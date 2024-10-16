@@ -6,18 +6,14 @@ const auth = useAuth()
 </script>
 
 <template>
-  <nav v-if="auth.isAuthed" class="bg-primary w-screen">
+  <nav v-if="auth.isAuthed" class="bg-white w-screen">
     <div class="flex flex-row justify-around p-2">
-      <div>
-        <GTNavLink :url="'/about'" class="hover:text-white flex flex-row justify-between">
-          About GolfTracker
-        </GTNavLink>
-      </div>
-      <div>
-        <GTNavLink :url="'/contact'" class="hover:text-white flex flex-row justify-between">
-          Contact Us
-        </GTNavLink>
-      </div>
+      <GTNavLink :url="'/about'">
+        About GolfTracker
+      </GTNavLink>
+      <GTNavLink :url="'/contact'">
+        Contact Us
+      </GTNavLink>
     </div>
   </nav>
 </template>
