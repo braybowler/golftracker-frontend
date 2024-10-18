@@ -11,8 +11,6 @@ const model = ref('')
 const loft = ref(0)
 const category = ref('')
 const type = ref('')
-const carryDistance = ref(0)
-const totalDistance = ref(0)
 
 const clubCategories = Object.values(ClubCategory)
 const clubTypes = computed(() => {
@@ -26,8 +24,6 @@ const createGolfClub = async () => {
     loft: unref(loft),
     club_category: unref(category),
     club_type: unref(type),
-    carry_distance: unref(carryDistance),
-    total_distance: unref(totalDistance)
   })
 }
 </script>
@@ -73,14 +69,6 @@ const createGolfClub = async () => {
       <div class="flex flex-row justify-between">
         <label for="loft">Loft</label>
         <input type="number" v-model="loft" class="w-1/2 border border-black rounded-md" />
-      </div>
-      <div class="flex flex-row justify-between">
-        <label for="carryDistance">Carry distance</label>
-        <input type="number" v-model="carryDistance" class="w-1/2 border border-black rounded-md" />
-      </div>
-      <div class="flex flex-row justify-between">
-        <label for="totalDistance">Total distance</label>
-        <input type="number" v-model="totalDistance" class="w-1/2 border border-black rounded-md" />
       </div>
       <div class="flex flex-col justify-center">
         <GTNavButton

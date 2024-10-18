@@ -27,10 +27,9 @@ export interface GolfClub {
   loft: number
   club_category: ClubCategory
   club_type: string
-  carry_distance: number
-  total_distance: number
   created_at: string
   updated_at: string
+  yardages: []
 }
 
 export function isGolfClub(obj: any): obj is GolfBag {

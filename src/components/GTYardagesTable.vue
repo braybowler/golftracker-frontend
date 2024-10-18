@@ -3,6 +3,7 @@ import { onMounted, ref, unref, watch } from 'vue'
 import { useAxios } from '@/composables/useAxios'
 import GTButton from '@/components/GTButton.vue'
 import type { GolfClub } from '@/common/resources'
+import GTTableCell from '@/components/GTTableCellContent.vue'
 
 const golfClubs = ref<Array<GolfClub>>([])
 
@@ -10,6 +11,7 @@ const { requestMethodSelector } = useAxios()
 
 onMounted(async () => {
   golfClubs.value = await requestMethodSelector('GET', 'golfclubs/')
+  console.log(golfClubs.value)
 })
 
 const sortedGolfClubs = ref<Array<GolfClub>>([])
@@ -77,58 +79,26 @@ defineExpose({
 
             <!-- 50% Swing -->
             <td>
-              <template v-if="isInEditMode">
-                <input type="number" placeholder="Enter carry" class="w-full" />
-              </template>
-              <template v-else> </template>
+              <GTTableCell display-property="carry_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter carry" target-swing-type="50%" :golf-club="club" />
             </td>
             <td>
-              <template v-if="isInEditMode">
-                <input type="number" placeholder="Enter total" class="w-full" />
-              </template>
-              <template v-else> </template>
+              <GTTableCell display-property="total_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter total" target-swing-type="50%" :golf-club="club" />
             </td>
 
             <!-- 75% Swing -->
             <td>
-              <template v-if="isInEditMode">
-                <input type="number" placeholder="Enter carry" class="w-full" />
-              </template>
-              <template v-else> </template>
+              <GTTableCell display-property="carry_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter carry" target-swing-type="75%" :golf-club="club" />
             </td>
             <td>
-              <template v-if="isInEditMode">
-                <input type="number" placeholder="Enter total" class="w-full" />
-              </template>
-              <template v-else> </template>
+              <GTTableCell display-property="total_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter total" target-swing-type="75%" :golf-club="club" />
             </td>
 
             <!-- Full Swing -->
             <td>
-              <template v-if="isInEditMode">
-                <input
-                  type="number"
-                  v-model.number="club.carry_distance"
-                  placeholder="Enter carry"
-                  class="w-full"
-                />
-              </template>
-              <template v-else>
-                {{ club.carry_distance }}
-              </template>
+                <GTTableCell display-property="carry_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter carry" target-swing-type="100%" :golf-club="club" />
             </td>
             <td>
-              <template v-if="isInEditMode">
-                <input
-                  type="number"
-                  v-model.number="club.total_distance"
-                  placeholder="Enter total"
-                  class="w-full"
-                />
-              </template>
-              <template v-else>
-                {{ club.total_distance }}
-              </template>
+              <GTTableCell display-property="total_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter total" target-swing-type="100%" :golf-club="club" />
             </td>
           </tr>
         </tbody>
