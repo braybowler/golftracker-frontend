@@ -26,8 +26,6 @@ onMounted(async () => {
       <p>Make: {{ golfClub.make }}</p>
       <p>Model: {{ golfClub.model }}</p>
       <p>Loft: {{ golfClub.loft }}&#176;</p>
-      <p>Carry Distance: {{ golfClub.carry_distance }}</p>
-      <p>Total Distance: {{ golfClub.total_distance }}</p>
       <p>Created: {{ golfClub.created_at }}</p>
       <p>Last Updated: {{ golfClub.updated_at }}</p>
     </div>

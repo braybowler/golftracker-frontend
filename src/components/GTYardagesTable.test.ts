@@ -216,44 +216,6 @@ describe('GTYardagesTable', () => {
 
       expect(wrapper.vm.golfClubs.length).toBeGreaterThan(0)
     })
-
-    test('Table sorts golf clubs on mount', async () => {
-      const wrapper = shallowMount(GTYardagesTable, defaultMountOptions)
-      await flushPromises()
-
-      expect(wrapper.vm.golfClubs.length).toBeGreaterThan(0)
-      expect(wrapper.vm.sortedGolfClubs.length).toBeGreaterThan(0)
-      expect(wrapper.vm.sortedGolfClubs[0]).toEqual({
-        id: 1,
-        type: 'golf_clubs',
-        user_id: 1,
-        sort_index: 0,
-        make: 'Ping',
-        model: 'Anser',
-        club_category: 'Putter',
-        club_type: 'Blade',
-        carry_distance: 0,
-        total_distance: 0,
-        loft: 0,
-        created_at: '2024-09-24T13:07:51.000000Z',
-        updated_at: '2024-09-24T13:07:51.000000Z'
-      })
-      expect(wrapper.vm.sortedGolfClubs[11]).toEqual({
-        id: 4,
-        type: 'golf_clubs',
-        user_id: 1,
-        sort_index: 27,
-        make: 'Ping',
-        model: 'G410 LST',
-        club_category: 'Wood',
-        club_type: '1w',
-        carry_distance: 270,
-        total_distance: 290,
-        loft: 7,
-        created_at: '2024-09-25T12:53:05.000000Z',
-        updated_at: '2024-09-25T15:28:53.000000Z'
-      })
-    })
   })
 
   describe('Edit mode', () => {

@@ -23,7 +23,7 @@ const createGolfClub = async () => {
     model: unref(model),
     loft: unref(loft),
     club_category: unref(category),
-    club_type: unref(type),
+    club_type: unref(type)
   })
 }
 </script>

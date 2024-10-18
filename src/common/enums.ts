@@ -6,6 +6,15 @@ export enum ClubCategory {
   WOOD = 'Wood'
 }
 
+export enum SwingType {
+  TWENTY_FIVE_PERCENT = '25%',
+  THIRTY_THREE_PERCENT = '33%',
+  FIFTY_PERCENT = '50%',
+  SIXTY_SIX_PERCENT = '66%',
+  SEVENTY_FIVE_PERCENT = '75%',
+  ONE_HUNDRED_PERCENT = '100%',
+}
+
 export const PUTTER_TYPES = ['Blade', 'Mallet']
 
 export const WEDGE_TYPES = ['LW', 'SW', 'GW', 'PW']

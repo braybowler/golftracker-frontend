@@ -14,20 +14,6 @@ onMounted(async () => {
   console.log(golfClubs.value)
 })
 
-const sortedGolfClubs = ref<Array<GolfClub>>([])
-const sortGolfClubs = () => {
-  sortedGolfClubs.value = [...golfClubs.value].sort((a, b) => {
-    if (a.sort_index === b.sort_index) {
-      return a.carry_distance - b.carry_distance
-    }
-    return a.sort_index - b.sort_index
-  })
-}
-
-watch(golfClubs, () => {
-  sortGolfClubs()
-})
-
 const isInEditMode = ref(false)
 
 const toggleIsInEditMode = () => {
@@ -45,7 +31,6 @@ const updateYardages = () => {
 
 defineExpose({
   golfClubs,
-  sortedGolfClubs,
   isInEditMode
 })
 </script>
@@ -62,7 +47,7 @@ defineExpose({
           <tr>
             <th colspan="2">50%</th>
             <th colspan="2">75%</th>
-            <th colspan="2">Full</th>
+            <th colspan="2">100%</th>
           </tr>
           <tr>
             <th>Carry</th>
@@ -74,31 +59,67 @@ defineExpose({
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(club, index) in sortedGolfClubs" :key="index" class="h-10">
+          <tr v-for="(club, index) in golfClubs" :key="index" class="h-10">
             <td>{{ club.make }} {{ club.model }}: {{ club.club_type }}</td>
 
             <!-- 50% Swing -->
             <td>
-              <GTTableCell display-property="carry_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter carry" target-swing-type="50%" :golf-club="club" />
+              <GTTableCell
+                display-property="carry_distance"
+                :is-in-edit-mode="isInEditMode"
+                placeholder="Enter carry"
+                target-swing-type="50%"
+                :golf-club="club"
+              />
             </td>
             <td>
-              <GTTableCell display-property="total_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter total" target-swing-type="50%" :golf-club="club" />
+              <GTTableCell
+                display-property="total_distance"
+                :is-in-edit-mode="isInEditMode"
+                placeholder="Enter total"
+                target-swing-type="50%"
+                :golf-club="club"
+              />
             </td>
 
             <!-- 75% Swing -->
             <td>
-              <GTTableCell display-property="carry_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter carry" target-swing-type="75%" :golf-club="club" />
+              <GTTableCell
+                display-property="carry_distance"
+                :is-in-edit-mode="isInEditMode"
+                placeholder="Enter carry"
+                target-swing-type="75%"
+                :golf-club="club"
+              />
             </td>
             <td>
-              <GTTableCell display-property="total_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter total" target-swing-type="75%" :golf-club="club" />
+              <GTTableCell
+                display-property="total_distance"
+                :is-in-edit-mode="isInEditMode"
+                placeholder="Enter total"
+                target-swing-type="75%"
+                :golf-club="club"
+              />
             </td>
 
             <!-- Full Swing -->
             <td>
-                <GTTableCell display-property="carry_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter carry" target-swing-type="100%" :golf-club="club" />
+              <GTTableCell
+                display-property="carry_distance"
+                :is-in-edit-mode="isInEditMode"
+                placeholder="Enter carry"
+                target-swing-type="100%"
+                :golf-club="club"
+              />
             </td>
             <td>
-              <GTTableCell display-property="total_distance" :is-in-edit-mode="isInEditMode" placeholder="Enter total" target-swing-type="100%" :golf-club="club" />
+              <GTTableCell
+                display-property="total_distance"
+                :is-in-edit-mode="isInEditMode"
+                placeholder="Enter total"
+                target-swing-type="100%"
+                :golf-club="club"
+              />
             </td>
           </tr>
         </tbody>

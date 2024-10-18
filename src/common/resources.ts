@@ -1,4 +1,5 @@
 import type { ClubCategory } from '@/common/enums'
+import { SwingType } from '@/common/enums'
 
 export interface GolfBag {
   id: number
@@ -32,7 +33,7 @@ export interface GolfClub {
   yardages: []
 }
 
-export function isGolfClub(obj: any): obj is GolfBag {
+export function isGolfClub(obj: any): obj is GolfClub {
   return (
     obj.id !== undefined &&
     obj.type !== undefined &&
@@ -41,9 +42,7 @@ export function isGolfClub(obj: any): obj is GolfBag {
     obj.model !== undefined &&
     obj.loft !== undefined &&
     obj.club_category !== undefined &&
-    obj.club_type !== undefined &&
-    obj.carry_distance !== undefined &&
-    obj.total_distance !== undefined
+    obj.club_type !== undefined
   )
 }
 
@@ -57,8 +56,28 @@ export interface GolfBall {
   updated_at: string
 }
 
-export function isGolfBall(obj: any): obj is GolfBag {
+export function isGolfBall(obj: any): obj is GolfBall {
   return obj.id !== undefined && obj.make !== undefined && obj.model !== undefined
+}
+
+export interface Yardage {
+  id: number
+  golf_club_id: number
+  swing_type: SwingType
+  carry_distance: string
+  total_distance: string
+  created_at: string
+  updated_at: string
+}
+
+export function isYardage(obj: any): obj is Yardage {
+  return obj.id !== undefined
+    && obj.golf_club_id !== undefined
+    && obj.swing_type !== undefined
+    && obj.carry_distance !== undefined
+    && obj.total_distance !== undefined
+    && obj.created_at !== undefined
+    && obj.updated_at !== undefined
 }
 
 export interface PracticeSession {
@@ -72,7 +91,7 @@ export interface PracticeSession {
   is_complete: boolean
 }
 
-export function isPracticeSession(obj: any): obj is GolfBag {
+export function isPracticeSession(obj: any): obj is PracticeSession {
   return (
     obj.id !== undefined &&
     obj.date !== undefined &&

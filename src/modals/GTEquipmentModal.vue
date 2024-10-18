@@ -46,16 +46,15 @@ const clearSelections = () => {
 }
 
 const handleAddEquipmentButtonClick = () => {
-  addGearToBag();
-  clearSelections();
-  open.value = false;
+  addGearToBag()
+  clearSelections()
+  open.value = false
 }
 
 const handleCancelButtonClick = () => {
-  clearSelections();
-  open.value = false;
+  clearSelections()
+  open.value = false
 }
-
 </script>
 
 <template>
@@ -87,14 +86,10 @@ const handleCancelButtonClick = () => {
       </div>
       <div class="flex flex-row justify-between">
         <div>
-          <GTButton @click="handleAddEquipmentButtonClick()">
-            Add Equipment
-          </GTButton>
+          <GTButton @click="handleAddEquipmentButtonClick()"> Add Equipment </GTButton>
         </div>
         <div>
-          <GTButton @click="handleCancelButtonClick()">
-            Cancel
-          </GTButton>
+          <GTButton @click="handleCancelButtonClick()"> Cancel </GTButton>
         </div>
       </div>
     </div>
