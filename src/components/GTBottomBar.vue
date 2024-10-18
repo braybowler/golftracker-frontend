@@ -8,12 +8,8 @@ const auth = useAuth()
 <template>
   <nav v-if="auth.isAuthed" class="bg-white w-screen">
     <div class="flex flex-row justify-around p-2">
-      <GTNavLink :url="'/about'">
-        About GolfTracker
-      </GTNavLink>
-      <GTNavLink :url="'/contact'">
-        Contact Us
-      </GTNavLink>
+      <GTNavLink :url="'/about'"> About GolfTracker </GTNavLink>
+      <GTNavLink :url="'/contact'"> Contact Us </GTNavLink>
     </div>
   </nav>
 </template>

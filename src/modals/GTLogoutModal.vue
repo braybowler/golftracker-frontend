@@ -9,7 +9,7 @@ const open = ref(false)
 
 <template>
   <div class="flex flex-row justify-end gap-2 items-center transition duration-400 hover:scale-105">
-    <GTButton class="border-none" @click="open = true" >Logout</GTButton>
+    <GTButton class="border-none" @click="open = true">Logout</GTButton>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -33,8 +33,12 @@ const open = ref(false)
     >
       <p>Are you sure you'd like to logout?</p>
       <div class="flex flex-row justify-around">
-        <GTButton @click="auth.logout()" class="transition duration-400 hover:scale-105">Logout</GTButton>
-        <GTButton @click="open = false" class="transition duration-400 hover:scale-105">Cancel</GTButton>
+        <GTButton @click="auth.logout()" class="transition duration-400 hover:scale-105"
+          >Logout</GTButton
+        >
+        <GTButton @click="open = false" class="transition duration-400 hover:scale-105"
+          >Cancel</GTButton
+        >
       </div>
     </div>
   </Teleport>

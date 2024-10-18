@@ -31,7 +31,6 @@ export function useAxios() {
       }
 
       return response.value?.data.data ? response.value?.data.data : response.value?.data
-
     } catch (e) {
       console.error(`Error with ${method} request: `, e)
     }

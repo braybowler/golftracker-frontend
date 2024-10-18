@@ -8,10 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <RouterLink
-    :to="props.url"
-    class="text-center transition duration-400 hover:scale-105"
-  >
+  <RouterLink :to="props.url" class="text-center transition duration-400 hover:scale-105">
     <slot></slot>
   </RouterLink>
 </template>

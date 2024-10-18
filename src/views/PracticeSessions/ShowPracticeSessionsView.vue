@@ -21,8 +21,9 @@ onMounted(async () => {
 
 <template>
   <div>
-    <GTNavButton url="/golfclubs" class="border border-black rounded-md">Back to Practice Sessions</GTNavButton>
-    <div v-if="practiceSession" class="mt-2">
-    </div>
+    <GTNavButton url="/golfclubs" class="border border-black rounded-md"
+      >Back to Practice Sessions</GTNavButton
+    >
+    <div v-if="practiceSession" class="mt-2"></div>
   </div>
 </template>
