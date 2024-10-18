@@ -12,13 +12,13 @@ const auth = useAuth()
       <GTDropDownMenu></GTDropDownMenu>
     </div>
   </nav>
-  <nav v-else class="flex flex-row bg-white justify-between p-2">
-    <div class="space-x-2">
+  <nav v-else class="flex flex-row justify-between bg-white p-2">
+    <div class="flex space-x-4">
       <GTNavLink :url="'/'">Home</GTNavLink>
       <GTNavLink :url="'/about'">About</GTNavLink>
       <GTNavLink :url="'/contact'">Contact Us</GTNavLink>
     </div>
-    <div class="space-x-2">
+    <div class="flex space-x-4">
       <GTNavLink :url="'/register'">Register</GTNavLink>
       <GTNavLink :url="'/login'">Login</GTNavLink>
     </div>
