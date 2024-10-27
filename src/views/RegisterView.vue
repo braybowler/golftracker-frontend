@@ -52,6 +52,7 @@ const register = () => {
           <GTButton @click="register()">Register</GTButton>
         </div>
       </div>
+      <p class="text-center">Already registered? Login here.<br /></p>
     </div>
   </div>
 </template>

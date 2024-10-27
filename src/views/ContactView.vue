@@ -40,7 +40,7 @@ const submitForm = () => {
               type="text"
               id="name"
               v-model="form.name"
-              placeholder="Enter your name"
+              placeholder="Name"
               required
               class="border border-black rounded-md w-2/3"
             />
@@ -52,7 +52,7 @@ const submitForm = () => {
               type="email"
               id="email"
               v-model="form.email"
-              placeholder="Enter your email address"
+              placeholder="Email"
               required
               class="border border-black rounded-md w-2/3"
             />
@@ -64,7 +64,7 @@ const submitForm = () => {
               type="text"
               id="subject"
               v-model="form.subject"
-              placeholder="Enter the subject"
+              placeholder="Subject"
               required
               class="border border-black rounded-md w-2/3"
             />

@@ -22,7 +22,7 @@ const login = () => {
           <input
             type="text"
             v-model="email"
-            placeholder="Please enter an email"
+            placeholder="Email"
             class="border border-black rounded-md"
           />
         </div>
@@ -31,7 +31,7 @@ const login = () => {
           <input
             type="password"
             v-model="password"
-            placeholder="Please enter a password"
+            placeholder="Password"
             class="border border-black rounded-md"
           />
         </div>
@@ -39,6 +39,7 @@ const login = () => {
           <GTButton @click="login()">Login</GTButton>
         </div>
       </div>
+      <p class="text-center">Haven't registered yet? Register here.<br /></p>
     </div>
   </div>
 </template>
