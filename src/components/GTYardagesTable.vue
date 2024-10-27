@@ -4,6 +4,7 @@ import { useAxios } from '@/composables/useAxios'
 import GTButton from '@/components/GTButton.vue'
 import type { GolfClub } from '@/common/resources'
 import GTTableCell from '@/components/GTTableCellContent.vue'
+import GTYardagesModal from '@/modals/GTYardagesModal.vue'
 
 const golfClubs = ref<Array<GolfClub>>([])
 
@@ -126,8 +127,13 @@ defineExpose({
       </table>
     </div>
 
-    <div class="flex justify-center items-center w-full mt-2">
-      <GTButton @click="toggleIsInEditMode()"> {{ isInEditMode ? 'Save Edits' : 'Edit' }}</GTButton>
+    <div class="flex flex-row justify-center">
+      <div class="flex justify-center items-center w-full mt-2 w-1/4">
+        <GTYardagesModal></GTYardagesModal>
+      </div>
+      <div class="flex justify-center items-center w-full mt-2 w-1/4">
+        <GTButton @click="toggleIsInEditMode()"> {{ isInEditMode ? 'Save Edits' : 'Enter Cell Edit Mode' }}</GTButton>
+      </div>
     </div>
   </div>
 </template>

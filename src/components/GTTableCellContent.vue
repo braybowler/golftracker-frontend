@@ -18,3 +18,4 @@ const props = defineProps<{
     {{ props.golfClub.yardages.find((item: Yardage) => item.swing_type === targetSwingType)?.[displayProperty] }}
   </template>
 </template>
+
