@@ -1,58 +1,137 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import GTButton from '@/components/GTButton.vue'
 import type { GolfClub } from '@/common/resources'
 import { useAxios } from '@/composables/useAxios'
 import { SwingType } from '@/common/enums'
 
+interface Shot {
+  carry_distance: number;
+  total_distance: number;
+}
+
 const open = ref(false)
 const selectedClub = ref<GolfClub | null>(null)
+const selectedClubType = computed(() => {
+  return selectedClub.value?.club_type ?? null
+})
 const selectedSwingType = ref<string | null>(null)
+const selectedNumberOfShots = ref<number | null>(null)
 const golfClubs = ref<Array<GolfClub>>([])
-const calibrationShots = {
-  'PW': {
+
+// const calibrationShots = computed(() => {
+//   if (!(selectedClubType.value && selectedSwingType.value && selectedNumberOfShots.value)) {
+//     return {}
+//   }
+//
+//   const shots: Record<string, Record<string, Shot[]>> = {};
+//   // const newShots = Array.from({length: selectedNumberOfShots.value}, () => ({
+//   //   carry_distance: 0,
+//   //   total_distance: 0
+//   // }))
+//
+//   if (!shots[selectedClubType.value]) {
+//     shots[selectedClubType.value] = {}
+//   }
+//
+//   if(!shots[selectedClubType.value][selectedSwingType.value]) {
+//     shots[selectedClubType.value][selectedSwingType.value] = []
+//   }
+//
+//   return shots
+// })
+
+const calibrationShots = reactive({
+  LW: {
     '50%': [
       {
-        carry_distance: null,
-        total_distance: null,
+        carry_distance: 0,
+        total_distance: 0,
       }
     ],
     '75%': [
       {
-        carry_distance: null,
-        total_distance: null,
+        carry_distance: 0,
+        total_distance: 0,
       }
     ],
     '100%': [
       {
-        carry_distance: null,
-        total_distance: null,
+        carry_distance: 0,
+        total_distance: 0,
       }
     ]
   },
-  '9i': {
+  PW: {
     '50%': [
       {
-        carry_distance: null,
-        total_distance: null,
+        carry_distance: 0,
+        total_distance: 0,
       }
     ],
     '75%': [
       {
-        carry_distance: null,
-        total_distance: null,
+        carry_distance: 0,
+        total_distance: 0,
       }
     ],
     '100%': [
       {
-        carry_distance: null,
-        total_distance: null,
+        carry_distance: 0,
+        total_distance: 0,
       }
     ]
+  },
+  "9i": {
+    '50%': [
+      {
+        carry_distance: 0,
+        total_distance: 0,
+      }
+    ],
+    '75%': [
+      {
+        carry_distance: 0,
+        total_distance: 0,
+      }
+    ],
+    '100%': [
+      {
+        carry_distance: 0,
+        total_distance: 0,
+      }
+    ]
+  },
+})
+
+const averageCarry = computed(() => {
+  if (!(selectedClubType.value && selectedSwingType.value && selectedNumberOfShots.value)) {
+    return 0
   }
-}
-const selectedClubType = computed(() => {
-  return selectedClub.value?.club_type ?? null
+
+  const shots = calibrationShots[selectedClubType.value]?.[selectedSwingType.value] ?? []
+
+  if (shots.length === 0) {
+    return 0
+  }
+
+  const sumCarry = shots.reduce((sum: number, shot: Shot) => sum + shot.carry_distance, 0);
+  return sumCarry/shots.length;
+})
+
+const averageTotal = computed(() => {
+  if (!(selectedClubType.value && selectedSwingType.value && selectedNumberOfShots.value)) {
+    return 0
+  }
+
+  const shots = calibrationShots.value[selectedClubType.value]?.[selectedSwingType.value] ?? []
+
+  if (shots.length === 0) {
+    return 0
+  }
+
+  const sumTotal = shots.reduce((sum: number, shot: Shot) => sum + shot.total_distance, 0);
+  return sumTotal/shots.length;
 })
 
 const { requestMethodSelector } = useAxios()
@@ -61,21 +140,11 @@ onMounted(async () => {
   golfClubs.value = await requestMethodSelector('GET', 'golfclubs/')
 })
 
-const addNewCalibrationShot = () => {
-  if (!calibrationShots.clubTypeIndex.swingTypeIndex) {
-    calibrationShots.clubTypeIndex.swingTypeIndex = []
-  }
-
-  calibrationShots.clubTypeIndex.swingTypeIndex.push({
-    carry_distance: null,
-    total_distance: null,
-  })
-}
-
 const clearModal = () => {
   open.value = false
   selectedClub.value = null
   selectedSwingType.value = null
+  selectedNumberOfShots.value = null
 }
 </script>
 
@@ -89,7 +158,10 @@ const clearModal = () => {
       v-if="open"
       class="fixed left-1/4 top-1/4 z-999 w-5/6 -ml-52 border border-black rounded-md bg-white p-2 space-y-4"
     >
-      <p>Let's calculate your average yardages. To begin, select a club to calibrate and the swing type you are working on.</p>
+      <div>
+        <p>Let's calculate your average yardages. </p>
+        <p>To begin, select a club to calibrate,the swing type you are working on, and the number of shots you want in the average.</p>
+      </div>
 
       <div class="flex flex-row">
         <div class="flex flex-col w-1/3">
@@ -108,8 +180,24 @@ const clearModal = () => {
           </label>
         </div>
 
+        <div class="flex flex-col w-1/3">
+          <h2>Number of Shots</h2>
+          <label>
+            <input type="radio" v-model="selectedNumberOfShots" :value=5>
+            <span> 5 </span>
+          </label>
+          <label>
+            <input type="radio" v-model="selectedNumberOfShots" :value=10>
+            <span> 10 </span>
+          </label>
+          <label>
+            <input type="radio" v-model="selectedNumberOfShots" :value=20>
+            <span> 20 </span>
+          </label>
+        </div>
+
         <div class="border border-black bg-purewhite h-auto w-full">
-          <div v-if="selectedClub && selectedSwingType">
+          <div class="flex flex-row justify-center gap-2" v-if="selectedClubType && selectedSwingType && selectedNumberOfShots">
             <table>
               <thead>
                 <tr>
@@ -119,22 +207,25 @@ const clearModal = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr :key="index" v-for="index in selectedNumberOfShots">
                   <td>
-                    <span>1</span>
+                    <span>{{index}}</span>
                   </td>
                   <td>
-                    <input class="bg-white" type="number">
+                    <input class="bg-white" type="number" v-model="calibrationShots[selectedClubType][selectedSwingType][index].carry_distance">
                   </td>
                   <td>
-                    <input class="bg-white" type="number">
+                    <input class="bg-white" type="number" v-model="calibrationShots[selectedClubType][selectedSwingType][index].total_distance">
                   </td>
                 </tr>
               </tbody>
             </table>
 
-            <div class="flex justify-center p-2">
-              <GTButton @click="addNewCalibrationShot()">Add Another Shot</GTButton>
+            <div class="flex flex-col items-center justify-center">
+              <div>
+                <p> Avg. Carry: {{averageCarry}} </p>
+                <p> Avg. Total: {{averageTotal}}</p>
+              </div>
             </div>
           </div>
         </div>

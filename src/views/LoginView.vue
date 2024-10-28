@@ -35,7 +35,7 @@ const login = () => {
             class="border border-black rounded-md"
           />
         </div>
-        <div class="flex flex-col justify-center">
+        <div class="flex flex-col justify-center bg-purewhite">
           <GTButton @click="login()">Login</GTButton>
         </div>
       </div>

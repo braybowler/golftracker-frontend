@@ -48,7 +48,7 @@ const register = () => {
             class="border border-black rounded-md"
           />
         </div>
-        <div class="flex flex-col justify-center">
+        <div class="flex flex-col justify-center bg-purewhite">
           <GTButton @click="register()">Register</GTButton>
         </div>
       </div>
