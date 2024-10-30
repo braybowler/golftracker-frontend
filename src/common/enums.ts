@@ -12,7 +12,7 @@ export enum SwingType {
   FIFTY_PERCENT = '50%',
   // SIXTY_SIX_PERCENT = '66%',
   SEVENTY_FIVE_PERCENT = '75%',
-  ONE_HUNDRED_PERCENT = '100%',
+  ONE_HUNDRED_PERCENT = '100%'
 }
 
 export const PUTTER_TYPES = ['Blade', 'Mallet']

@@ -70,7 +70,6 @@ export const useAuth = defineStore('auth', () => {
       await requestMethodSelector('GET', 'me')
 
       user.value = response.value?.data?.data ? response.value.data.data : response.value?.data
-      console.log(user.value)
     } catch (e) {
       console.error('Error when trying to fetch from /me endpoint: ', e)
     }

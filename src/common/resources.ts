@@ -71,13 +71,15 @@ export interface Yardage {
 }
 
 export function isYardage(obj: any): obj is Yardage {
-  return obj.id !== undefined
-    && obj.golf_club_id !== undefined
-    && obj.swing_type !== undefined
-    && obj.carry_distance !== undefined
-    && obj.total_distance !== undefined
-    && obj.created_at !== undefined
-    && obj.updated_at !== undefined
+  return (
+    obj.id !== undefined &&
+    obj.golf_club_id !== undefined &&
+    obj.swing_type !== undefined &&
+    obj.carry_distance !== undefined &&
+    obj.total_distance !== undefined &&
+    obj.created_at !== undefined &&
+    obj.updated_at !== undefined
+  )
 }
 
 export interface PracticeSession {

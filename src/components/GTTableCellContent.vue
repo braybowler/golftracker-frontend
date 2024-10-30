@@ -12,10 +12,21 @@ const props = defineProps<{
 
 <template>
   <template v-if="isInEditMode">
-    <input type="number" :placeholder="props.golfClub.yardages.find((item: Yardage) => item.swing_type === targetSwingType)?.[displayProperty]" class="w-full" />
+    <input
+      type="number"
+      :placeholder="
+        props.golfClub.yardages.find((item: Yardage) => item.swing_type === targetSwingType)?.[
+          displayProperty
+        ]
+      "
+      class="w-full"
+    />
   </template>
   <template v-else>
-    {{ props.golfClub.yardages.find((item: Yardage) => item.swing_type === targetSwingType)?.[displayProperty] }}
+    {{
+      props.golfClub.yardages.find((item: Yardage) => item.swing_type === targetSwingType)?.[
+        displayProperty
+      ]
+    }}
   </template>
 </template>
-

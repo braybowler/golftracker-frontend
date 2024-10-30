@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, unref, watch } from 'vue'
+import { onMounted, ref, unref } from 'vue'
 import { useAxios } from '@/composables/useAxios'
 import GTButton from '@/components/GTButton.vue'
 import type { GolfClub } from '@/common/resources'
@@ -12,7 +12,6 @@ const { requestMethodSelector } = useAxios()
 
 onMounted(async () => {
   golfClubs.value = await requestMethodSelector('GET', 'golfclubs/')
-  console.log(golfClubs.value)
 })
 
 const isInEditMode = ref(false)
@@ -132,7 +131,9 @@ defineExpose({
         <GTYardagesModal></GTYardagesModal>
       </div>
       <div class="flex justify-center items-center w-full mt-2 w-1/4">
-        <GTButton @click="toggleIsInEditMode()"> {{ isInEditMode ? 'Save Edits' : 'Enter Cell Edit Mode' }}</GTButton>
+        <GTButton @click="toggleIsInEditMode()">
+          {{ isInEditMode ? 'Save Edits' : 'Enter Cell Edit Mode' }}</GTButton
+        >
       </div>
     </div>
   </div>
