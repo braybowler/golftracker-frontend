@@ -15,29 +15,21 @@ const selectedClub = ref<GolfClub | null>(null)
 const selectedClubType = computed(() => {
   return selectedClub.value?.club_type ?? null
 })
-const selectedSwingType = ref<string | null>(null)
+const selectedSwingType = ref<SwingType | null>(null)
 const selectedNumberOfShots = ref<number | null>(null)
 const golfClubs = ref<Array<GolfClub>>([])
 
-const calibrationShots = reactive({
-  LW: {
-    '50%': [],
-    '75%': [],
-    '100%': []
-  },
-  PW: {
-    '50%': [],
-    '75%': [],
-    '100%': []
-  },
-  '9i': {
-    '50%': [],
-    '75%': [],
-    '100%': []
-  }
-})
+const calibrationShots = reactive({})
 
 const updateCarryDistance = (newDistance: number, shotIndex: number) => {
+  if (!calibrationShots[selectedClubType.value]) {
+    calibrationShots[selectedClubType.value] = {}
+  }
+
+  if(!calibrationShots[selectedClubType.value][selectedSwingType.value]) {
+    calibrationShots[selectedClubType.value][selectedSwingType.value] = []
+  }
+
   if (
     calibrationShots[selectedClubType.value] &&
     calibrationShots[selectedClubType.value][selectedSwingType.value] &&
@@ -55,6 +47,14 @@ const updateCarryDistance = (newDistance: number, shotIndex: number) => {
 }
 
 const updateTotalDistance = (newDistance: number, shotIndex: number) => {
+  if (!calibrationShots[selectedClubType.value]) {
+    calibrationShots[selectedClubType.value] = {}
+  }
+
+  if(!calibrationShots[selectedClubType.value][selectedSwingType.value]) {
+    calibrationShots[selectedClubType.value][selectedSwingType.value] = []
+  }
+
   if (
     calibrationShots[selectedClubType.value] &&
     calibrationShots[selectedClubType.value][selectedSwingType.value] &&

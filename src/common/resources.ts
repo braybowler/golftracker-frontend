@@ -1,4 +1,4 @@
-import type { ClubCategory } from '@/common/enums'
+import { CLUB_TYPES, type ClubCategory } from '@/common/enums'
 import { SwingType } from '@/common/enums'
 
 export interface GolfBag {
@@ -27,7 +27,7 @@ export interface GolfClub {
   model: string
   loft: number
   club_category: ClubCategory
-  club_type: string
+  club_type: keyof typeof CLUB_TYPES[ClubCategory]
   created_at: string
   updated_at: string
   yardages: []
