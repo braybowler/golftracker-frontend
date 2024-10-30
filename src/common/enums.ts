@@ -7,10 +7,10 @@ export enum ClubCategory {
 }
 
 export enum SwingType {
-  // TWENTY_FIVE_PERCENT = '25%',
-  // THIRTY_THREE_PERCENT = '33%',
+  TWENTY_FIVE_PERCENT = '25%',
+  THIRTY_THREE_PERCENT = '33%',
   FIFTY_PERCENT = '50%',
-  // SIXTY_SIX_PERCENT = '66%',
+  SIXTY_SIX_PERCENT = '66%',
   SEVENTY_FIVE_PERCENT = '75%',
   ONE_HUNDRED_PERCENT = '100%'
 }
