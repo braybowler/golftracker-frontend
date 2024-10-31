@@ -5,12 +5,17 @@ import type { GolfClub } from '@/common/resources'
 import { useAxios } from '@/composables/useAxios'
 import { SwingType } from '@/common/enums'
 
+const emit = defineEmits<{
+  (event: 'yardagesModalOpened'): void
+  (event: 'yardagesModalClosed'): void
+}>()
+
 interface Shot {
   carry_distance: number
   total_distance: number
 }
 
-const open = ref(false)
+const isModalOpen = ref(false)
 const selectedClub = ref<GolfClub | null>(null)
 const selectedClubType = computed(() => {
   return selectedClub.value?.club_type ?? null
@@ -119,8 +124,13 @@ onMounted(async () => {
   golfClubs.value = await requestMethodSelector('GET', 'golfclubs/')
 })
 
-const clearModal = () => {
-  open.value = false
+const handleOpeningModal = () => {
+  emit('yardagesModalOpened')
+  isModalOpen.value = true
+}
+const handleClosingModal = () => {
+  emit('yardagesModalClosed')
+  isModalOpen.value = false
   selectedClub.value = null
   selectedSwingType.value = null
   selectedNumberOfShots.value = null
@@ -129,12 +139,12 @@ const clearModal = () => {
 
 <template>
   <div class="flex flex-row justify-end gap-2 items-center transition duration-400 hover:scale-105">
-    <GTButton @click="open = true">Calibrate Yardages</GTButton>
+    <GTButton @click="handleOpeningModal()">Calibrate Yardages</GTButton>
   </div>
 
   <Teleport to="body">
     <div
-      v-if="open"
+      v-if="isModalOpen"
       class="fixed left-1/4 top-1/4 z-999 w-5/6 -ml-52 border border-black rounded-md bg-white p-2 space-y-4"
     >
       <div>
@@ -234,7 +244,7 @@ const clearModal = () => {
 
       <div class="flex flex-row justify-around">
         <GTButton class="transition duration-400 hover:scale-105">Save Yardages</GTButton>
-        <GTButton @click="clearModal()" class="transition duration-400 hover:scale-105"
+        <GTButton @click="handleClosingModal()" class="transition duration-400 hover:scale-105"
           >Cancel</GTButton
         >
       </div>

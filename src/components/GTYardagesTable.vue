@@ -5,8 +5,11 @@ import GTButton from '@/components/GTButton.vue'
 import type { GolfClub } from '@/common/resources'
 import GTTableCell from '@/components/GTTableCellContent.vue'
 import GTYardagesModal from '@/modals/GTYardagesModal.vue'
+import GTNavButton from '@/components/GTNavButton.vue'
 
 const golfClubs = ref<Array<GolfClub>>([])
+const createGolfClubUrl = 'golfclubs/create'
+const isYardagesModalOpen = ref(false);
 
 const { requestMethodSelector } = useAxios()
 
@@ -29,6 +32,14 @@ const updateYardages = () => {
   console.log('...updating yardages.')
 }
 
+const handleYardagesModalClosing = () => {
+  isYardagesModalOpen.value = false
+}
+
+const handleYardagesModalOpening = () => {
+  isYardagesModalOpen.value = true
+}
+
 defineExpose({
   golfClubs,
   isInEditMode
@@ -36,104 +47,117 @@ defineExpose({
 </script>
 
 <template>
-  <div class="flex flex-col justify-center align-items-center">
-    <div class="yardages-table">
-      <table>
-        <thead>
-          <tr>
-            <th rowspan="3">Club</th>
-            <th colspan="6">Swing Type</th>
-          </tr>
-          <tr>
-            <th colspan="2">50%</th>
-            <th colspan="2">75%</th>
-            <th colspan="2">100%</th>
-          </tr>
-          <tr>
-            <th>Carry</th>
-            <th>Total</th>
-            <th>Carry</th>
-            <th>Total</th>
-            <th>Carry</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(club, index) in golfClubs" :key="index" class="h-10">
-            <td>{{ club.make }} {{ club.model }}: {{ club.club_type }}</td>
+  <div :class="{'blur-lg': isYardagesModalOpen}">
+    <div class="flex flex-col justify-center align-items-center">
+      <div class="yardages-table">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="3">Club</th>
+              <th colspan="6">Swing Type</th>
+            </tr>
+            <tr>
+              <th colspan="2">50%</th>
+              <th colspan="2">75%</th>
+              <th colspan="2">100%</th>
+            </tr>
+            <tr>
+              <th>Carry</th>
+              <th>Total</th>
+              <th>Carry</th>
+              <th>Total</th>
+              <th>Carry</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(club, index) in golfClubs" :key="index" class="h-10">
+              <td>{{ club.make }} {{ club.model }}: {{ club.club_type }}</td>
 
-            <!-- 50% Swing -->
-            <td>
-              <GTTableCell
-                display-property="carry_distance"
-                :is-in-edit-mode="isInEditMode"
-                placeholder="Enter carry"
-                target-swing-type="50%"
-                :golf-club="club"
-              />
-            </td>
-            <td>
-              <GTTableCell
-                display-property="total_distance"
-                :is-in-edit-mode="isInEditMode"
-                placeholder="Enter total"
-                target-swing-type="50%"
-                :golf-club="club"
-              />
-            </td>
+              <!-- 50% Swing -->
+              <td>
+                <GTTableCell
+                  display-property="carry_distance"
+                  :is-in-edit-mode="isInEditMode"
+                  placeholder="Enter carry"
+                  target-swing-type="50%"
+                  :golf-club="club"
+                />
+              </td>
+              <td>
+                <GTTableCell
+                  display-property="total_distance"
+                  :is-in-edit-mode="isInEditMode"
+                  placeholder="Enter total"
+                  target-swing-type="50%"
+                  :golf-club="club"
+                />
+              </td>
 
-            <!-- 75% Swing -->
-            <td>
-              <GTTableCell
-                display-property="carry_distance"
-                :is-in-edit-mode="isInEditMode"
-                placeholder="Enter carry"
-                target-swing-type="75%"
-                :golf-club="club"
-              />
-            </td>
-            <td>
-              <GTTableCell
-                display-property="total_distance"
-                :is-in-edit-mode="isInEditMode"
-                placeholder="Enter total"
-                target-swing-type="75%"
-                :golf-club="club"
-              />
-            </td>
+              <!-- 75% Swing -->
+              <td>
+                <GTTableCell
+                  display-property="carry_distance"
+                  :is-in-edit-mode="isInEditMode"
+                  placeholder="Enter carry"
+                  target-swing-type="75%"
+                  :golf-club="club"
+                />
+              </td>
+              <td>
+                <GTTableCell
+                  display-property="total_distance"
+                  :is-in-edit-mode="isInEditMode"
+                  placeholder="Enter total"
+                  target-swing-type="75%"
+                  :golf-club="club"
+                />
+              </td>
 
-            <!-- Full Swing -->
-            <td>
-              <GTTableCell
-                display-property="carry_distance"
-                :is-in-edit-mode="isInEditMode"
-                placeholder="Enter carry"
-                target-swing-type="100%"
-                :golf-club="club"
-              />
-            </td>
-            <td>
-              <GTTableCell
-                display-property="total_distance"
-                :is-in-edit-mode="isInEditMode"
-                placeholder="Enter total"
-                target-swing-type="100%"
-                :golf-club="club"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="flex flex-row justify-center">
-      <div class="flex justify-center items-center w-full mt-2 w-1/4">
-        <GTYardagesModal></GTYardagesModal>
+              <!-- Full Swing -->
+              <td>
+                <GTTableCell
+                  display-property="carry_distance"
+                  :is-in-edit-mode="isInEditMode"
+                  placeholder="Enter carry"
+                  target-swing-type="100%"
+                  :golf-club="club"
+                />
+              </td>
+              <td>
+                <GTTableCell
+                  display-property="total_distance"
+                  :is-in-edit-mode="isInEditMode"
+                  placeholder="Enter total"
+                  target-swing-type="100%"
+                  :golf-club="club"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="flex justify-center items-center w-full mt-2 w-1/4">
-        <GTButton @click="toggleIsInEditMode()">
-          {{ isInEditMode ? 'Save Edits' : 'Enter Cell Edit Mode' }}</GTButton
-        >
+
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-row justify-center items-center w-1/2">
+          <div class="flex justify-center items-center m-2">
+            <GTYardagesModal
+              @yardagesModalOpened="handleYardagesModalOpening()"
+              @yardagesModalClosed="handleYardagesModalClosing()"
+            ></GTYardagesModal>
+          </div>
+          <div class="flex justify-center items-center m-2">
+            <GTButton @click="toggleIsInEditMode()">
+              {{ isInEditMode ? 'Save Edits' : 'Enter Cell Edit Mode' }}</GTButton
+            >
+          </div>
+        </div>
+
+        <div class="flex flex-row justify-center items-center w-1/2">
+          <GTNavButton :url="createGolfClubUrl" class="flex justify-center items-center border border-black rounded-md m-2">
+            Add A New Club
+          </GTNavButton>
+        </div>
       </div>
     </div>
   </div>

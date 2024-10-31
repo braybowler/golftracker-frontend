@@ -4,10 +4,6 @@ import GTYardagesTable from '@/components/GTYardagesTable.vue'
 
 <template>
   <div>
-    <div class="flex flex-col justify-items-end">
-      <p>Typical Weather: ~25°C</p>
-      <p>Typical Altitude: Sea Level</p>
-    </div>
     <GTYardagesTable></GTYardagesTable>
   </div>
 </template>
