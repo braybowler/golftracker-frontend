@@ -29,7 +29,7 @@ const open = ref(false)
   <Teleport to="body">
     <div
       v-if="open"
-      class="fixed left-1/2 top-1/2 z-999 -ml-28 border w-70 h-24 border-black rounded-md bg-white p-2 space-y-4"
+      class="fixed left-1/2 top-1/3 z-50 -ml-28 w-70 h-24 rounded-lg shadow-lg bg-white p-2 space-y-4"
     >
       <p>Are you sure you'd like to logout?</p>
       <div class="flex flex-row justify-around">

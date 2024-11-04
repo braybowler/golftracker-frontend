@@ -2,7 +2,6 @@
 import { RouterView } from 'vue-router'
 import GTNavBar from './components/GTNavBar.vue'
 import GTSideBar from './components/GTSideBar.vue'
-import GTBottomBar from '@/components/GTBottomBar.vue'
 </script>
 
 <template>
@@ -12,6 +11,5 @@ import GTBottomBar from '@/components/GTBottomBar.vue'
         <GTSideBar></GTSideBar>
         <RouterView class="w-full p-4" />
       </div>
-      <GTBottomBar></GTBottomBar>
     </main>
 </template>

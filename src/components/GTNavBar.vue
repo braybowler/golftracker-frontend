@@ -7,12 +7,14 @@ const auth = useAuth()
 </script>
 
 <template>
-  <nav v-if="auth.isAuthed" class="flex flex-row bg-white justify-end p-2">
-    <div class="flex flex-row space-x-2">
-      <GTDropDownMenu></GTDropDownMenu>
+  <nav v-if="auth.isAuthed" class="flex flex-row bg-white w-full justify-between">
+    <div class="flex flex-row p-2 space-x-4">
+      <GTNavLink :url="'/about'"> About GolfTracker </GTNavLink>
+      <GTNavLink :url="'/contact'"> Contact Us </GTNavLink>
     </div>
+    <GTDropDownMenu></GTDropDownMenu>
   </nav>
-  <nav v-else class="flex flex-row justify-between bg-white p-2">
+  <nav v-else class="flex flex-row justify-between bg-white w-full p-2">
     <div class="flex space-x-4">
       <GTNavLink :url="'/'">Home</GTNavLink>
       <GTNavLink :url="'/about'">About</GTNavLink>

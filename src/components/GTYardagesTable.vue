@@ -32,14 +32,6 @@ const updateYardages = () => {
   console.log('...updating yardages.')
 }
 
-const handleYardagesModalClosing = () => {
-  isYardagesModalOpen.value = false
-}
-
-const handleYardagesModalOpening = () => {
-  isYardagesModalOpen.value = true
-}
-
 defineExpose({
   golfClubs,
   isInEditMode
@@ -47,7 +39,7 @@ defineExpose({
 </script>
 
 <template>
-  <div :class="{'blur-lg': isYardagesModalOpen}">
+  <div>
     <div class="flex flex-col justify-center align-items-center">
       <div class="yardages-table">
         <table>
@@ -141,10 +133,7 @@ defineExpose({
       <div class="flex flex-row justify-between">
         <div class="flex flex-row justify-center items-center w-1/2">
           <div class="flex justify-center items-center m-2">
-            <GTYardagesModal
-              @yardagesModalOpened="handleYardagesModalOpening()"
-              @yardagesModalClosed="handleYardagesModalClosing()"
-            ></GTYardagesModal>
+            <GTYardagesModal></GTYardagesModal>
           </div>
           <div class="flex justify-center items-center m-2">
             <GTButton @click="toggleIsInEditMode()">

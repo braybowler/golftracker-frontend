@@ -125,11 +125,9 @@ onMounted(async () => {
 })
 
 const handleOpeningModal = () => {
-  emit('yardagesModalOpened')
   isModalOpen.value = true
 }
 const handleClosingModal = () => {
-  emit('yardagesModalClosed')
   isModalOpen.value = false
   selectedClub.value = null
   selectedSwingType.value = null
@@ -138,6 +136,13 @@ const handleClosingModal = () => {
 </script>
 
 <template>
+  <div
+    v-if="isModalOpen"
+    class="fixed inset-0 bg-black bg-opacity-30 z-40"
+    @click="handleClosingModal"
+  >
+  </div>
+
   <div class="flex flex-row justify-end gap-2 items-center transition duration-400 hover:scale-105">
     <GTButton @click="handleOpeningModal()">Calibrate Yardages</GTButton>
   </div>
@@ -145,7 +150,7 @@ const handleClosingModal = () => {
   <Teleport to="body">
     <div
       v-if="isModalOpen"
-      class="fixed left-1/4 top-1/4 z-999 w-5/6 -ml-52 border border-black rounded-md bg-white p-2 space-y-4"
+      class="fixed left-1/4 top-1/4 z-50 w-5/6 -ml-52 rounded-lg shadow-lg transition duration-300 transform bg-white p-4 space-y-4"
     >
       <div>
         <p>Let's calculate your average yardages.</p>
@@ -188,7 +193,7 @@ const handleClosingModal = () => {
           </label>
         </div>
 
-        <div class="border border-black bg-purewhite h-auto w-full">
+        <div class="border border-black rounded-lg bg-purewhite h-auto w-full">
           <div
             class="flex flex-row justify-center gap-2 p-2"
             v-if="selectedClubType && selectedSwingType && selectedNumberOfShots"

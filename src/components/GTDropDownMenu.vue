@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref, unref } from 'vue'
+import { ref } from 'vue'
 import GTNavLink from './GTNavLink.vue'
 import GTLogoutModal from '../modals/GTLogoutModal.vue'
 import GTButton from '@/components/GTButton.vue'
 
 const isHamburgerMenuExpanded = ref(false)
 const toggleIsExpanded = () => {
-  if (!unref(isHamburgerMenuExpanded)) {
-    isHamburgerMenuExpanded.value = true
-  } else if (unref(isHamburgerMenuExpanded.value)) {
-    isHamburgerMenuExpanded.value = false
-  }
+    isHamburgerMenuExpanded.value = !isHamburgerMenuExpanded.value
+}
+const closeMenuOnOutsideClick = () => {
+  isHamburgerMenuExpanded.value = false;
 }
 
 defineExpose({
@@ -35,9 +34,17 @@ defineExpose({
       />
     </svg>
   </GTButton>
+
   <div
-    class="flex flex-col bg-white w-36 fixed top-10 right-0 p-2 space-y-2"
     v-if="isHamburgerMenuExpanded"
+    class="fixed inset-0 bg-black bg-opacity-30 z-40"
+    @click="closeMenuOnOutsideClick"
+  >
+  </div>
+
+  <div
+    v-if="isHamburgerMenuExpanded"
+    class="fixed top-12 right-2 bg-white w-44 p-2 rounded-lg shadow-lg z-50 transition duration-300 transform space-y-2"
   >
     <GTNavLink :url="'/profile'" class="flex flex-row justify-end gap-2">
       <div>Profile</div>
