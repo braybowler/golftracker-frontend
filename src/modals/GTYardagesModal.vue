@@ -150,7 +150,7 @@ const handleClosingModal = () => {
   <Teleport to="body">
     <div
       v-if="isModalOpen"
-      class="fixed left-1/4 top-1/4 z-50 w-5/6 -ml-52 rounded-lg shadow-lg transition duration-300 transform bg-white p-4 space-y-4"
+      class="fixed left-1/2 top-1/4 z-50 w-5/6 rounded-lg shadow-lg transition duration-300 transform -translate-x-1/2 bg-white p-4 space-y-4"
     >
       <div>
         <p>Let's calculate your average yardages.</p>
