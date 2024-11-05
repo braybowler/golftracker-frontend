@@ -3,7 +3,8 @@ import { type GolfBag } from '@/common/resources'
 import GTNavButton from '@/components/GTNavButton.vue'
 import { computed } from 'vue'
 import GTButton from '@/components/GTButton.vue'
-
+import GTImageNotFound from '@/components/icons/GTImageNotFound.svg'
+import GTFileUpload from '@/components/GTFileUpload.vue'
 const props = defineProps<{
   golfBag: GolfBag
 }>()
@@ -17,7 +18,9 @@ const resourceUrl = computed(() => {
   <div class="border rounded-md border-black">
     <div class="flex flex-col justify-center p-2">
       <div class="flex flex-row justify-between p-2">
-        <img src="../icons/GTImageNotFound.svg" alt="Image not found" class="h-20 w-20" />
+        <div>
+          <GTFileUpload></GTFileUpload>
+        </div>
         <div>
           <p>{{ props.golfBag.make }}</p>
           <p>{{ props.golfBag.model }}</p>

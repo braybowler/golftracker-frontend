@@ -7,7 +7,13 @@ const user = auth.getUser
 
 <template>
   <div>
-    <p>{{ user }}</p>
-    <p>{{ auth.isAuthed }}</p>
+    <div>
+      <p> Hi, {{ user.user.name }}! </p>
+      <p> {{ user.user.last_active_at ? 'Welcome back to GolfTracker.' : 'Welcome to GolfTracker' }} </p>
+    </div>
+
+    <div>
+
+    </div>
   </div>
 </template>
